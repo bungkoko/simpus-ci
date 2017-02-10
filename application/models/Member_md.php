@@ -50,7 +50,7 @@
     function member_auth($user,$password){
       $this->db->where('anggota_username',$user);
       $this->db->where('anggota_password',$password);
-      return $this->db->get('simpus_anggota');
+      return $this->db->get('simpus_anggota')->row();
     }
   }
 

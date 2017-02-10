@@ -1,4 +1,6 @@
 <?php
+
+defined('BASEPATH') OR exit('No direct script access allowed');
   /**
    * Controller Member
    * Joko Purwanto
@@ -105,6 +107,37 @@
       $data['gt_detail']=$this->Member_md->get_detail_anggota($kode);
       $this->load->view('index',$data);
     }
+
+    function signin(){
+      $this->form_validation->set_rules('anggota_username','username','required');
+      $this->form_validation->set_rules('anggota_password','password','required');
+
+      if($this->form_validation->run()==TRUE):
+        $username=$this->input->post('anggota_username');
+        $password=md5($this->input->post('anggota_password'));
+
+        //Check Member Auth
+        $query=$this->Member_md->member_auth($username,$password);
+        if(count($query)):
+          $member_auth=array('username'=>$query->anggota_username,
+                        'fullname'=>$query->anggota_nm,
+                        'email'=>$query->anggota_email,
+                        'logged'=>TRUE
+                      );
+          $this->session->set_userdata($member_auth);
+          redirect('welcome');
+        else:
+          $data['warning']="Username atau password tidak sesuai";
+        endif;
+      else:
+        $data['warning']=validation_errors();
+      endif;
+      $data['title']="Sign In Member";
+      $data['content']='signin/signin';
+      $this->load->view('index',$data);
+    }
+
+
 
 
 
