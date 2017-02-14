@@ -12,7 +12,11 @@ class Administrator extends CI_Controller
   }
 
   function index(){
-    $this->signin();
+    if($this->session->userdata('logged')==FALSE):
+      $this->signin();
+    else:
+      redirect('dashboard');
+    endif;
   }
 
   function signin(){
@@ -35,7 +39,7 @@ class Administrator extends CI_Controller
                       'logged'=>TRUE
                     );
         $this->session->set_userdata($admin_auth);
-        redirect('welcome');
+        redirect('dashboard');
       else:
         $data['warning']="Username atau password tidak sesuai";
       endif;

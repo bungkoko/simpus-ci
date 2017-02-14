@@ -24,16 +24,30 @@
         <link rel="stylesheet" href="<?php echo base_url()?>assets/css/bootstrap-datetimepicker.min.css">
         <link rel="stylesheet" href="<?php echo base_url()?>assets/css/fileinput.css">
     </head>
-    <body class="">
+    <?php if($this->session->userdata('logged')==FALSE):?>
+      <body class="">
         <?php $this->load->view($content);?>
-        <!-- Bootstrap and necessary plugins -->
-        <!--<script src="<?php echo base_url();?>assets/js/libs/jquery.js"></script>-->
-        <script src="<?php echo base_url();?>assets/js/libs/tether.min.js"></script>
-        <script src="<?php echo base_url();?>assets/js/libs/bootstrap.min.js"></script>
-        <script src="<?php echo base_url();?>assets/js/jquery-1.8.3.min.js"></script>
-        <script src="<?php echo base_url();?>assets/js/bootstrap-datetimepicker.js"></script>
-        <script type="text/javascript" src="<?php echo base_url()?>assets/js/fileinput.js"></script>
-        <script>
+          <script src="<?php echo base_url();?>assets/js/jquery-1.8.3.min.js"></script>
+          <script src="<?php echo base_url();?>assets/js/libs/tether.min.js"></script>
+          <script src="<?php echo base_url();?>assets/js/libs/bootstrap.min.js"></script>
+          <script src="<?php echo base_url();?>assets/js/bootstrap-datetimepicker.js"></script>
+          <script type="text/javascript" src="<?php echo base_url()?>assets/js/fileinput.js"></script>
+    <?php else: ?>
+      <body class="navbar-fixed sidebar-nav fixed-nav">
+        <?php $this->load->view($content);?>
+       <script src="<?php echo base_url();?>assets/js/libs/jquery.min.js"></script>
+       <script src="<?php echo base_url();?>assets/js/libs/tether.min.js"></script>
+       <script src="<?php echo base_url();?>assets/js/libs/bootstrap.min.js"></script>
+       <script src="<?php echo base_url();?>assets/js/libs/pace.min.js"></script>
+       <!-- Plugins and scripts required by all views -->
+       <script src="<?php echo base_url();?>assets/js/libs/Chart.min.js"></script>
+       <!-- GenesisUI main scripts -->
+       <script src="<?php echo base_url();?>assets/js/app.js"></script>
+       <!-- Plugins and scripts required by this views -->
+       <!-- Custom scripts required by this view -->
+       <script src="<?php echo base_url();?>assets/js/views/main.js"></script>
+    <?php endif; ?>
+      <script>
           function verticalAlignMiddle()
           {
               var bodyHeight = $(window).height();
