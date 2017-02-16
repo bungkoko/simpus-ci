@@ -122,7 +122,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           $member_auth=array('username'=>$query->anggota_username,
                         'fullname'=>$query->anggota_nm,
                         'email'=>$query->anggota_email,
-                        'logged'=>TRUE
+                        'member_logged'=>TRUE
                       );
           $this->session->set_userdata($member_auth);
           redirect('welcome');

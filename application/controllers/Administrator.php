@@ -51,7 +51,16 @@ class Administrator extends CI_Controller
     $this->load->view('index',$data);
   }
 
+  function signout(){
+    $this->session->unset_userdata('username');
+    $this->session->unset_userdata('fullname');
+    $this->session->unset_userdata('email');
+    $this->session->unset_userdata('user_role');
+    $this->session->unset_userdata('logged');
+    redirect('administrator');
+  }
+
+
 
 }
-
 ?>

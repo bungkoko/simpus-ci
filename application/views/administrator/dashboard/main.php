@@ -29,7 +29,7 @@
                                     <a class="dropdown-item" href="#">Something else here</a>
                                 </div>
                             </div>
-                            <h4 class="m-b-0">9.823</h4>
+                            <h4 class="m-b-0"><?php echo $total_member; ?></h4>
                             <p>Anggota Baru Hari Ini</p>
                         </div>
                         <div class="chart-wrapper p-x-1" style="height:70px;">
@@ -44,8 +44,8 @@
                             <button type="button" class="btn btn-transparent active p-a-0 pull-right">
                               <i class="icon-location-pin"></i>
                             </button>
-                            <h4 class="m-b-0">9.823</h4>
-                            <p>Members online</p>
+                            <h4 class="m-b-0"><?php echo $total_all; ?></h4>
+                            <p>Total Member</p>
                         </div>
                         <div class="chart-wrapper p-x-1" style="height:70px;">
                             <canvas id="card-chart2" class="chart" height="70"></canvas>
