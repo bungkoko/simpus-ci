@@ -1,4 +1,3 @@
-<main class="main">
     <!-- Breadcrumb -->
     <ol class="breadcrumb">
         <li class="breadcrumb-item">Home</li>
@@ -765,4 +764,3 @@
         </div>
     </div>
     <!-- /.conainer-fluid -->
-</main>

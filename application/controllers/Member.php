@@ -137,6 +137,37 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       $this->load->view('index',$data);
     }
 
+    function new_member(){
+      if($this->session->userdata('logged')==FALSE):
+        redirect('administrator');
+      else:
+        //$date=date('Y-m-d');
+        $data['title']='Daftar Member Baru';
+        $data['content']="administrator/content";
+        $data['main']="administrator/member/new_member";
+        $data['sidebar']="administrator/dashboard/sidebar";
+        $data['header']="administrator/dashboard/header";
+        $data['footer']="administrator/dashboard/footer";
+        $data['list_member']=$this->Member_md->list_member()->result();
+      endif;
+      $this->load->view('index',$data);
+    }
+
+    function all(){
+      if($this->session->userdata('logged')==FALSE):
+        redirect('administrator');
+      else:
+        $data['title']='Daftar Seluruh Member';
+        $data['content']='administrator/content';
+        $data['main']='administrator/member/all';
+        $data['sidebar']='administrator/dashboard/sidebar';
+        $data['header']='administrator/dashboard/header';
+        $data['footer']='administrator/dashboard/footer';
+        $data['all']=$this->Member_md->get_all();
+      endif;
+      $this->load->view('index',$data);
+    }
+
 
 
 

@@ -1,4 +1,4 @@
-<div class="sidebar">
+
     <nav class="sidebar-nav">
         <ul class="nav">
             <li class="nav-item">
@@ -70,4 +70,3 @@
             </li>
         </ul>
     </nav>
-</div>

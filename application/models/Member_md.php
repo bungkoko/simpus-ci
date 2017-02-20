@@ -55,17 +55,23 @@
 
     function count_new_member_today(){
       $this->db->like('anggota_tgldaftar',date('Y-m-d'));
-      $this->db->from('simpus_anggota');
-      return $this->db->count_all_results();
+      return $this->db->count_all_results('simpus_anggota');
+      //$this->db->select(select anggota_tgldaftar, count(anggota_tgldaftar) as Total_Anggota);
+      //$this->db->where('anggota_tgldaftar',date('Y-m-d'));
+
     }
 
     function count_all(){
       return $this->db->count_all('simpus_anggota');
     }
 
-    function detail_new_member_day(){
-      $this->db->where('anggota_tgllahir',date('Y-m-d'));
+    function list_member(){
+      $this->db->where('anggota_tgldaftar',date('Y-m-d'));
       $this->db->group_by('anggota_kd');
+      return $this->db->get('simpus_anggota');
+    }
+
+    function get_all(){
       return $this->db->get('simpus_anggota');
     }
   }
