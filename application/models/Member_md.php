@@ -65,13 +65,15 @@
       return $this->db->count_all('simpus_anggota');
     }
 
-    function list_member(){
+    function list_member($num='',$offset=''){
       $this->db->where('anggota_tgldaftar',date('Y-m-d'));
       $this->db->group_by('anggota_kd');
+      $this->db->limit($num,$offset);
       return $this->db->get('simpus_anggota');
     }
 
-    function get_all(){
+    function get_all($num='',$offset=''){
+      $this->db->limit($num,$offset);
       return $this->db->get('simpus_anggota');
     }
   }

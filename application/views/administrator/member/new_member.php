@@ -31,7 +31,9 @@
                </tr>
              </thead>
              <tbody>
-                 <?php foreach($list_member as $list):?>
+                 <?php
+                 if($list_member->num_rows()>0):
+                   foreach($list_member->result() as $list):?>
                 <tr>
                   <td><?php echo $list->anggota_kd;?></td>
                   <td><?php echo $list->anggota_nm;?></td>
@@ -39,9 +41,20 @@
                     <span class="tag tag-success">Active</span>
                   </td>
                 </tr>
-                <?php endforeach; ?>
+                <?php endforeach;
+              else:
+                echo "<tr>
+                    <td colspan=\"6\">no data</td>
+                </tr>";
+              endif;
+                ?>
              </tbody>
             </table>
+
+            <?php
+	echo $this->pagination->create_links();
+	?>
+
          <ul class="pagination">
            <li class="page-item"><a class="page-link" href="#">Prev</a></li>
            <li class="page-item active">
