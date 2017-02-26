@@ -179,7 +179,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         $this->load->library('pagination');
         $config['base_url']=base_url().'index.php/member/all/';
         $config['total_rows']=$this->Member_md->get_all()->num_rows();
-        $config['per_page']=11;
+        $config['per_page']=10;
         $config['num_links']=6;
 
         //initialize pagination
