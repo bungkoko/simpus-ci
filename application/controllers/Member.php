@@ -26,7 +26,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       $gt_kode=$this->Member_md->get_kode_anggota();
       $anggota_kd='';
       foreach($gt_kode->result() as $gtkode):
-        if($gtkode->anggota_kd==NULL):
+        if(($gtkode->anggota_kd==NULL) || (substr($gtkode->anggota_kd,0,2)!=$sub_thndaftar)):
           $anggota_kd=$sub_thndaftar.'0001';
         else:
           $anggota_kd=$gtkode->anggota_kd+1;
@@ -147,9 +147,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         $data['title']='Daftar Member Baru';
         $data['content']="administrator/content";
         $data['main']="administrator/member/new_member";
-        $data['sidebar']="administrator/dashboard/sidebar";
-        $data['header']="administrator/dashboard/header";
-        $data['footer']="administrator/dashboard/footer";
 
 
         //paginasi
@@ -170,35 +167,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     }
 
     function all($offset=''){
+
+      $offset=0;
+
       if($this->session->userdata('logged')==FALSE):
         redirect('administrator');
       else:
         $data['title']='Daftar Seluruh Member';
         $data['content']='administrator/content';
         $data['main']='administrator/member/all';
-        $data['sidebar']='administrator/dashboard/sidebar';
-        $data['header']='administrator/dashboard/header';
-        $data['footer']='administrator/dashboard/footer';
 
         $this->load->library('pagination');
         $config['base_url']=base_url().'index.php/member/all/';
         $config['total_rows']=$this->Member_md->get_all()->num_rows();
-        $config['per_page']='10';
-        $config['num_links']='6';
+        $config['per_page']=10;
+        $config['num_links']=6;
 
-        
+
         //initialize pagination
         $this->pagination->initialize($config);
-        $data['all']=$this->Member_md->get_all($config['per_page'],$this->uri->segment(3));
+        $data['all']=$this->Member_md->get_all($config['per_page'],$offset);
         $data['pagination']=$this->pagination->create_links();
       endif;
       $this->load->view('index',$data);
     }
-
-
-
-
-
   }
 
 ?>
