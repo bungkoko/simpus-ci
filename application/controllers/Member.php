@@ -137,7 +137,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       $this->load->view('index',$data);
     }
 
-    function new_member($offset=''){
+    function new_member(){
 
       if($this->session->userdata('logged')==FALSE):
         redirect('administrator');
@@ -159,6 +159,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
         //initialize pagination
         $this->pagination->initialize($config);
+        $offset=$this->uri->segment(3);
         $data['list_member']=$this->Member_md->list_member($config['per_page'],$offset);
         $data['pagination']=$this->pagination->create_links();
 
@@ -166,9 +167,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       $this->load->view('index',$data);
     }
 
-    function all($offset=''){
-
-      $offset=0;
+    function all(){
 
       if($this->session->userdata('logged')==FALSE):
         redirect('administrator');
@@ -180,12 +179,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         $this->load->library('pagination');
         $config['base_url']=base_url().'index.php/member/all/';
         $config['total_rows']=$this->Member_md->get_all()->num_rows();
-        $config['per_page']=10;
+        $config['per_page']=11;
         $config['num_links']=6;
-
 
         //initialize pagination
         $this->pagination->initialize($config);
+        $offset=$this->uri->segment(3);
         $data['all']=$this->Member_md->get_all($config['per_page'],$offset);
         $data['pagination']=$this->pagination->create_links();
       endif;
