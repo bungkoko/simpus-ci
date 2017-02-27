@@ -168,7 +168,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     }
 
     function all(){
-
       if($this->session->userdata('logged')==FALSE):
         redirect('administrator');
       else:

@@ -12,9 +12,6 @@
       <li class="nav-item p-x-1">
         <a class="nav-link" href="#">Users</a>
       </li>
-      <li class="nav-item p-x-1">
-        <a class="nav-link" href="#">Settings</a>
-      </li>
     </ul>
     <ul class="nav navbar-nav pull-right hidden-md-down">
       <li class="nav-item dropdown">
@@ -28,9 +25,6 @@
           <a class="dropdown-item" href="<?php echo site_url('administrator/signout')?>"><i class="fa fa-lock"></i> Logout</a>
         </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link navbar-toggler aside-toggle" href="#">&#9776;</a>
-      </li>
     </ul>
   </div>
 </header>
@@ -38,16 +32,16 @@
   <nav class="sidebar-nav">
     <ul class="nav">
       <li class="nav-item">
-        <a class="nav-link" href="index.html"><i class="icon-speedometer"></i> Dashboard <span class="tag tag-info">NEW</span></a>
+        <a class="nav-link" href="index.html"><i class="icon-speedometer"></i> Dashboard <span class="tag tag-info"></span></a>
       </li>
       <li class="nav-title">
-        UI Elements
+        Master Data
       </li>
       <li class="nav-item nav-dropdown">
-        <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i> Components</a>
+        <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i>Colections</a>
         <ul class="nav-dropdown-items">
           <li class="nav-item">
-            <a class="nav-link" href="components-buttons.html"><i class="icon-puzzle"></i> Buttons</a>
+            <a class="nav-link" href="#"><i class="icon-puzzle"></i> Buttons</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="components-social-buttons.html"><i class="icon-puzzle"></i> Social Buttons</a>
