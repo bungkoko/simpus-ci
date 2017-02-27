@@ -2,7 +2,7 @@
 <ol class="breadcrumb">
   <li class="breadcrumb-item">Home</li>
   <li class="breadcrumb-item"><a href="#">Admin</a></li>
-  <li class="breadcrumb-item active">Dashboard</li>
+  <li class="breadcrumb-item active">Member</li>
   <!-- Breadcrumb Menu-->
   <li class="breadcrumb-menu">
     <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
@@ -44,7 +44,7 @@
                 <?php endforeach;
               else:
                 echo "<tr>
-                    <td colspan=\"6\">no data</td>
+                    <td colspan=\"6\"><center>no data</center></td>
                 </tr>";
               endif;
                 ?>
@@ -52,19 +52,12 @@
             </table>
 
             <?php
-	echo $this->pagination->create_links();
-	?>
-
-         <ul class="pagination">
-           <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-           <li class="page-item active">
-             <a class="page-link" href="#">1</a>
-           </li>
-           <li class="page-item"><a class="page-link" href="#">2</a></li>
-           <li class="page-item"><a class="page-link" href="#">3</a></li>
-           <li class="page-item"><a class="page-link" href="#">4</a></li>
-           <li class="page-item"><a class="page-link" href="#">Next</a></li>
-        </ul>
+            if($list_member->num_rows()>0):
+	            echo $this->pagination->create_links();
+            endif;
+	          ?>
+          </div>
+        </div>
       </div>
     </div>
   </div>

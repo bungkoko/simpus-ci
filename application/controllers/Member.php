@@ -16,6 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     function index(){
       $this->register();
+
     }
 
     function get_kode_otomatis(){
@@ -152,9 +153,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         //paginasi
         $this->load->library('pagination');
         $config['base_url']=base_url().'member/new_member/';
-        $config['total_rows']=$this->Member_md->list_member->num_rows();
-        $config['per_page']='10';
-        $config['num_links']='6';
+        $config['total_rows']=$this->Member_md->list_member()->num_rows();
+        $config['per_page']=10;
+        $config['num_links']=6;
 
 
         //initialize pagination

@@ -38,63 +38,27 @@
         Master Data
       </li>
       <li class="nav-item nav-dropdown">
-        <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i>Colections</a>
+        <a class="nav-link nav-dropdown-toggle" href="#"><i class="fa fa-book"></i>Book's Collection</a>
         <ul class="nav-dropdown-items">
           <li class="nav-item">
-            <a class="nav-link" href="#"><i class="icon-puzzle"></i> Buttons</a>
+            <a class="nav-link" href="#"><i class="fa fa-plus"></i>Add Book's </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="components-social-buttons.html"><i class="icon-puzzle"></i> Social Buttons</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="components-cards.html"><i class="icon-puzzle"></i> Cards</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="components-forms.html"><i class="icon-puzzle"></i> Forms</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="components-switches.html"><i class="icon-puzzle"></i> Switches</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="components-tables.html"><i class="icon-puzzle"></i> Tables</a>
+            <a class="nav-link" href="components-social-buttons.html"><i class="icon-puzzle"></i>List Book's Collection</a>
           </li>
         </ul>
       </li>
       <li class="nav-item nav-dropdown">
-        <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-star"></i> Icons</a>
-          <ul class="nav-dropdown-items">
-            <li class="nav-item">
-              <a class="nav-link" href="icons-font-awesome.html"><i class="icon-star"></i> Font Awesome</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="icons-simple-line-icons.html"><i class="icon-star"></i> Simple Line Icons</a>
-            </li>
-          </ul>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="widgets.html"><i class="icon-calculator"></i> Widgets <span class="tag tag-info">NEW</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="charts.html"><i class="icon-pie-chart"></i> Charts</a>
-      </li>
-      <li class="divider"></li>
-      <li class="nav-title">
-        Extras
+        <a class="nav-link nav-dropdown-toggle" href="<?php echo site_url('genres')?>"><i class="icon-star"></i>Genre</a>
       </li>
       <li class="nav-item nav-dropdown">
-        <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-star"></i> Pages</a>
+        <a class="nav-link nav-dropdown-toggle" href="#"><i class="fa fa-user"></i>Member</a>
         <ul class="nav-dropdown-items">
           <li class="nav-item">
-            <a class="nav-link" href="pages-login.html" target="_top"><i class="icon-star"></i> Login</a>
+            <a class="nav-link" href="<?php echo site_url('member/new_member')?>"><i class="fa fa-user"></i>List Member Today </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="pages-register.html" target="_top"><i class="icon-star"></i> Register</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="pages-404.html" target="_top"><i class="icon-star"></i> Error 404</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="pages-500.html" target="_top"><i class="icon-star"></i> Error 500</a>
+            <a class="nav-link" href="<?php echo site_url('member/all')?>"><i class="icon-user"></i>List All Member</a>
           </li>
         </ul>
       </li>
@@ -106,9 +70,9 @@
 </main>
 <footer class="footer">
   <span class="text-left">
-      <a href="http://coreui.io">CoreUI</a> &copy; 2016 creativeLabs.
+      Sistem Informasi Managemen Perpustakaan &copy; 2017
   </span>
   <span class="pull-right">
-      Powered by <a href="http://coreui.io">CoreUI</a>
+      Powered by Joko Purwanto, Design by <a href="http://coreui.io">CoreUI</a>
   </span>
 </footer>
