@@ -13,6 +13,9 @@ class Author extends CI_Controller
   }
 
   function index(){
+    if($this->session->userdata('logged')==FALSE):
+      redirect('administrator');
+    endif;
     $data['title']="Author";
     $data['content']="administrator/content";
     $data['main']="administrator/author/main";

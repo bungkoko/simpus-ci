@@ -24,16 +24,16 @@
           <form class="form-horizontal" action="<?php echo site_url('author/index')?>" method="post">
             <div class="card-block">
               <div class="form-group">
-                <label for="genre">Kode Penulis</label>
+                <label for="kode">Kode Penulis</label>
                 <input type="text" name="penulis_kd" class="form-control" value="<?php echo $gt_kode;?>" readonly>
               </div>
               <div class="form-group">
-                <label for="genre">Nama Penulis</label>
-                <input type="text" name="penulis_nm" class="form-control" placeholder="Masukkan Genre">
+                <label for="nama">Nama Penulis</label>
+                <input type="text" name="penulis_nm" class="form-control" placeholder="Masukkan Nama Penulis">
               </div>
               <div class="form-group">
-                <label for="singkatan">Email Penulis</label>
-                <input type="text" name="penulis_email" class="form-control" placeholder="Masukkan Singkatan dari Genre">
+                <label for="email">Email Penulis</label>
+                <input type="text" name="penulis_email" class="form-control" placeholder="Masukkan Email Penulis">
               </div>
             </div>
             <div class="card-footer">
