@@ -22,7 +22,7 @@
             <strong>Genre</strong>
             <small>Buku</small>
           </div>
-          <form class="form-horizontal" action="<?php echo site_url('genres/index')?>" method="post">
+          <form class="form-horizontal" action="<?php echo current_url()?>" method="post">
             <div class="card-block">
               <div class="form-group">
                 <label for="genre">Genre</label>
