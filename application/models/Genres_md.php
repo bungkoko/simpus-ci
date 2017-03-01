@@ -17,7 +17,7 @@ class Genres_md extends CI_Model
 
   function add_genres(){
     $this->set_genres();
-    return $this->db->insert('simpus_genre');
+    $this->db->insert('simpus_genre');
   }
 
   function all_genre($num='',$offset=''){
@@ -25,9 +25,20 @@ class Genres_md extends CI_Model
     return $this->db->get('simpus_genre');
   }
 
-  function update(){
+  function delete_genre($kd){
+    $this->db->where('genre_kd',$kd);
+    return $this->db->delete('simpus_genre');
+  }
+
+  function read($kode){
+    $this->db->where('genre_kd',$kode);
+    return $this->db->get('simpus_genre')->row();
+  }
+
+  function update($kode){
     $this->set_genres();
-    return $this->db->update('simpus_genre');
+    $this->db->where('genre_kd',$kode);
+    $this->db->update('simpus_genre');
   }
 
 }

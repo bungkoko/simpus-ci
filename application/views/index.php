@@ -15,7 +15,7 @@
         <meta name="author" content="Lukasz Holeczek">
         <meta name="keyword" content="CoreUI Bootstrap 4 Admin Template">
         <!-- <link rel="shortcut icon" href="assets/ico/favicon.png"> -->
-        <title><?php echo $title;?></title>
+        <title>Sistem Informasi Managemen Perpustakaan - <?php echo $title;?></title>
         <!-- Icons -->
         <link href="<?php echo base_url();?>assets/css/font-awesome.min.css" rel="stylesheet">
         <link href="<?php echo base_url();?>assets/css/simple-line-icons.css" rel="stylesheet">

@@ -6,11 +6,11 @@
        <li class="breadcrumb-item active">Dashboard</li>
        <!-- Breadcrumb Menu-->
        <li class="breadcrumb-menu">
-  <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-      <a class="btn btn-secondary" href="#"><i class="icon-speech"></i></a>
-      <a class="btn btn-secondary" href="./"><i class="icon-graph"></i> &nbsp;Dashboard</a>
-      <a class="btn btn-secondary" href="#"><i class="icon-settings"></i> &nbsp;Settings</a>
-  </div>
+          <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+              <a class="btn btn-secondary" href="#"><i class="icon-speech"></i></a>
+              <a class="btn btn-secondary" href="./"><i class="icon-graph"></i> &nbsp;Dashboard</a>
+              <a class="btn btn-secondary" href="#"><i class="icon-settings"></i> &nbsp;Settings</a>
+          </div>
        </li>
    </ol>
 <div class="container-fluid">
@@ -64,7 +64,9 @@
                   <td><?php echo $gt_list->genre_singkatan;?></td>
 
                   <td>
-                    <span class="tag tag-success">Active</span>
+                    <a style="text-decoration:none" href="<?php echo site_url('genres/delete').'/'.$gt_list->genre_kd;?>"><span class="tag tag-default">Hapus</span></a>
+                    <a style="text-decoration:none" href="<?php echo site_url('genres/update').'/'.$gt_list->genre_kd;?>"><span class="tag tag-default">Edit</span></a>
+
                   </td>
                 </tr>
               <?php endforeach; ?>

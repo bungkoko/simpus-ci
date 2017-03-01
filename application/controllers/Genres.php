@@ -51,6 +51,24 @@ class Genres extends CI_Controller
     $this->load->view('index',$data);
 
   }
+
+  function delete($kode){
+    $this->Genres_md->delete_genre($kode);
+    redirect('Genres');
+  }
+
+  function update($kode){
+    $data['title']='Update Genre';
+    $data['content']='administrator/content';
+    $data['main']='administrator/genre/update';
+    $data['read']=$this->Genres_md->read($kode);
+    if($this->input->post('submit')):
+      $this->Genres_md->update($kode);
+      redirect('genres');
+    endif;
+    $this->load->view('index',$data);
+  }
+
 }
 
 
