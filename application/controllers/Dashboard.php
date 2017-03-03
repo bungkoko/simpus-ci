@@ -11,14 +11,14 @@ class Dashboard extends CI_Controller {
 	{
 		if($this->session->userdata('logged')==FALSE):
 			redirect('Administrator');
-		else:
-			$data['title']="Dashboard";
-			$data['content']="administrator/content";
-			$data['main']="administrator/dashboard/main";
-			$data['total_member']=$this->Member_md->count_new_member_today();
-      $data['total_all']=$this->Member_md->count_all();
-		endif;
-			$this->load->view('index',$data);
+    endif;
+    $data['title']="Dashboard";
+		$data['content']="administrator/content";
+		$data['main']="administrator/dashboard/main";
+		$data['total_member']=$this->Member_md->count_new_member_today();
+    $data['total_all']=$this->Member_md->count_all();
+
+		$this->load->view('index',$data);
 	}
 
 

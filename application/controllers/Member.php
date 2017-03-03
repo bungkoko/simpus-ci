@@ -142,52 +142,51 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
       if($this->session->userdata('logged')==FALSE):
         redirect('administrator');
-      else:
+      endif;
         //$date=date('Y-m-d');
 
-        $data['title']='Daftar Member Baru';
-        $data['content']="administrator/content";
-        $data['main']="administrator/member/new_member";
 
+
+      $data['title']='Daftar Member Baru';
+      $data['content']="administrator/content";
+      $data['main']="administrator/member/new_member";
 
         //paginasi
-        $this->load->library('pagination');
-        $config['base_url']=base_url().'member/new_member/';
-        $config['total_rows']=$this->Member_md->list_member()->num_rows();
-        $config['per_page']=10;
-        $config['num_links']=6;
-
+      $this->load->library('pagination');
+      $config['base_url']=base_url().'member/new_member/';
+      $config['total_rows']=$this->Member_md->list_member()->num_rows();
+      $config['per_page']=10;
+      $config['num_links']=6;
 
         //initialize pagination
-        $this->pagination->initialize($config);
-        $offset=$this->uri->segment(3);
-        $data['list_member']=$this->Member_md->list_member($config['per_page'],$offset);
-        $data['pagination']=$this->pagination->create_links();
+      $this->pagination->initialize($config);
+      $offset=$this->uri->segment(3);
+      $data['list_member']=$this->Member_md->list_member($config['per_page'],$offset);
+      $data['pagination']=$this->pagination->create_links();
 
-      endif;
       $this->load->view('index',$data);
     }
 
     function all(){
       if($this->session->userdata('logged')==FALSE):
         redirect('administrator');
-      else:
-        $data['title']='Daftar Seluruh Member';
-        $data['content']='administrator/content';
-        $data['main']='administrator/member/all';
-
-        $this->load->library('pagination');
-        $config['base_url']=base_url().'index.php/member/all/';
-        $config['total_rows']=$this->Member_md->get_all()->num_rows();
-        $config['per_page']=10;
-        $config['num_links']=6;
-
-        //initialize pagination
-        $this->pagination->initialize($config);
-        $offset=$this->uri->segment(3);
-        $data['all']=$this->Member_md->get_all($config['per_page'],$offset);
-        $data['pagination']=$this->pagination->create_links();
       endif;
+      $data['title']='Daftar Seluruh Member';
+      $data['content']='administrator/content';
+      $data['main']='administrator/member/all';
+
+      $this->load->library('pagination');
+      $config['base_url']=base_url().'index.php/member/all/';
+      $config['total_rows']=$this->Member_md->get_all()->num_rows();
+      $config['per_page']=10;
+      $config['num_links']=6;
+
+      //initialize pagination
+      $this->pagination->initialize($config);
+      $offset=$this->uri->segment(3);
+      $data['all']=$this->Member_md->get_all($config['per_page'],$offset);
+      $data['pagination']=$this->pagination->create_links();
+
       $this->load->view('index',$data);
     }
   }
