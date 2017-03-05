@@ -16,48 +16,59 @@
 
 <div class="container-fluid">
   <div class="animated fadeIn">
-
-<div class="row">
-<div class="col-lg-8">
- <div class="card">
-     <div class="card-header">
-         <i class="fa fa-align-justify"></i> Striped Table
-     </div>
-     <div class="card-block">
-         <table class="table table-striped">
-    <thead>
-        <tr>
-   <th>Kode Anggota</th>
-   <th>Nama Anggota</th>
-   <th>Status</th>
-        </tr>
-    </thead>
-    <tbody>
-      <?php foreach($all->result() as $list):?>
-        <tr>
-   <td><?php echo $list->anggota_kd;?></td>
-   <td><?php echo $list->anggota_nm;?></td>
-   <td>
-       <span class="tag tag-success">Active</span>
-   </td>
-        </tr>
-      <?php endforeach; ?>
-    </tbody>
-         </table>
-         <?php echo $pagination;?>
-         <!--<ul class="pagination">
-    <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-    <li class="page-item active">
-        <a class="page-link" href="#">1</a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item"><a class="page-link" href="#">4</a></li>
-    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-  </ul>-->
-     </div>
- </div>
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="card">
+          <div class="card-header">
+            <i class="fa fa-align-justify"></i> Striped Table
+          </div>
+          <div class="card-block">
+            <div>
+              <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Pencarian Berdasarkan Kode Anggota"/>
+            </div>
+            <table class="table table-striped" id="myTable">
+              <thead>
+                <tr>
+                  <th>Kode Anggota</th>
+                  <th>Nama Anggota</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php foreach($all->result() as $list):?>
+                  <tr>
+                     <td><?php echo $list->anggota_kd;?></td>
+                     <td><?php echo $list->anggota_nm;?></td>
+                     <td>
+                         <span class="tag tag-success">Active</span>
+                     </td>
+                 </tr>
+               <?php endforeach; ?>
+             </tbody>
+           </table>
+            <?php echo $pagination;?>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-         </div>
+</div>
+<script>
+function myFunction() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 1; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>

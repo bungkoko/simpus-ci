@@ -44,8 +44,12 @@
           <div class="card-header">
             <i class="fa fa-align-justify"></i> Daftar Genre
           </div>
+
           <div class="card-block">
-            <table class="table table-striped">
+            <div>
+              <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Pencarian Berdasarkan Judul Genre"/>
+            </div>
+            <table class="table table-striped" id="myTable">
               <thead>
                 <tr>
                   <th>No</th>
@@ -78,3 +82,23 @@
     </div>
   </div>
 </div>
+
+<script>
+function myFunction() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 1; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>
