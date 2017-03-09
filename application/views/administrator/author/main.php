@@ -68,11 +68,9 @@
                   <td><?php echo $gt_list->penulis_kd;?></td>
                   <td><?php echo $gt_list->penulis_nm;?></td>
                   <td><?php echo $gt_list->penulis_email;?></td>
-
                   <td>
                     <a style="text-decoration:none" href="<?php echo site_url('author/delete').'/'.$gt_list->penulis_kd;?>"><span class="tag tag-default">Hapus</span></a>
                     <a style="text-decoration:none" href="<?php echo site_url('author/update').'/'.$gt_list->penulis_kd;?>"><span class="tag tag-default">Edit</span></a>
-
                   </td>
                 </tr>
               <?php endforeach; ?>
