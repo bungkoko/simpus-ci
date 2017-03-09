@@ -47,8 +47,11 @@
           <div class="card-header">
             <i class="fa fa-align-justify"></i> Daftar Penulis
           </div>
-          <div class="card-block">
-            <table class="table table-striped">
+          <div class="card-block" >
+            <div>
+              <input type="text" id="search" class="form-control" onkeyup="search()" placeholder="Pencarian Berdasarkan Pengarang"/>
+            </div>
+            <table class="table table-striped" id="table_with_search">
               <thead>
                 <tr>
                   <th>Kode Penulis</th>
@@ -67,7 +70,9 @@
                   <td><?php echo $gt_list->penulis_email;?></td>
 
                   <td>
-                    <span class="tag tag-success">Active</span>
+                    <a style="text-decoration:none" href="<?php echo site_url('author/delete').'/'.$gt_list->penulis_kd;?>"><span class="tag tag-default">Hapus</span></a>
+                    <a style="text-decoration:none" href="<?php echo site_url('author/update').'/'.$gt_list->penulis_kd;?>"><span class="tag tag-default">Edit</span></a>
+
                   </td>
                 </tr>
               <?php endforeach; ?>
@@ -79,3 +84,23 @@
     </div>
   </div>
 </div>
+
+<script>
+function search() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("search");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("table_with_search");
+  tr = table.getElementsByTagName("tr");
+  for (i = 1; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>

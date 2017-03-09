@@ -66,6 +66,24 @@ class Author extends CI_Controller
     //print_r($author_kd);
   }
 
+  function delete($kode){
+    $this->Author_md->delete_author($kode);
+    redirect('Author');
+  }
+
+  function update($kode){
+    $data['title']='Update Penulis/Pengarang';
+    $data['content']='administrator/content';
+    $data['main']='administrator/author/update';
+    $data['read']=$this->Author_md->read($kode);
+    if($this->input->post('submit')):
+      $this->Author_md->update_author($kode);
+      redirect('author');
+    endif;
+    $this->load->view('index',$data);
+  }
+
+
 
 
 }

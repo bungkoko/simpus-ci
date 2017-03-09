@@ -35,13 +35,6 @@ class Genres_md extends CI_Model
     return $this->db->get('simpus_genre')->row();
   }
 
-  function get_genre_with_search($num='',$offset='',$q=''){
-    if($q=="NIL") $q='';
-    $this->db->limit($num,$offset);
-    $this->db->like('genre_judul',"%$q%");
-    return $this->db->get('simpus_genre');
-  }
-
   function update($kode){
     $this->set_genres();
     $this->db->where('genre_kd',$kode);

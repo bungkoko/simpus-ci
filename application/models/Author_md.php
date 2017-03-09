@@ -31,6 +31,21 @@ class Author_md extends CI_Model
     return $this->db->get('simpus_penulis');
   }
 
+  function delete_author($kode){
+    $this->db->where('penulis_kd',$kode);
+    return $this->db->delete('simpus_penulis');
+  }
+
+  function update_author($kode){
+    $this->set_author();
+    $this->db->where('penulis_kd',$kode);
+    $this->db->update('simpus_penulis');
+  }
+
+  function read($kode){
+    $this->db->where('penulis_kd',$kode);
+    return $this->db->get('simpus_penulis')->row();
+  }
 }
 
 ?>

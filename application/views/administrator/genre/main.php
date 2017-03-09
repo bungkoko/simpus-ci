@@ -47,9 +47,9 @@
 
           <div class="card-block">
             <div>
-              <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Pencarian Berdasarkan Judul Genre"/>
+              <input type="text" id="search" class="form-control" onkeyup="search()" placeholder="Pencarian Berdasarkan Judul Genre"/>
             </div>
-            <table class="table table-striped" id="myTable">
+            <table class="table table-striped" id="table_with_search">
               <thead>
                 <tr>
                   <th>No</th>
@@ -84,11 +84,11 @@
 </div>
 
 <script>
-function myFunction() {
+function search() {
   var input, filter, table, tr, td, i;
-  input = document.getElementById("myInput");
+  input = document.getElementById("search");
   filter = input.value.toUpperCase();
-  table = document.getElementById("myTable");
+  table = document.getElementById("table_with_search");
   tr = table.getElementsByTagName("tr");
   for (i = 1; i < tr.length; i++) {
     td = tr[i].getElementsByTagName("td")[1];

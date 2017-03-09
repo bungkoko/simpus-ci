@@ -1,32 +1,30 @@
-
-   <!-- Breadcrumb -->
-   <ol class="breadcrumb">
-       <li class="breadcrumb-item">Home</li>
-       <li class="breadcrumb-item"><a href="#">Admin</a></li>
-       <li class="breadcrumb-item active">Dashboard</li>
+<!-- Breadcrumb -->
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Home</li>
+  <li class="breadcrumb-item"><a href="#">Admin</a></li>
+  <li class="breadcrumb-item active"><?php $title;?></li>
        <!-- Breadcrumb Menu-->
-       <li class="breadcrumb-menu">
-  <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+  <li class="breadcrumb-menu">
+    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
       <a class="btn btn-secondary" href="#"><i class="icon-speech"></i></a>
       <a class="btn btn-secondary" href="./"><i class="icon-graph"></i> &nbsp;Dashboard</a>
       <a class="btn btn-secondary" href="#"><i class="icon-settings"></i> &nbsp;Settings</a>
-  </div>
-       </li>
-   </ol>
-
+    </div>
+  </li>
+</ol>
 <div class="container-fluid">
   <div class="animated fadeIn">
     <div class="row">
       <div class="col-lg-8">
         <div class="card">
           <div class="card-header">
-            <i class="fa fa-align-justify"></i> Striped Table
+            <i class="fa fa-align-justify"></i> <?php $title;?>
           </div>
           <div class="card-block">
             <div>
-              <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Pencarian Berdasarkan Kode Anggota"/>
+              <input type="text" id="search" class="form-control" onkeyup="search()" placeholder="Pencarian Berdasarkan Kode Anggota"/>
             </div>
-            <table class="table table-striped" id="myTable">
+            <table class="table table-striped" id="table_with_search">
               <thead>
                 <tr>
                   <th>Kode Anggota</th>
@@ -54,11 +52,11 @@
   </div>
 </div>
 <script>
-function myFunction() {
+function search() {
   var input, filter, table, tr, td, i;
-  input = document.getElementById("myInput");
+  input = document.getElementById("search");
   filter = input.value.toUpperCase();
-  table = document.getElementById("myTable");
+  table = document.getElementById("table_with_search");
   tr = table.getElementsByTagName("tr");
   for (i = 1; i < tr.length; i++) {
     td = tr[i].getElementsByTagName("td")[0];
