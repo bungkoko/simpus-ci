@@ -35,23 +35,19 @@ class Genres extends CI_Controller
     $config['total_rows']=$this->Genres_md->all_genre()->num_rows();
     $config['per_page']='10';
     $config['num_links']='6';
-
+    //initialize pagination
     $this->pagination->initialize($config);
     $offset=$this->uri->segment(3);
-
+    //pagination
     $data['get_list']=$this->Genres_md->all_genre($config['per_page'],$offset);
     $data['pagination']=$this->pagination->create_links();
-
-
+    //main
     $data['title']='Genre';
     $data['content']='administrator/content';
     $data['main']='administrator/genre/main';
-
-
     $this->load->view('index',$data);
-
   }
-  
+
   function delete($kode){
     $this->Genres_md->delete_genre($kode);
     redirect('Genres');

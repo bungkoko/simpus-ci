@@ -55,7 +55,7 @@
 
           <div class="card-block">
             <div>
-              <input type="text" id="search" class="form-control" onkeyup="search()" placeholder="Pencarian Berdasarkan Judul Genre"/>
+              <input type="text" id="search" class="form-control" onkeyup="search()" placeholder="Pencarian Berdasarkan Nama Penerbit"/>
             </div>
             <table class="table table-striped" id="table_with_search">
               <thead>
@@ -81,7 +81,6 @@
                   <td>
                     <a style="text-decoration:none" href="<?php echo site_url('publisher/delete').'/'.$gt_list->penerbit_kd;?>"><span class="tag tag-default">Hapus</span></a>
                     <a style="text-decoration:none" href="<?php echo site_url('publisher/update').'/'.$gt_list->penerbit_kd;?>"><span class="tag tag-default">Edit</span></a>
-
                   </td>
                 </tr>
               <?php endforeach; ?>
