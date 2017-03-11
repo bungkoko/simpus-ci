@@ -10,11 +10,6 @@ class Collection_md extends CI_Model
     parent::__construct();
   }
 
-  function get_kode(){
-    $this->db->select('koleksi_kd');
-    return $this->db->get('simpus_koleksi');
-  }
-
   function set_collection(){
     $this->db->set('koleksi_judul',$this->input->post('koleksi_judul'));
     $this->db->set('koleksi_tebal',$this->input->post('koleksi_tebal'));
@@ -33,7 +28,18 @@ class Collection_md extends CI_Model
     return $this->db->insert('simpus_koleksi');
   }
 
+  function get_all_collection($num='',$offset=''){
+    $this->db->limit($num,$offset);
+    $this->db->join('simpus_genre','simpus_genre.genre_kd=simpus_koleksi.simpus_genre_genre_kd');
+    $this->db->join('simpus_penulis','simpus_penulis.penulis_kd=simpus_koleksi.simpus_penulis_penulis_kd');
+    $this->db->join('simpus_penerbit','simpus_penerbit.penerbit_kd=simpus_koleksi.simpus_penerbit_penerbit_kd');
+    return $this->db->get('simpus_koleksi');
+  }
 
+  function get_kode_koleksi(){
+    $this->db->select_max('koleksi_kd');
+    return $this->db->get('simpus_koleksi');
+  }
 }
 
 ?>
