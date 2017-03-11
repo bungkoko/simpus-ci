@@ -15,14 +15,19 @@
 <div class="container-fluid">
   <div class="animated fadeIn">
     <div class="row">
-      <div class="col-lg-8">
+      <div class="col-lg-12">
         <div class="card">
           <div class="card-header">
             <i class="fa fa-align-justify"></i> <?php $title;?>
           </div>
           <div class="card-block">
-            <div>
-              <input type="text" id="search" class="form-control" onkeyup="search()" placeholder="Pencarian Berdasarkan Kode Anggota"/>
+            <div style="padding-bottom:50px">
+              <div class="col-lg-6">
+                <input type="text" id="search" class="form-control" onkeyup="search()" placeholder="Pencarian Berdasarkan Kode Anggota"/>
+              </div>
+              <div class="col-lg-6">
+                  <a style="text-decoration:none" href="<?php echo site_url('collection/add');?>"><button class="btn btn-sm btn-primary">Tambah</button></a>
+              </div>
             </div>
             <table class="table table-striped" id="table_with_search">
               <thead>

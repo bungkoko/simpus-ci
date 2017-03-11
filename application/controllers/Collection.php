@@ -31,7 +31,7 @@ class Collection extends CI_Controller
     $data['get_list']=$this->Collection_md->get_all_collection($config['per_page'],$offset);
     $data['pagination']=$this->pagination->create_links();
 
-    
+
     $data['content']='administrator/content';
     $data['main']='administrator/collection/main';
 
@@ -113,6 +113,13 @@ class Collection extends CI_Controller
     else:
       $data['warning']="Database belum terhubung";
     endif;
+
+    $data['kode_otomatis']=$this->get_kode_koleksi();
+    $data['title']='Tambah Koleksi';
+    $data['content']='administrator/content';
+    $data['main']='administrator/collection/add';
+
+    $this->load->view('index',$data);
   }
 }
 
