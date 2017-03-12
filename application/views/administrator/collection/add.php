@@ -102,7 +102,7 @@
               <div class="form-group row">
                 <label class="col-md-3 form-control-label" for="text-input">Lokasi Rak</label>
                 <div class="col-md-9">
-                  <input type="text" id="text-input" name="koleksi_lokasi_rak" class="form-control" placeholder="Tebal Koleksi">
+                  <input type="text" id="text-input" name="koleksi_lokasi_rak" class="form-control" placeholder="Lokasi Koleksi">
                 </div>
               </div>
               <div class="form-group row">
@@ -134,13 +134,3 @@
     </div>
   </div>
 </div>
-
-<script type="text/javascript">
-  $(document).ready(function(){
-    $('#genre_kd').change(function(){
-      var url="<?php echo site_url('collection/get_chain_genre')?>/"+$(this).val();
-      $('koleksi_kode').load(url);
-      return false;
-    })
-  })
-</script>
