@@ -57,12 +57,15 @@ class Collection extends CI_Controller
       endif;
     endforeach;
     return $koleksi_kd;
-
   }
 
+
   function add(){
+    if($this->session->userdata('logged')==FALSE):
+      redirect('administrator');
+    endif;
+
     if($this->input->post('submit')):
-      $this->form_validation->set_rules('koleksi_kd','Kode Koleksi','required');
       $this->form_validation->set_rules('koleksi_judul','Judul Koleksi','required');
       $this->form_validation->set_rules('koleksi_isbn','ISBN','required');
       $this->form_validation->set_rules('koleksi_stok','Stok','required');
@@ -108,16 +111,19 @@ class Collection extends CI_Controller
           redirect('Collection/list');
         endif;
       else:
-        $data['warning']="Data belum lengkap";
+        $data['warning']=validation_errors();
       endif;
     else:
       $data['warning']="Database belum terhubung";
     endif;
 
-    $data['kode_otomatis']=$this->get_kode_koleksi();
-    $data['title']='Tambah Koleksi';
-    $data['content']='administrator/content';
-    $data['main']='administrator/collection/add';
+    //$data['kode_otomatis']=$this->get_kode_koleksi();
+    $data['title']="Tambah Koleksi";
+    $data['content']="administrator/content";
+    $data['main']="administrator/collection/add";
+    $data['list_genre']=$this->Collection_md->getGenreList();
+    $data['list_penulis']=$this->Collection_md->getAuthorList();
+    $data['list_penerbit']=$this->Collection_md->getPublisherList();
 
     $this->load->view('index',$data);
   }

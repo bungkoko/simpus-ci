@@ -40,6 +40,23 @@ class Collection_md extends CI_Model
     $this->db->select_max('koleksi_kd');
     return $this->db->get('simpus_koleksi');
   }
+
+  function getGenreList(){
+    $this->db->order_by('genre_judul','ASC');
+    return $this->db->get('simpus_genre');
+  }
+
+  function getAuthorList(){
+    $this->db->order_by('penulis_nm','ASC');
+    return $this->db->get('simpus_penulis');
+  }
+
+  function getPublisherList(){
+    $this->db->order_by('penerbit_nm','ASC');
+    return $this->db->get('simpus_penerbit');
+  }
+
+
 }
 
 ?>
