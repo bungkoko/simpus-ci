@@ -108,7 +108,7 @@ class Collection extends CI_Controller
 
           $this->db->set('koleksi_kd',$this->get_kode_koleksi());
           $this->Collection_md->add_collection($cover_path);
-          redirect('Collection/list');
+          redirect('Collection');
         endif;
       else:
         $data['warning']=validation_errors();

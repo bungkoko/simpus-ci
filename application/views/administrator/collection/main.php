@@ -32,8 +32,13 @@
             <table class="table table-striped" id="table_with_search">
               <thead>
                 <tr>
-                  <th>Kode Anggota</th>
-                  <th>Nama Anggota</th>
+                  <th>Kode Koleksi</th>
+                  <th>Judul Koleksi</th>
+                  <th>Genre</th>
+                  <th>Penulis</th>
+                  <th>Penerbit</th>
+                  <th>Lokasi Rak</th>
+                  <th>Stok Koleksi</th>
                   <th>Status</th>
                 </tr>
               </thead>
@@ -42,6 +47,11 @@
                   <tr>
                      <td><?php echo $list->koleksi_kd;?></td>
                      <td><?php echo $list->koleksi_judul;?></td>
+                     <td><?php echo $list->genre_judul; ?></td>
+                     <td><?php echo $list->penulis_nm ?></td>
+                     <td><?php echo $list->penerbit_nm; ?></td>
+                     <td><?php echo $list->koleksi_lokasi_rak; ?></td>
+                     <td><?php echo $list->koleksi_stok; ?></td>
                      <td>
                          <span class="tag tag-success">Active</span>
                      </td>
