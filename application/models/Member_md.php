@@ -22,7 +22,7 @@
       $this->db->set('anggota_jeniskelamin',$this->input->post('anggota_jeniskelamin'));
       $this->db->set('anggota_tgldaftar',date('Y-m-d'));
       $this->db->set('anggota_alamat',$this->input->post('anggota_alamat'));
-      $this->db->set('anggota_status',$this->input->post('anggota_status'));
+      $this->db->set('anggota_status','block');
     }
 
     function add_member($avatar){
@@ -41,6 +41,7 @@
       return $this->db->get('simpus_anggota')->row();
     }
 
+     
     function get_anggota($num='',$limit=''){
       $this->db->order_by('anggota_tgldaftar','desc');
       $this->db->where($num,$limit);

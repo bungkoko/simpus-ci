@@ -38,7 +38,13 @@
                      <td><?php echo $list->anggota_kd;?></td>
                      <td><?php echo $list->anggota_nm;?></td>
                      <td>
-                         <span class="tag tag-success">Active</span>
+                      <?php if($list->anggota_status=="active"):?>
+                         <a href="<?php echo site_url('member/status/'.$list->anggota_kd.'/'.$list->anggota_status.'')?>"><span class="tag tag-danger">Blocked</span></a>
+                      <?php elseif($list->anggota_status=="block"):?>
+                         <a href="<?php echo site_url('member/status/'.$list->anggota_kd.'/'.$list->anggota_status.'')?>"><span class="tag tag-success">Activate</span>
+                      <?php else:?>
+                          Not Chooice
+                      <?php endif;?>
                      </td>
                  </tr>
                <?php endforeach; ?>

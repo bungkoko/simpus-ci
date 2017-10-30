@@ -22,6 +22,7 @@ class Genres_md extends CI_Model
 
   function all_genre($num='',$offset=''){
     $this->db->limit($num,$offset);
+    $this->db->order_by('genre_kd','ASC');
     return $this->db->get('simpus_genre');
   }
 

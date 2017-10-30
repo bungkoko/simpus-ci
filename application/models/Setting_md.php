@@ -21,6 +21,10 @@ class Setting_md extends CI_Model
     return $this->db->get('simpus_pengaturan')->row();
   }
 
+  function get_setting(){
+    return $this->db->get('simpus_pengaturan');
+  }
+
 
 
 

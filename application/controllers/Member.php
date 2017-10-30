@@ -102,6 +102,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       endif;
     }
 
+    function status($id='', $status='') {
+        if ($id == '')
+            redirect($this->uri->segment(3) . '/' . $this->uri->segment(4));
+
+        if ($status == 'active')
+            $status = 'block';
+        else
+            $status = 'active';
+
+        // $this->db->join('tborder','tborder.kdorder=tborder_detail.tborder_kdorder');
+        // $this->db->join('tbproduk','tborder_detail.TbProduk_KdProduk=tbProduk.kdproduk');
+        //$this->db->join('tbmember','tbmember.kdmember=tborder.tbmember_kdmember');
+        $this->db->where('anggota_kd', $id);
+        $this->db->set('anggota_status', $status);
+        $this->db->update('simpus_anggota');
+
+        $this->session->set_flashdata('message', 'status berita telah berhasil di ubah');
+        redirect('Member/all');
+    }
+
+
+
     function register_detail($kode){
       $data['title']="Register Detail Member";
       $data['content']="member/register_detail";

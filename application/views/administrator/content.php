@@ -21,7 +21,7 @@
         </a>
         <div class="dropdown-menu dropdown-menu-right">
           <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a>
-          <a class="dropdown-item" href="#"><i class="fa fa-wrench"></i> Settings</a>
+          <a class="dropdown-item" href="<?php echo site_url('setting')?>"><i class="fa fa-wrench"></i>Settings</a>
           <a class="dropdown-item" href="<?php echo site_url('administrator/signout')?>"><i class="fa fa-lock"></i> Logout</a>
         </div>
       </li>
@@ -38,18 +38,13 @@
         Master Data
       </li>
       <li class="nav-item nav-dropdown">
-        <a class="nav-link nav-dropdown-toggle" href="#"><i class="fa fa-book"></i>Book's Collection</a>
-        <ul class="nav-dropdown-items">
-          <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fa fa-plus"></i>Add Book's </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="components-social-buttons.html"><i class="icon-puzzle"></i>List Book's Collection</a>
-          </li>
-        </ul>
+        <a class="nav-link nav-dropdown-toggle" href="<?php echo site_url('collection')?>"><i class="fa fa-book"></i>Collection</a>
       </li>
       <li class="nav-item nav-dropdown">
         <a class="nav-link nav-dropdown-toggle" href="<?php echo site_url('genres')?>"><i class="icon-star"></i>Genre</a>
+      </li>
+      <li class="nav-item nav-dropdown">
+        <a class="nav-link nav-dropdown-toggle" href="<?php echo site_url('author')?>"><i class="icon-user"></i>Author</a>
       </li>
       <li class="nav-item nav-dropdown">
         <a class="nav-link nav-dropdown-toggle" href="#"><i class="fa fa-user"></i>Member</a>

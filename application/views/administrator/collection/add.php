@@ -21,7 +21,7 @@
             <strong>Tambah</strong>
             <small>Koleksi</small>
           </div>
-          <?php echo $warning;?>
+          <?php //echo $warning;?>
           <form class="form-horizontal" action="<?php echo current_url()?>" method="post" enctype="multipart/form-data">
             <div class="card-block">
               <div class="form-group row">
