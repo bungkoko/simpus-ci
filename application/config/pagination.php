@@ -1,8 +1,8 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 $config['query_string_segment'] = 'start';
-$config['full_tag_open'] = '<div class="pagination"><ul>';
-$config['full_tag_close'] = '</ul></div>';
+$config['full_tag_open'] = '<nav> <ul class="pagination">';
+$config['full_tag_close'] = '</ul></nav>';
 
 $config['first_link'] = '&laquo; First';
 $config['first_tag_open'] = '<li class="prev page">';

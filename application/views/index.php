@@ -45,7 +45,7 @@
        <script src="<?php echo base_url();?>assets/js/app.js"></script>
        <!-- Plugins and scripts required by this views -->
        <!-- Custom scripts required by this view -->
-       <script src="<?php echo base_url();?>assets/js/views/main.js"></script>
+       <!--<script src="<?php echo base_url();?>assets/js/views/main.js"></script>-->
     <?php endif; ?>
       <script>
           function verticalAlignMiddle()

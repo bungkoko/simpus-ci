@@ -1,25 +1,30 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Dashboard extends CI_Controller {
-  function __construct(){
-		parent::__construct();
-		$this->load->model('Member_md');
-	}
+/**
+ * Source by : Joko Purwanto
+ */
+class Dashboard extends CI_Controller
+{
 
-	public function index()
-	{
-		if($this->session->userdata('logged')==FALSE):
-			redirect('Administrator');
-    endif;
-    $data['title']="Dashboard";
-		$data['content']="administrator/content";
-		$data['main']="administrator/dashboard/main";
-		$data['total_member']=$this->Member_md->count_new_member_today();
-    $data['total_all']=$this->Member_md->count_all();
+    public function __construct()
+    {
+        parent::__construct();
+        if($this->session->userdata('logged')==FALSE):
+        	redirect('administrator');
+        	exit();
+        endif;
+    }
 
-		$this->load->view('index',$data);
-	}
+    public function index()
+    {
+        $data['title']              = 'Sistem Managemen Perpustakaan - Dashboard';
+        $data['content']            = 'dashboard';
+        $data['counter_genre']      = $this->Genres_md->all_genre()->num_rows();
+        $data['counter_collection'] = $this->Collection_md->get_all_collection()->num_rows();
+        $data['counter_penulis']    = $this->Author_md->get_all()->num_rows();
 
+        $this->load->view('administrator/index', $data);
+    }
 
 }
