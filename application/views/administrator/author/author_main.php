@@ -95,7 +95,7 @@
                                           <td>
                                             <a style="text-decoration:none" href="<?php echo site_url('author/update').'/'.$gt_list->penulis_kd;?>"><i class="material-icons">update</i>
                                             </a>
-                                            <a style="text-decoration:none" href="<?php echo site_url('author/update').'/'.$gt_list->penulis_kd;?>"><i class="material-icons">delete</i>
+                                            <a style="text-decoration:none" href="<?php echo site_url('author/delete').'/'.$gt_list->penulis_kd;?>"><i class="material-icons">delete</i>
                                             </a>
                                           </td>
                                         </tr>

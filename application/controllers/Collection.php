@@ -213,4 +213,6 @@ class Collection extends CI_Controller
         $this->load->view('administrator/index',$data);
     }
 
+    
+
 }
