@@ -104,6 +104,7 @@ class Collection extends CI_Controller
 
                     $this->db->set('koleksi_kd', $this->get_kode_koleksi());
                     $this->Collection_md->add_collection($cover_path);
+                    $this->Collection_md->penulis_has_koleksi($this->get_kode_koleksi());
                     $this->session->set_flashdata('message', 'Koleksi berhasil ditambahkan');
                     redirect('collection');
                     exit();

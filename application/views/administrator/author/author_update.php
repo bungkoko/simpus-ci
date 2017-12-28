@@ -17,8 +17,9 @@
                                 <p><?php echo $warning;?></p>
                             </div>
                         <?php endif; ?>
-                    
-                            <div class="row clearfix">
+                            <form class="form-horizontal" action="<?php echo current_url()?>" method="post">
+                                <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>" style="display: none"> 
+                                <div class="row clearfix">
                                     <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
                                         <label for="penulis_kd">Kode Penulis</label>
                                     </div>

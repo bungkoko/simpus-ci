@@ -34,7 +34,18 @@
                         </div>
                         <div class="content">
                             <div class="text">Penulis</div>
-                            <div class="number count-to" data-from="0" data-to="<?php echo $counter_collection;?>" data-speed="1000" data-fresh-interval="20"></div>
+                            <div class="number count-to" data-from="0" data-to="<?php echo $counter_author;?>" data-speed="1000" data-fresh-interval="20"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box bg-red hover-expand-effect">
+                        <div class="icon">
+                            <i class="material-icons">people</i>
+                        </div>
+                        <div class="content">
+                            <div class="text">Publisher</div>
+                            <div class="number count-to" data-from="0" data-to="<?php echo $counter_publisher;?>" data-speed="1000" data-fresh-interval="20"></div>
                         </div>
                     </div>
                 </div>

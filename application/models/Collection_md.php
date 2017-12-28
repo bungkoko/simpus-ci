@@ -20,7 +20,14 @@ class Collection_md extends CI_Model
         $this->db->set('koleksi_stok', $this->input->post('koleksi_stok'));
         $this->db->set('simpus_genre_genre_kd', $this->input->post('simpus_genre_genre_kd'));
         $this->db->set('simpus_penerbit_penerbit_kd', $this->input->post('simpus_penerbit_penerbit_kd'));
-        $this->db->set('simpus_penulis_penulis_kd', $this->input->post('simpus_penulis_penulis_kd'));
+        //$this->db->set('simpus_penulis_penulis_kd', $this->input->post('simpus_penulis_penulis_kd'));
+    }
+
+    public function penulis_has_koleksi($collection_id)
+    {
+        $this->db->set('simpus_koleksi_koleksi_kd',$collection_id);
+        $this->db->set('simpus_penulis_penulis_kd',$this->input->post('simpus_penulis_penulis_kd'));
+        return $this->db->insert('simpus_penulis_has_simpus_koleksi');
     }
 
     public function add_collection($cover)
@@ -34,7 +41,7 @@ class Collection_md extends CI_Model
     {
         $this->db->limit($num, $offset);
         $this->db->join('simpus_genre', 'simpus_genre.genre_kd=simpus_koleksi.simpus_genre_genre_kd');
-        $this->db->join('simpus_penulis', 'simpus_penulis.penulis_kd=simpus_koleksi.simpus_penulis_penulis_kd');
+        //$this->db->join('simpus_penulis', 'simpus_penulis.penulis_kd=simpus_koleksi.simpus_penulis_penulis_kd');
         $this->db->join('simpus_penerbit', 'simpus_penerbit.penerbit_kd=simpus_koleksi.simpus_penerbit_penerbit_kd');
         return $this->db->get('simpus_koleksi');
     }
@@ -89,15 +96,16 @@ class Collection_md extends CI_Model
 
     public function unlink_collection($collection_id)
     {
-        $this->db->where('koleksi_kd',$collection_id);
-        $gtData=$this->db->get('simpus_koleksi')->row();
+        $this->db->where('koleksi_kd', $collection_id);
+        $gtData = $this->db->get('simpus_koleksi')->row();
 
         unlink(".$gtData->koleksi_cover");
     }
 
-    function read($collection_id){
-      $this->db->where('koleksi_kd',$collection_id);
-      return $this->db->get('simpus_koleksi')->row();
+    public function read($collection_id)
+    {
+        $this->db->where('koleksi_kd', $collection_id);
+        return $this->db->get('simpus_koleksi')->row();
     }
 
 }
