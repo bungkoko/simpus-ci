@@ -87,11 +87,11 @@
                                     </div>
                                     <?php if($list_author->num_rows()!='NULL'):?>
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-7">
-                                        <select class="form-control show-tick" name="simpus_penulis_penulis_kd">
+                                        <select class="form-control show-tick" name="simpus_penulis_penulis_kd[]" data-live-search="true" multiple >
                                             <option value="">-- Please select --</option>
                                             <?php foreach($list_author->result() as $author): ?>
                                             <option value='<?php echo $author->penulis_kd?>'>
-                                                <?php echo $author->penulis_nm;?>
+                                                <?php echo $author->penulis_kd.' '.$author->penulis_nm;?>
                                             </option>
                                             <?php endforeach; ?>
                                          </select>

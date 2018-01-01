@@ -35,7 +35,7 @@
                                             <th><?php echo $gtKoleksi->koleksi_judul; ?></th>
                                             <th><?php echo $gtKoleksi->koleksi_tebal; ?></th>
                                             <th><?php echo $gtKoleksi->genre_judul; ?></th>
-                                            <th><?php echo $gtKoleksi->penulis_nm; ?></th>
+                                            <th><?php echo $gtKoleksi->nama_penulis; ?></th>
                                             <th><?php echo $gtKoleksi->penerbit_nm;?></th>
                                             <th><?php echo $gtKoleksi->koleksi_lokasi_rak;?></th>
                                             <th><?php echo $gtKoleksi->koleksi_stok; ?></th>

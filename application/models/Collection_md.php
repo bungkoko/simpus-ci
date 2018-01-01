@@ -23,27 +23,40 @@ class Collection_md extends CI_Model
         //$this->db->set('simpus_penulis_penulis_kd', $this->input->post('simpus_penulis_penulis_kd'));
     }
 
-    public function penulis_has_koleksi($collection_id)
-    {
-        $this->db->set('simpus_koleksi_koleksi_kd',$collection_id);
-        $this->db->set('simpus_penulis_penulis_kd',$this->input->post('simpus_penulis_penulis_kd'));
-        return $this->db->insert('simpus_penulis_has_simpus_koleksi');
-    }
-
-    public function add_collection($cover)
+    public function add_collection($cover, $collection_id)
     {
         $this->set_collection();
         $this->db->set('koleksi_cover', $this->config->item('upload_path_koleksi') . $cover);
-        return $this->db->insert('simpus_koleksi');
+
+        $penulis = $this->input->post('simpus_penulis_penulis_kd');
+        $result  = array();
+
+        foreach ($penulis as $key => $val) {
+            $result[] = array(
+                "simpus_penulis_penulis_kd" => $penulis[$key],
+                "simpus_koleksi_koleksi_kd" => $collection_id,
+            );
+        }
+
+        $this->db->insert('simpus_koleksi');
+        $this->db->insert_batch('simpus_penulis_has_simpus_koleksi', $result);
     }
 
-    public function get_all_collection($num = '', $offset = '')
+    public function get_all_collection()
     {
-        $this->db->limit($num, $offset);
-        $this->db->join('simpus_genre', 'simpus_genre.genre_kd=simpus_koleksi.simpus_genre_genre_kd');
-        //$this->db->join('simpus_penulis', 'simpus_penulis.penulis_kd=simpus_koleksi.simpus_penulis_penulis_kd');
-        $this->db->join('simpus_penerbit', 'simpus_penerbit.penerbit_kd=simpus_koleksi.simpus_penerbit_penerbit_kd');
-        return $this->db->get('simpus_koleksi');
+
+        $this->db->select('*,
+                    GROUP_CONCAT(simpus_penulis.penulis_kd) AS kode_penulis,
+                    GROUP_CONCAT(simpus_penulis.penulis_nm) AS nama_penulis');
+        $this->db->from('simpus_penulis_has_simpus_koleksi');
+        $this->db->join('simpus_koleksi','simpus_penulis_has_simpus_koleksi.simpus_koleksi_koleksi_kd=simpus_koleksi.koleksi_kd','inner');
+        $this->db->join('simpus_penulis','simpus_penulis_has_simpus_koleksi.simpus_penulis_penulis_kd=simpus_penulis.penulis_kd','inner');
+        $this->db->join('simpus_genre','simpus_koleksi.simpus_genre_genre_kd=simpus_genre.genre_kd','inner');
+        $this->db->join('simpus_penerbit','simpus_koleksi.simpus_penerbit_penerbit_kd=simpus_penerbit.penerbit_kd','inner');
+        $this->db->group_by('simpus_koleksi.koleksi_kd');
+
+        return $this->db->get();
+
     }
 
     public function get_collection_code()

@@ -20,15 +20,8 @@ class Collection extends CI_Controller
         $data['warning'] = '';
         $data['title']   = "Daftar Koleksi";
 
-        $config['base_url']   = base_url() . 'index.php/collection/index/';
-        $config['total_rows'] = $this->Collection_md->get_all_collection()->num_rows();
-        $config['per_page']   = '10';
-        $config['num_links']  = '6';
-
-        $this->pagination->initialize($config);
-
-        $data['get_koleksi'] = $this->Collection_md->get_all_collection($config['per_page'], $this->uri->segment(3));
-        $data['pagination']  = $this->pagination->create_links();
+        $data['get_koleksi'] = $this->Collection_md->get_all_collection();
+     
 
         $data['content'] = 'collection/collection_list';
         $this->load->view('administrator/index', $data);
@@ -68,7 +61,7 @@ class Collection extends CI_Controller
             $this->form_validation->set_rules('koleksi_lokasi_rak', 'Lokasi Rak', 'required');
             $this->form_validation->set_rules('koleksi_tebal', 'Tebal Koleksi', 'required');
             $this->form_validation->set_rules('koleksi_deskripsi', 'Deskripsi Koleksi', 'required');
-            $this->form_validation->set_rules('simpus_penulis_penulis_kd', 'Penulis', 'required');
+            $this->form_validation->set_rules('simpus_penulis_penulis_kd[]', 'Penulis', 'required');
             $this->form_validation->set_rules('simpus_genre_genre_kd', 'Genre', 'required');
             $this->form_validation->set_rules('simpus_penerbit_penerbit_kd', 'Penerbit', 'required');
 
@@ -103,8 +96,9 @@ class Collection extends CI_Controller
                     $this->image_lib->clear();
 
                     $this->db->set('koleksi_kd', $this->get_kode_koleksi());
-                    $this->Collection_md->add_collection($cover_path);
-                    $this->Collection_md->penulis_has_koleksi($this->get_kode_koleksi());
+
+                    $this->Collection_md->add_collection($cover_path, $this->get_kode_koleksi());
+
                     $this->session->set_flashdata('message', 'Koleksi berhasil ditambahkan');
                     redirect('collection');
                     exit();
@@ -211,9 +205,11 @@ class Collection extends CI_Controller
                 exit();
             endif;
         endif;
-        $this->load->view('administrator/index',$data);
+        $this->load->view('administrator/index', $data);
     }
 
-    
+    //function check_multiple(){
+    //  print_r($this->input->post(''))
+    //}
 
 }
