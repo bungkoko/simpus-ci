@@ -142,50 +142,51 @@
             <div class="menu">
                 <ul class="list">
                     <li class="header">Menu Navigasi</li>
-                    <li class="active">
+                    <li class="<?php if($this->uri->segment(1)=='dashboard'):echo "active";endif; ?>">
                         <a href="<?php echo site_url('dashboard')?>">
                             <i class="material-icons">home</i>
                             <span>Dashboard</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="<?php echo site_url('categories')?>">
+                    <li class="<?php if($this->uri->segment(1)=='collection'||$this->uri->segment(1)=='genre'||$this->uri->segment(1)=='author'||$this->uri->segment(1)=='publisher'):echo "active";endif; ?>">
+                        <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">list</i>
-                            <span>Kategori Produk</span>
+                            <span>Master</span>
                         </a>
+                         <ul class="ml-menu">
+                            <li class="<?php if($this->uri->segment(1)=='collection'):echo "active";endif; ?>">
+                                <a href="<?php echo site_url('collection') ?>">Master Koleksi</a>
+                            </li>
+                            <li class="<?php if($this->uri->segment(1)=='genre'):echo "active";endif; ?>">
+                                <a href="<?php echo site_url('genre')?>">Master Genre</a>
+                            </li>
+                            
+                            <li class="<?php if($this->uri->segment(1)=='author'):echo "active";endif; ?>">
+                                <a href="<?php echo site_url('author')?>">Master Penulis</a>
+                            </li>
+
+                            <li class="<?php if($this->uri->segment(1)=='publisher'):echo "active";endif; ?>">
+                                <a href="<?php echo site_url('publisher')?>">Master Penerbit</a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">business</i>
-                            <span>Produk</span>
+                            <span>Sirkulasi</span>
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="<?php echo site_url('product') ?>">Daftar Produk</a>
+                                <a href="#">Peminjaman</a>
                             </li>
                             <li>
-                                <a href="<?php echo site_url('product/add')?>">Tambah Produk</a>
+                                <a href="#">Pengembalian</a>
                             </li>
                             
                         </ul>
                     </li>
-                    <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">pages</i>
-                            <span>Tentang</span>
-                        </a>
-                        <ul class="ml-menu">
-                            <li>
-                                <a href="<?php echo site_url('about') ?>">Daftar Halaman Tentang</a>
-                            </li>
-                            <li>
-                                <a href="<?php echo site_url('about/add')?>">Tambah Halaman Tentang</a>
-                            </li>
-                            
-                        </ul>
-                    </li>
-                      <li>
-                        <a href="<?php echo site_url('contact')?>">
+                    <li class="<?php if($this->uri->segment(1)=='setting'):echo "active";endif;?>">
+                        <a href="<?php echo site_url('setting')?>">
                             <i class="material-icons">settings_applications</i>
                             <span>Setting</span>
                         </a>

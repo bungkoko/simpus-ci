@@ -7,24 +7,15 @@
 class Circulation_md extends CI_Model
 {
 
-  function set_circulation(){
+  function set_circulation($tgl_harus_kembali=''){
     $this->db->set('simpus_anggota_anggota_kd',$this->input->post('anggota_kd'));
     $this->db->set('simpus_koleksi_koleksi_kd',$this->input->post('koleksi_kd'));
-    $this->db->set('tgl_pinjam',date('Y-m-d'));
-    //$this->db->set('tgl_kembali');
-    $this->db->set('tgl_dikembalikan');
+    $this->db->set('sirkulasi_jumlah_buku',)
+    $this->db->set('sirkulasi_tgl_pinjam',date('Y-m-d'));
+    $this->db->set('sirkulasi_tgl_harus_kembali',$tgl_harus_kembali);
+    $this->db->set('sirkulasi_status',$this->input->post('status_pinjam'));
+
   }
-
-
-
-  /*function set_date_return(){
-  	$get_setting=$this->db->get('simpus_setting')->result();
-  	$lama_pinjam=$get_setting->lama_pinjam;
-
-  	$date_return= date('Y-m-d',strtotime('+$lama_pinjam days'))
-
-  	$
-  }*/
 
 
 }
