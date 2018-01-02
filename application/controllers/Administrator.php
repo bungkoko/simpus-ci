@@ -63,6 +63,7 @@ class Administrator extends CI_Controller
         $this->session->unset_userdata('user_role');
         $this->session->unset_userdata('logged');
         redirect('administrator');
+        exit();
     }
 
 }

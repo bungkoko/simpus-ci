@@ -40,7 +40,6 @@
                                             <th><?php echo $gtKoleksi->koleksi_lokasi_rak;?></th>
                                             <th><?php echo $gtKoleksi->koleksi_stok; ?></th>
                                             <th><?php echo word_limiter(strip_tags($gtKoleksi->koleksi_deskripsi),4); ?>[..]</th>
-
                                             <th>
                                                 <div class="btn-group">
                                                     <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">update</i>
