@@ -9,7 +9,10 @@ class Author extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        //$this->load->model('Author_md');
+        if ($this->session->userdata('logged') == false):
+            redirect('administrator');
+            exit();
+        endif;
     }
 
     public function index()

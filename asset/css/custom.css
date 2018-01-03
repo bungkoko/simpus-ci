@@ -1,0 +1,17 @@
+/*Custom CSS*/
+
+fieldset {
+    padding: 5px;
+    border: 1px solid #4CAF50;
+    background: #FBFFF4;
+}
+legend {
+    font-weight: bold;
+    color: #2D74BE;
+    padding: 8px;
+}
+/*fieldset a {
+    color: #3B5998;
+    background-color: inherit;
+}
+fieldset a:hover { color: #A70B0B; background-color: inherit;}*/

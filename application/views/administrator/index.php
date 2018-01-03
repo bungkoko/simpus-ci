@@ -31,52 +31,17 @@
 
     <!-- Custom Css -->
     <link href="<?php echo base_url(); ?>asset/css/style.css" rel="stylesheet">
-
+     <link href="<?php echo base_url(); ?>asset/css/custom.css" rel="stylesheet">
     <link href="<?php echo base_url() ?>asset/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="<?php echo base_url(); ?>asset/css/themes/theme-green.css" rel="stylesheet" />
 
-    <script>
-        function search_publisher() {
-          var input, filter, table, tr, td, i;
-          input = document.getElementById("search_publisher");
-          filter = input.value.toUpperCase();
-          table = document.getElementById("table_with_search");
-          tr = table.getElementsByTagName("tr");
-          for (i = 1; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[1];
-            if (td) {
-              if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                tr[i].style.display = "";
-              } else {
-                tr[i].style.display = "none";
-              }
-            }
-          }
-        }
-    </script>
+   
 
 </head>
 
 <body class="theme-green">
-    <!-- Page Loader -->
-    <div class="page-loader-wrapper">
-        <div class="loader">
-            <div class="preloader">
-                <div class="spinner-layer pl-green">
-                    <div class="circle-clipper left">
-                        <div class="circle"></div>
-                    </div>
-                    <div class="circle-clipper right">
-                        <div class="circle"></div>
-                    </div>
-                </div>
-            </div>
-            <p>Please wait...</p>
-        </div>
-    </div>
-    <!-- #END# Page Loader -->
     <!-- Overlay For Sidebars -->
     <div class="overlay"></div>
     <!-- #END# Overlay For Sidebars -->
@@ -170,14 +135,14 @@
                             </li>
                         </ul>
                     </li>
-                    <li>
+                    <li class="<?php if($this->uri->segment(1)=='circulation'):echo "active";endif; ?>">
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">business</i>
                             <span>Sirkulasi</span>
                         </a>
                         <ul class="ml-menu">
-                            <li>
-                                <a href="#">Peminjaman</a>
+                            <li class="<?php if($this->uri->segment(1)=='circulation'):echo "active";endif; ?>">
+                                <a href="<?php echo site_url('circulation/borrow') ?>">Peminjaman</a>
                             </li>
                             <li>
                                 <a href="#">Pengembalian</a>
@@ -243,16 +208,27 @@
     <!-- CKEDITOR -->
     <script src="<?php echo base_url(); ?>asset/plugins/ckeditor/ckeditor.js"></script>
 
+    <!-- Input Mask Plugin Js -->
+    <script src="<?php echo base_url(); ?>asset/plugins/jquery-inputmask/jquery.inputmask.bundle.js"></script>
+
     <!-- FileInput Plugin Js -->
     <script src="<?php echo base_url(); ?>asset/js/fileinput.js"></script>
 
     <!--JS Validate-->
     <script src="<?php echo base_url(); ?>asset/plugins/jquery-validation/jquery.validate.js"></script>
+
+    <!--JS editable-->
+    <script src="<?php echo base_url(); ?>asset/plugins/editable-table/mindmup-editabletable.js"></script>
+
+    <!-- Custom Js -->
+    <script src="<?php echo base_url(); ?>asset/js/pages/tables/editable-table.js"></script>
+
     <!-- Custom Js -->
     <script src="<?php echo base_url(); ?>asset/js/admin.js"></script>
     <script src="<?php echo base_url(); ?>asset/js/pages/index.js"></script>
     <script src="<?php echo base_url(); ?>asset/js/pages/forms/editors.js"></script>
     <script src="<?php echo base_url(); ?>asset/js/pages/ui/modals.js"></script>
+    <script src="<?php echo base_url(); ?>asset/js/advanced-form-elements.js"></script>
 
   
 

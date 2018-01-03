@@ -7,20 +7,20 @@ class Administrator extends CI_Controller
 
     public function __construct()
     {
-        parent::__construct();
-        if ($this->session->userdata('logged') == true):
-            redirect('dashboard');
-            exit();
-        endif;
+        parent::__construct(); 
     }
 
     public function index()
     {
+        if ($this->session->userdata('logged') == true):
+            redirect('dashboard');
+        endif;
         $this->signin();
     }
 
     public function signin()
     {
+      
         $data['warning'] = '';
         $data['error']   = '';
 
@@ -62,8 +62,7 @@ class Administrator extends CI_Controller
         $this->session->unset_userdata('email');
         $this->session->unset_userdata('user_role');
         $this->session->unset_userdata('logged');
-        redirect('administrator');
-        exit();
+        redirect('administrator/signin');
     }
 
 }

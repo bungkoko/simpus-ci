@@ -211,5 +211,13 @@ class Collection extends CI_Controller
     //function check_multiple(){
     //  print_r($this->input->post(''))
     //}
+    //
+    
+    function borrow(){
+        $data['warning']='';
+        $data['title']='Peminjaman';
+        $data['content']='circulation/borrow';
+        $this->load->view('administrator/index',$data);
+    }
 
 }
