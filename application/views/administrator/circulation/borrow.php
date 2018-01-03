@@ -1,23 +1,23 @@
         <form class="form-horizontal" action="" method="post">    
             <div class="row clearfix">
-            <?php //echo $transaction_id; ?>
                 <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="body">
                             <div class="masked-input">
                                 <fieldset>
-                                    <legend>Nomor Induk Anggota</legend>
+                                    <legend>No Transaksi Peminjaman</legend>
                                         <div class="input-group">
+                                            <span class="input-group-addon">No Transaksi</span>
                                             <div class="form-line">
-                                                <input type="text" name="pengaturan_lamapinjam" class="form-control" placeholder="Masukkan Nomor Anggota" value="">
+                                                <input type="text" name="pengaturan_lamapinjam" class="form-control" placeholder="Masukkan Nomor Anggota" value="<?php echo $transaction_id?>" disabled>
                                             </div>
-                                            <span class="input-group-addon"><small>Nomor Anggota/Nama Anggota</small></span>
+                                            
                                         </div>
                                 </fieldset>
                             </div>
                         </div>
                     </div>
-                </div> 
+                </div>
                 <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="body">
@@ -48,7 +48,43 @@
                             </div>
                         </div>
                     </div>
-                </div>                   
+                </div>       
+            </div>
+
+            <div class="row clearfix">
+            <?php //echo $transaction_id; ?>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="body">
+                            <div class="masked-input">
+                                <fieldset>
+                                    <legend>Nomor Induk Anggota</legend>
+                                    <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Nomor Induk Anggota</span>
+                                            <div class="form-line">
+                                                <input type="text" name="anggota_kd" class="form-control" placeholder="Masukkan Nomor Anggota" id="anggota_kd">
+                                            </div>  
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="input-group">
+                                            <button type="button" onclick="search()" class="btn btn-primary waves-effect">Go</button> 
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Nama Anggota</span>
+                                            <div class="form-line">
+                                                <input type="text" name="anggota_nm" class="form-control" id="anggota_nm" placeholder="Otomatis ketika Nomor Induk di inputkan" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>   
+                            </div>
+                        </div>
+                    </div>
+                </div>            
             </div>
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -56,17 +92,6 @@
                         <div class="body">
                             <fieldset>
                                 <legend>Buku yang dipinjam</legend>
-                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            Kode Transaksi
-                                        </span>
-                                        <div class="form-line">
-                                            <input type="text" name="pengaturan_lamapinjam" class="form-control" placeholder="KODE TRANSAKSI" value="<?php echo $transaction_id?>">
-                                        </div>
-                                    </div>
-                                </div>    
-
 
                                 <table id="mainTable" class="table table-bordered">
                                     <thead style="background: #9E9E9E;">
@@ -124,3 +149,6 @@
                 </div>
             </div>
          </form>
+    
+
+    

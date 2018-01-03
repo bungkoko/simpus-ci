@@ -86,4 +86,16 @@ class Member_md extends CI_Model
         $this->db->limit($num, $offset);
         return $this->db->get('simpus_anggota');
     }
+
+    public function viewByMemberId($member_id)
+    {
+        $this->db->where('anggota_kd',$member_id);
+        return $this->db->get('simpus_anggota')->row();
+    }
+
+    public function get_autocomplete($keyword){
+        $this->db->like('anggota_kd',$keyword);
+        return $this->db->get('simpus_anggota');
+
+    }
 }

@@ -8,6 +8,7 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>Selamat Datang di Administrator - Halaman <?php echo $title; ?></title>
     <!-- Favicon-->
+
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
     <!-- Google Fonts -->
@@ -36,7 +37,7 @@
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="<?php echo base_url(); ?>asset/css/themes/theme-green.css" rel="stylesheet" />
-
+    
    
 
 </head>
@@ -224,13 +225,44 @@
     <script src="<?php echo base_url(); ?>asset/js/pages/tables/editable-table.js"></script>
 
     <!-- Custom Js -->
+
     <script src="<?php echo base_url(); ?>asset/js/admin.js"></script>
     <script src="<?php echo base_url(); ?>asset/js/pages/index.js"></script>
     <script src="<?php echo base_url(); ?>asset/js/pages/forms/editors.js"></script>
     <script src="<?php echo base_url(); ?>asset/js/pages/ui/modals.js"></script>
     <script src="<?php echo base_url(); ?>asset/js/advanced-form-elements.js"></script>
 
-  
+
+    <script>
+        function search() {
+            $.ajax({
+                type: "POST", // Method pengiriman data bisa dengan GET atau POST
+                url: "<?php echo base_url()?>index.php/member/search_member", 
+                data: {
+                    anggota_kd: $("#anggota_kd").val()
+                }, // data yang akan dikirim ke file proses
+                dataType: "json",
+                beforeSend: function(e) {
+                    if (e && e.overrideMimeType) {
+                        e.overrideMimeType("application/json;charset=UTF-8");
+                    }
+                },
+                success: function(response) { // Ketika proses pengiriman berhasil
+                    if (response.status == "success") { // Jika isi dari array status adalah success
+                        $("#anggota_nm").val(response.anggota_nm); // set textbox dengan id nama
+                    } else { // Jika isi dari array status adalah failed
+                        alert("Data Tidak Ditemukan");
+                    }
+                },
+                error: function(xhr, ajaxOptions, thrownError) { // Ketika ada error
+                    alert(xhr.responseText);
+                }
+            });
+        }
+        
+    </script>
+
+
 
     <script>
         $("#upload_image").fileinput({

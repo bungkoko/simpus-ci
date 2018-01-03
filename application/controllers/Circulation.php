@@ -27,16 +27,16 @@ class Circulation extends CI_Controller
         $gtday             = sprintf("%02d", $date['mday']);
         $gtMonth           = sprintf("%02d", $date['mon']);
         $gtYear            = $date['year'];
-        $trans             = $gtMonth.'/'.$gtYear;
+        $trans             = $gtMonth . '/' . $gtYear;
 
         foreach ($gt_transaction_id->result() as $gtTrans):
-            if (($gtTrans->sirkulasi_pinjam_kd == null)|| (substr($gtTrans->sirkulasi_pinjam_kd, 5, 2) != $gtMonth)):
-                $transaction_id = '0001'.'/'.$trans;
+            if (($gtTrans->sirkulasi_pinjam_kd == null) || (substr($gtTrans->sirkulasi_pinjam_kd, 5, 2) != $gtMonth)):
+                $transaction_id = '0001' . '/' . $trans;
                 //$transaction_id=substr($gtTrans->sirkulasi_pinjam_kd,6,2);
             else:
                 $substr_id      = (int) substr($gtTrans->sirkulasi_pinjam_kd, 0, 4);
                 $tmp            = $substr_id + 1;
-                $transaction_id = sprintf("%04s", $tmp).'/'.$trans ;
+                $transaction_id = sprintf("%04s", $tmp) . '/' . $trans;
             endif;
         endforeach;
 
@@ -71,6 +71,26 @@ class Circulation extends CI_Controller
 
         return $date_return;
 
+    }
+
+    public function search_member()
+    {
+        $member_id=$this->input->post('anggota_kd');
+        
+        //$member_id='160001';
+        $member=$this->Member_md->viewByMemberId($member_id);
+
+        if(!empty($member)):
+            $callback=array(
+                'status'=>'success',
+                'anggota_nm' => $member->anggota_nm,
+            );
+        else:
+            $callback=array(
+                'status'=>'failed');
+        endif;
+
+        echo json_encode($callback);
     }
 
 }
