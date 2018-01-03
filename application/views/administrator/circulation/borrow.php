@@ -53,62 +53,72 @@
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
-                        <div class="header">
-                            <h2>
-                                Buku yang dipinjam
-                            </h2>
-                        </div>
                         <div class="body">
-                            <table id="mainTable" class="table table-bordered">
-                                <thead style="background: #9E9E9E;">
-                                    <tr>
-                                        <th scope="row" width="10px">#</th>
-                                        <th>Cost</th>
-                                        <th>Profit</th>
-                                        <th>Fun</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Car</td>
-                                        <td>100</td>
-                                        <td>200</td>
-                                        <td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Bike</td>
-                                        <td>330</td>
-                                        <td>240</td>
-                                        <td>1</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Plane</td>
-                                        <td>430</td>
-                                        <td>540</td>
-                                        <td>3</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Yacht</td>
-                                        <td>100</td>
-                                        <td>200</td>
-                                        <td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Segway</td>
-                                        <td>330</td>
-                                        <td>240</td>
-                                        <td>1</td>
-                                    </tr>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th><strong>TOTAL</strong></th>
-                                        <th>1290</th>
-                                        <th>1420</th>
-                                        <th>5</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
+                            <fieldset>
+                                <legend>Buku yang dipinjam</legend>
+                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            Kode Transaksi
+                                        </span>
+                                        <div class="form-line">
+                                            <input type="text" name="pengaturan_lamapinjam" class="form-control" placeholder="KODE TRANSAKSI" value="<?php echo $transaction_id?>">
+                                        </div>
+                                    </div>
+                                </div>    
+
+
+                                <table id="mainTable" class="table table-bordered">
+                                    <thead style="background: #9E9E9E;">
+                                        <tr>
+                                            <th scope="row" width="10px">#</th>
+                                            <th>Cost</th>
+                                            <th>Profit</th>
+                                            <th>Fun</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Car</td>
+                                            <td>100</td>
+                                            <td>200</td>
+                                            <td>0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bike</td>
+                                            <td>330</td>
+                                            <td>240</td>
+                                            <td>1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Plane</td>
+                                            <td>430</td>
+                                            <td>540</td>
+                                            <td>3</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Yacht</td>
+                                            <td>100</td>
+                                            <td>200</td>
+                                            <td>0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Segway</td>
+                                            <td>330</td>
+                                            <td>240</td>
+                                            <td>1</td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th><strong>TOTAL</strong></th>
+                                            <th>1290</th>
+                                            <th>1420</th>
+                                            <th>5</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </fieldset>
                         </div>
                     </div>
                 </div>

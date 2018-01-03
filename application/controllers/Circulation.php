@@ -16,7 +16,7 @@ class Circulation extends CI_Controller
 
     public function index()
     {
-       $this->borrow();
+        $this->borrow();
     }
 
     public function get_transaction_id()
@@ -24,17 +24,19 @@ class Circulation extends CI_Controller
         $gt_transaction_id = $this->Circulation_md->get_kode_transaksi();
         $transaction_id    = '';
         $date              = getdate();
-        $gtTgl             = sprintf("%02d", $date['mday']);
-        $gtYear            = substr($date['year'], 2, 4);
-        $trans             = $gtYear . $gtTgl;
+        $gtday             = sprintf("%02d", $date['mday']);
+        $gtMonth           = sprintf("%02d", $date['mon']);
+        $gtYear            = $date['year'];
+        $trans             = $gtMonth.'/'.$gtYear;
 
         foreach ($gt_transaction_id->result() as $gtTrans):
-            if (($gtTrans->sirkulasi_pinjam_kd == null) || (substr($gtTrans->sirkulasi_pinjam_kd, 3, 5) != $gtTgl)):
-                $transaction_id = $trans . '0001';
+            if (($gtTrans->sirkulasi_pinjam_kd == null)|| (substr($gtTrans->sirkulasi_pinjam_kd, 5, 2) != $gtMonth)):
+                $transaction_id = '0001'.'/'.$trans;
+                //$transaction_id=substr($gtTrans->sirkulasi_pinjam_kd,6,2);
             else:
-                $substr_id      = (int) substr($gtTrans->sirkulasi_pinjam_kd, 4, 8);
+                $substr_id      = (int) substr($gtTrans->sirkulasi_pinjam_kd, 0, 4);
                 $tmp            = $substr_id + 1;
-                $transaction_id = $trans . sprintf("%04s", $tmp);
+                $transaction_id = sprintf("%04s", $tmp).'/'.$trans ;
             endif;
         endforeach;
 
@@ -44,13 +46,13 @@ class Circulation extends CI_Controller
     public function borrow()
     {
         $data['warning'] = '';
-        $data['title']   = "Peminjaman";
+        $data['title']   = 'Peminjaman';
 
         //$data['get_koleksi'] = $this->Collection_md->get_all_collection();
 
         $data['transaction_id'] = $this->get_transaction_id();
         $data['date_return']    = $this->date_return();
-        $data['date_now']=date('Y-m-d');
+        $data['date_now']       = date('Y-m-d');
 
         $data['content'] = 'circulation/borrow';
 
@@ -65,7 +67,7 @@ class Circulation extends CI_Controller
         foreach ($get_setting->result() as $gtSetting):
             $lamapinjam = $gtSetting->pengaturan_lamapinjam;
         endforeach;
-        $date_return = date('Y-m-d', strtotime('+'.$lamapinjam . 'day', strtotime($now)));
+        $date_return = date('Y-m-d', strtotime('+' . $lamapinjam . 'day', strtotime($now)));
 
         return $date_return;
 
