@@ -51,6 +51,7 @@ class Circulation extends CI_Controller
         //$data['get_koleksi'] = $this->Collection_md->get_all_collection();
 
         $data['transaction_id'] = $this->get_transaction_id();
+        $data['limit_book']     = $this->Setting_md->read()->pengaturan_limit_pinjam;
         $data['date_return']    = $this->date_return();
         $data['date_now']       = date('Y-m-d');
 
@@ -71,26 +72,6 @@ class Circulation extends CI_Controller
 
         return $date_return;
 
-    }
-
-    public function search_member()
-    {
-        $member_id=$this->input->post('anggota_kd');
-        
-        //$member_id='160001';
-        $member=$this->Member_md->viewByMemberId($member_id);
-
-        if(!empty($member)):
-            $callback=array(
-                'status'=>'success',
-                'anggota_nm' => $member->anggota_nm,
-            );
-        else:
-            $callback=array(
-                'status'=>'failed');
-        endif;
-
-        echo json_encode($callback);
     }
 
 }

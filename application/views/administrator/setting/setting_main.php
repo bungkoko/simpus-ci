@@ -45,6 +45,19 @@
                                         </div>
                                     </div>
                                 </div>
+                                 <div class="row clearfix">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5 form-control-label">
+                                        <label for="lamapinjam">Lama Pinjam</label>
+                                    </div>
+                                   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                        <div class="input-group">
+                                            <div class="form-line">
+                                                <input type="text" name="pengaturan_limit_pinjam" class="form-control" placeholder="Masukkan Limit Pinjam" value="<?php echo $read->pengaturan_limit_pinjam; ?>">
+                                            </div>
+                                            <span class="input-group-addon">Buku</span>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="row clearfix">
                                     <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
                                         <input type="submit" class="btn btn-primary m-t-15 waves-effect" value="Simpan" name="submit">

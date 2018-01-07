@@ -30,6 +30,10 @@
      <!-- Fileinput Css -->
     <link href="<?php echo base_url(); ?>asset/css/fileinput.css" rel="stylesheet">
 
+    <!--AutoComplete-->
+     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>asset/plugins/autocomplete/jquery.autocomplete.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>asset/plugins/autocomplete/thickbox.css" />
+
     <!-- Custom Css -->
     <link href="<?php echo base_url(); ?>asset/css/style.css" rel="stylesheet">
      <link href="<?php echo base_url(); ?>asset/css/custom.css" rel="stylesheet">
@@ -37,8 +41,8 @@
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="<?php echo base_url(); ?>asset/css/themes/theme-green.css" rel="stylesheet" />
-    
-   
+
+
 
 </head>
 
@@ -82,11 +86,11 @@
             <!-- User Info -->
             <div class="user-info">
                 <div class="image">
-                <?php if($this->session->userdata('avatar')==null): ?>
+                <?php if ($this->session->userdata('avatar') == null): ?>
                     <img src="<?php echo base_url(); ?>asset/images/user-default.png" width="50" height="50" alt="User" />
                 <?php else: ?>
-                      <img src="<?php echo base_url().$this->session->userdata('avatar'); ?>" width="50" height="50" alt="User" />
-                <?php endif; ?>
+                      <img src="<?php echo base_url() . $this->session->userdata('avatar'); ?>" width="50" height="50" alt="User" />
+                <?php endif;?>
                 </div>
                 <div class="info-container">
                     <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $this->session->userdata('fullname'); ?></div>
@@ -94,10 +98,10 @@
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                         <ul class="dropdown-menu pull-right">
-                            <li><a href="<?php echo site_url('user')?>"><i class="material-icons">person</i>Profile</a></li>
+                            <li><a href="<?php echo site_url('user') ?>"><i class="material-icons">person</i>Profile</a></li>
                             <li role="seperator" class="divider"></li>
                             <li>
-                                <a href="<?php echo site_url('administrator/signout')?>"><i class="material-icons">input</i>Sign Out</a>
+                                <a href="<?php echo site_url('administrator/signout') ?>"><i class="material-icons">input</i>Sign Out</a>
                             </li>
                         </ul>
                     </div>
@@ -108,51 +112,51 @@
             <div class="menu">
                 <ul class="list">
                     <li class="header">Menu Navigasi</li>
-                    <li class="<?php if($this->uri->segment(1)=='dashboard'):echo "active";endif; ?>">
-                        <a href="<?php echo site_url('dashboard')?>">
+                    <li class="<?php if ($this->uri->segment(1) == 'dashboard'): echo "active";endif;?>">
+                        <a href="<?php echo site_url('dashboard') ?>">
                             <i class="material-icons">home</i>
                             <span>Dashboard</span>
                         </a>
                     </li>
-                    <li class="<?php if($this->uri->segment(1)=='collection'||$this->uri->segment(1)=='genre'||$this->uri->segment(1)=='author'||$this->uri->segment(1)=='publisher'):echo "active";endif; ?>">
+                    <li class="<?php if ($this->uri->segment(1) == 'collection' || $this->uri->segment(1) == 'genre' || $this->uri->segment(1) == 'author' || $this->uri->segment(1) == 'publisher'): echo "active";endif;?>">
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">list</i>
                             <span>Master</span>
                         </a>
                          <ul class="ml-menu">
-                            <li class="<?php if($this->uri->segment(1)=='collection'):echo "active";endif; ?>">
+                            <li class="<?php if ($this->uri->segment(1) == 'collection'): echo "active";endif;?>">
                                 <a href="<?php echo site_url('collection') ?>">Master Koleksi</a>
                             </li>
-                            <li class="<?php if($this->uri->segment(1)=='genre'):echo "active";endif; ?>">
-                                <a href="<?php echo site_url('genre')?>">Master Genre</a>
-                            </li>
-                            
-                            <li class="<?php if($this->uri->segment(1)=='author'):echo "active";endif; ?>">
-                                <a href="<?php echo site_url('author')?>">Master Penulis</a>
+                            <li class="<?php if ($this->uri->segment(1) == 'genre'): echo "active";endif;?>">
+                                <a href="<?php echo site_url('genre') ?>">Master Genre</a>
                             </li>
 
-                            <li class="<?php if($this->uri->segment(1)=='publisher'):echo "active";endif; ?>">
-                                <a href="<?php echo site_url('publisher')?>">Master Penerbit</a>
+                            <li class="<?php if ($this->uri->segment(1) == 'author'): echo "active";endif;?>">
+                                <a href="<?php echo site_url('author') ?>">Master Penulis</a>
+                            </li>
+
+                            <li class="<?php if ($this->uri->segment(1) == 'publisher'): echo "active";endif;?>">
+                                <a href="<?php echo site_url('publisher') ?>">Master Penerbit</a>
                             </li>
                         </ul>
                     </li>
-                    <li class="<?php if($this->uri->segment(1)=='circulation'):echo "active";endif; ?>">
+                    <li class="<?php if ($this->uri->segment(1) == 'circulation'): echo "active";endif;?>">
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">business</i>
                             <span>Sirkulasi</span>
                         </a>
                         <ul class="ml-menu">
-                            <li class="<?php if($this->uri->segment(1)=='circulation'):echo "active";endif; ?>">
+                            <li class="<?php if ($this->uri->segment(1) == 'circulation'): echo "active";endif;?>">
                                 <a href="<?php echo site_url('circulation/borrow') ?>">Peminjaman</a>
                             </li>
                             <li>
                                 <a href="#">Pengembalian</a>
                             </li>
-                            
+
                         </ul>
                     </li>
-                    <li class="<?php if($this->uri->segment(1)=='setting'):echo "active";endif;?>">
-                        <a href="<?php echo site_url('setting')?>">
+                    <li class="<?php if ($this->uri->segment(1) == 'setting'): echo "active";endif;?>">
+                        <a href="<?php echo site_url('setting') ?>">
                             <i class="material-icons">settings_applications</i>
                             <span>Setting</span>
                         </a>
@@ -224,6 +228,15 @@
     <!-- Custom Js -->
     <script src="<?php echo base_url(); ?>asset/js/pages/tables/editable-table.js"></script>
 
+
+
+
+    <!--JS Autocomplete-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
+    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js"></script>  
+        
+
     <!-- Custom Js -->
 
     <script src="<?php echo base_url(); ?>asset/js/admin.js"></script>
@@ -232,14 +245,65 @@
     <script src="<?php echo base_url(); ?>asset/js/pages/ui/modals.js"></script>
     <script src="<?php echo base_url(); ?>asset/js/advanced-form-elements.js"></script>
 
-
     <script>
+        <?php $limit=$this->Setting_md->read()->pengaturan_limit_pinjam;?> 
+        var target=document.getElementById("anggota_kd");
+        var batas_karakter=6;
+        function character_limit(){
+            // jika jumlah karakter yg diketikkan lebih dari atau sama dengan 100
+            if(target.value.length >= batas_karakter ){
+            //disable textarea
+            target.readOnly=true;
+            //memberikan warna merah pada text pemberitahuan
+            document.getElementById("notif").style.color="red";
+            // menampilkan pemberitahuan 
+            document.getElementById("notif").innerHTML="Maksimal "+batas_karakter+" karakter";
+            }else{
+            //menghitung jumlah karakter yg sudah diketikkan
+            var jumlah_karakter=target.value.length;
+            // untuk mengetahui jumlah karakter yg tersisa, maka batas_karakter dikurangi karakter yg telah diketikkan
+            var sisa=batas_karakter-jumlah_karakter;
+            // tampilkan pemberitahuan berapa karakter lagi yg tersisa
+            document.getElementById("notif").innerHTML=sisa+" Karakter tersisa !";
+            }
+        }
+
+        function reset_limit(){
+            target.readOnly=false;
+            var notif=document.getElementById("notif");
+            notif.style.color="black";
+            notif.innerHTML="";
+        }
+
+
+        $('#member_id').typeahead({
+            source:  function (query, process) {
+                return $.get('<?php echo site_url('member/getMemberbyId')?>', { query: query }, function (data) {
+                console.log(data);
+                data = $.parseJSON(data);
+                return process(data);
+                });
+            }
+        });
+      
+        <?php for($i=1;$i<=$limit;$i++): ?>
+        $('#koleksi_kd_<?php echo $i;?>').typeahead({
+            source: function(query,process){
+                return $.get('<?php echo site_url('collection/getCollectionbyId')?>', { query: query }, function (data) {
+                console.log(data);
+                data = $.parseJSON(data);
+                return process(data);
+                }); 
+            }
+        });
+        <?php endfor;?>
+
         function search() {
             $.ajax({
                 type: "POST", // Method pengiriman data bisa dengan GET atau POST
-                url: "<?php echo base_url()?>index.php/member/search_member", 
+                url: "<?php echo site_url('member/search_member')?>",
                 data: {
-                    anggota_kd: $("#anggota_kd").val()
+                    anggota_kd: $("#member_id").val()
                 }, // data yang akan dikirim ke file proses
                 dataType: "json",
                 beforeSend: function(e) {
@@ -249,9 +313,14 @@
                 },
                 success: function(response) { // Ketika proses pengiriman berhasil
                     if (response.status == "success") { // Jika isi dari array status adalah success
-                        $("#anggota_nm").val(response.anggota_nm); // set textbox dengan id nama
+                        $("#member_nm").val(response.anggota_nm); // set textbox dengan id nama
                     } else { // Jika isi dari array status adalah failed
                         alert("Data Tidak Ditemukan");
+                        $("#member_id").val("");
+                        target.readOnly=false;
+                        var notif=document.getElementById("notif");
+                        notif.style.color="black";
+                        notif.innerHTML="";
                     }
                 },
                 error: function(xhr, ajaxOptions, thrownError) { // Ketika ada error
@@ -259,7 +328,34 @@
                 }
             });
         }
-        
+
+        function isi_otomatis(i){
+            $.ajax({
+                type: "POST", // Method pengiriman data bisa dengan GET atau POST
+                url: "<?php echo site_url('collection/getAttributeCollection')?>",
+                data: {
+                    koleksi_kd: $("#koleksi_kd_"+i).val()
+                }, // data yang akan dikirim ke file proses
+                dataType: "json",
+                beforeSend: function(e) {
+                    if (e && e.overrideMimeType) {
+                        e.overrideMimeType("application/json;charset=UTF-8");
+                    }
+                },
+                success: function(response) { // Ketika proses pengiriman berhasil
+                    if (response.status == "success") { // Jika isi dari array status adalah success
+                        $("#koleksi_judul_"+i).val(response.koleksi_judul); 
+                        $("#koleksi_penerbit_"+i).val(response.penerbit_nm);
+                        $("#koleksi_penulis_"+i).val(response.penulis_nm);
+                        $("#koleksi_isbn_"+i).val(response.koleksi_isbn);
+                    } 
+                },
+                error: function(xhr, ajaxOptions, thrownError) { // Ketika ada error
+                    alert(xhr.responseText);
+                }
+            });
+        }
+
     </script>
 
 
@@ -277,12 +373,12 @@
             removeTitle: 'Cancel or reset changes',
             elErrorContainer: '#kv-avatar-errors-2',
             msgErrorClass: 'alert alert-block alert-danger',
-            defaultPreviewContent: '<img src="<?php echo base_url()?>asset/images/user-default.png" alt="Your Avatar" style="width:160px;text-align:center;"><h6 class="text-muted" style="text-align:center">Pilih Gambar Max 2 MB</h6>',
+            defaultPreviewContent: '<img src="<?php echo base_url() ?>asset/images/user-default.png" alt="Your Avatar" style="width:160px;text-align:center;"><h6 class="text-muted" style="text-align:center">Pilih Gambar Max 2 MB</h6>',
             layoutTemplates: {main2: '{preview} ' + '<div style="text-align:center">' + ' {remove} {browse}'+'</div>'},
             allowedFileExtensions: ["jpg","jpeg", "png", "gif"]
           });
 
-         
+      
 
     </script>
 

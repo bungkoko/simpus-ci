@@ -8,6 +8,7 @@ class Setting_md extends CI_Model
   function set_setting(){
     $this->db->set('pengaturan_lamapinjam',$this->input->post('pengaturan_lamapinjam'));
     $this->db->set('pengaturan_dendaperhari',$this->input->post('pengaturan_dendaperhari'));
+    $this->db->set('pengaturan_limit_pinjam',$this->input->post('pengaturan_limit_pinjam'));
   }
 
   function setting(){

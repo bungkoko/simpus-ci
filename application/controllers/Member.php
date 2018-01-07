@@ -30,22 +30,15 @@ class Member extends CI_Controller
         echo json_encode($callback);
     }
 
-    public function autocomplete_member()
+    public function getMemberbyId()
     {
-    	$keyword=$this->uri->segment(3);
-        //$keyword = $this->input->post('anggota_kd');
-    	//$keyword='160001';
+      $member_id=$this->input->post('anggota_kd');
+      $member=$this->Member_md->getMemberById($member_id);
 
-        $member = $this->Member_md->get_autocomplete($keyword);
-
-        foreach ($member->result() as $mbr):
-            $data['query']     = $keyword;
-            $data['suggest'][] = array(
-            						'value'=>$mbr->anggota_kd,
-            						'nama'=>$mbr->anggota_nm
-            					);
-        endforeach;
-
-        echo json_encode($data);
+      foreach($member->result() as $mbr):
+        $data[]=$mbr->anggota_kd;
+      endforeach;
+      echo json_encode($data);
     }
+
 }

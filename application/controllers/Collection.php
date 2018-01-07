@@ -21,7 +21,6 @@ class Collection extends CI_Controller
         $data['title']   = "Daftar Koleksi";
 
         $data['get_koleksi'] = $this->Collection_md->get_all_collection();
-     
 
         $data['content'] = 'collection/collection_list';
         $this->load->view('administrator/index', $data);
@@ -208,16 +207,39 @@ class Collection extends CI_Controller
         $this->load->view('administrator/index', $data);
     }
 
-    //function check_multiple(){
-    //  print_r($this->input->post(''))
-    //}
-    //
-    
-    function borrow(){
-        $data['warning']='';
-        $data['title']='Peminjaman';
-        $data['content']='circulation/borrow';
-        $this->load->view('administrator/index',$data);
+    public function getCollectionbyId()
+    {
+        $collection_id = $this->input->post('koleksi_kd');
+        $collect       = $this->Collection_md->getCollectionById($collection_id);
+
+        foreach ($collect->result() as $collection):
+            $data[] = $collection->koleksi_kd;
+        endforeach;
+        echo json_encode($data);
+    }
+
+    public function getAttributeCollection()
+    {
+        $collection_id=$this->input->post('koleksi_kd');
+       // $collection_id='FKS-0001';
+        //$data=array();
+        $collection=$this->Collection_md->getAttributeCollection($collection_id);
+       
+        if(!empty($collection)):
+            $callback = array(
+                'status'=>'success',
+                'koleksi_kd'=>$collection->koleksi_kd,
+                'koleksi_judul'=>$collection->koleksi_judul,
+                'penulis_nm'=>$collection->nama_penulis,
+                'penerbit_nm'=>$collection->penerbit_nm,
+                'koleksi_isbn'=>$collection->koleksi_isbn,
+            );
+        else:
+            $callback=array(
+                'status'=>'failed');
+        endif;
+
+        echo json_encode($callback);
     }
 
 }

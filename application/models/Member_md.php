@@ -93,8 +93,9 @@ class Member_md extends CI_Model
         return $this->db->get('simpus_anggota')->row();
     }
 
-    public function get_autocomplete($keyword){
-        $this->db->like('anggota_kd',$keyword);
+    public function getMemberById($member_id){
+        $this->db->order_by('anggota_kd','ASC');
+        $this->db->like('anggota_kd',$member_id);
         return $this->db->get('simpus_anggota');
 
     }

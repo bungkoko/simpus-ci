@@ -1,4 +1,4 @@
-        <form class="form-horizontal" action="" method="post">    
+        <form class="form-horizontal" action="" method="post">
             <div class="row clearfix">
                 <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
@@ -9,9 +9,9 @@
                                         <div class="input-group">
                                             <span class="input-group-addon">No Transaksi</span>
                                             <div class="form-line">
-                                                <input type="text" name="pengaturan_lamapinjam" class="form-control" placeholder="Masukkan Nomor Anggota" value="<?php echo $transaction_id?>" disabled>
+                                                <input type="text" name="pengaturan_lamapinjam" class="form-control" placeholder="Masukkan Nomor Anggota" value="<?php echo $transaction_id ?>" disabled>
                                             </div>
-                                            
+
                                         </div>
                                 </fieldset>
                             </div>
@@ -24,23 +24,23 @@
                             <div class="masked-input">
                                 <fieldset>
                                     <legend>Tanggal</legend>
-                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">    
+                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon">
                                                 Tanggal Pinjam
                                             </span>
                                             <div class="form-line">
-                                                <input type="text" class="form-control date" placeholder="Ex: 30/07/2016" value="<?php echo date('d-M-Y',strtotime($date_now)); ?>" disabled>
+                                                <input type="text" class="form-control date" placeholder="Ex: 30/07/2016" value="<?php echo date('d-M-Y', strtotime($date_now)); ?>" disabled>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">    
+                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon">
                                                 Tanggal Kembali
                                             </span>
                                             <div class="form-line">
-                                                <input type="text" class="form-control date" placeholder="Ex: 30/07/2016" value="<?php echo date('d-M-Y',strtotime($date_return)); ?>" disabled>
+                                                <input type="text" class="form-control date" placeholder="Ex: 30/07/2016" value="<?php echo date('d-M-Y', strtotime($date_return)); ?>" disabled>
                                             </div>
                                         </div>
                                     </div>
@@ -48,7 +48,7 @@
                             </div>
                         </div>
                     </div>
-                </div>       
+                </div>
             </div>
 
             <div class="row clearfix">
@@ -63,28 +63,29 @@
                                         <div class="input-group">
                                             <span class="input-group-addon">Nomor Induk Anggota</span>
                                             <div class="form-line">
-                                                <input type="text" name="anggota_kd" class="form-control" placeholder="Masukkan Nomor Anggota" id="anggota_kd">
-                                            </div>  
+                                                <input type="text" name="anggota_kd" class="anggota_typeahead form-control" placeholder="Masukkan Nomor Anggota" id="member_id" onkeyup="character_limit()">
+                                            </div>
+                                            <span id="notif"></span>
                                         </div>
-                                    </div>
+                                    </div>                                    
                                     <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
                                         <div class="input-group">
-                                            <button type="button" onclick="search()" class="btn btn-primary waves-effect">Go</button> 
+                                            <button type="button" onclick="search()" class="btn btn-primary waves-effect">Periksa</button>
                                         </div>
                                     </div>
                                     <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon">Nama Anggota</span>
                                             <div class="form-line">
-                                                <input type="text" name="anggota_nm" class="form-control" id="anggota_nm" placeholder="Otomatis ketika Nomor Induk di inputkan" disabled>
+                                                <input type="text" name="anggota_nm" class="form-control" id="member_nm" placeholder="Otomatis ketika Nomor Induk di inputkan" disabled>
                                             </div>
                                         </div>
                                     </div>
-                                </fieldset>   
+                                </fieldset>
                             </div>
                         </div>
                     </div>
-                </div>            
+                </div>
             </div>
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -93,22 +94,59 @@
                             <fieldset>
                                 <legend>Buku yang dipinjam</legend>
 
-                                <table id="mainTable" class="table table-bordered">
+                                <table id="tabledata" class="table table-bordered">
                                     <thead style="background: #9E9E9E;">
                                         <tr>
-                                            <th scope="row" width="10px">#</th>
-                                            <th>Cost</th>
-                                            <th>Profit</th>
-                                            <th>Fun</th>
+                                            <th scope="row" width="10px">No</th>
+                                            <th style="vertical-align: middle;">Kode Koleksi</th>
+                                            <th style="vertical-align: middle;">Judul Koleksi</th>
+                                            <th style="vertical-align: middle;">Penerbit</th>
+                                            <th style="vertical-align: middle;">Pengarang</th>
+                                            <th style="vertical-align: middle;">ISBN</th>
+                                            <th style="vertical-align: middle;">Jumlah Pinjam</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php for ($i=1;$i<=$limit_book;$i++): ?>
                                         <tr>
-                                            <td>Car</td>
-                                            <td>100</td>
-                                            <td>200</td>
-                                            <td>0</td>
+                                            <td>1</td>
+                                            <td width="100px">
+                                                <div class="input-group">
+                                                    <div class="form-line">
+                                                        <input type="text" name="koleksi_kd" class="form-control" placeholder="Masukkan Nomor Anggota" onblur="isi_otomatis(<?php echo $i?>)" id="koleksi_kd_<?php echo $i;?>">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="input-group">
+                                                    <div class="form-line">
+                                                        <input type="text" name="koleksi_judul" class="form-control"  id="koleksi_judul_<?php echo $i;?>" disabled>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="input-group">
+                                                    <div class="form-line">
+                                                        <input type="text" name="penerbit_nm" class="form-control" id="koleksi_penerbit_<?php echo $i;?>" disabled>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="input-group">
+                                                    <div class="form-line">
+                                                        <input type="text" name="penulis_nm" class="form-control" id="koleksi_penulis_<?php echo $i;?>" disabled>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="input-group">
+                                                    <div class="form-line">
+                                                        <input type="text" name="koleksi_isbn" class="form-control" id="koleksi_isbn_<?php echo $i;?>" disabled>
+                                                    </div>
+                                                </div>
+                                            </td>
                                         </tr>
+                                    <?php endfor;?>
                                         <tr>
                                             <td>Bike</td>
                                             <td>330</td>
@@ -149,6 +187,11 @@
                 </div>
             </div>
          </form>
-    
 
-    
+       
+
+
+
+
+
+
