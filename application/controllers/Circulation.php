@@ -40,6 +40,7 @@ class Circulation extends CI_Controller
             endif;
         endforeach;
 
+        //return $transaction_id;
         return $transaction_id;
     }
 
@@ -48,10 +49,25 @@ class Circulation extends CI_Controller
         $data['warning'] = '';
         $data['title']   = 'Peminjaman';
 
-        //$data['get_koleksi'] = $this->Collection_md->get_all_collection();
+        $this->form_validation->set_rules('sirkulasi_pinjam_kd', 'Kode Transaksi', 'required');
+        $this->form_validation->set_rules('anggota_kd', 'Kode Anggota', 'required');
+       // $this->form_validation->set_rules('koleksi_kd', 'Kode Koleksi', 'required');
+        //$this->form_validation->set_rules('')
+        if ($this->input->post('submit')):
+            if ($this->form_validation->run() == true):
+
+                $this->Circulation_md->add_borrow($this->get_transaction_id(), $this->date_return(), date('Y-m-d'));
+                $this->session->set_flashdata('message', 'Transaksi peminjaman telah berhasil');
+                redirect('circulation');
+            else:
+                $data['warning'] = validation_errors();
+            endif;
+
+        endif;
 
         $data['transaction_id'] = $this->get_transaction_id();
         $data['limit_book']     = $this->Setting_md->read()->pengaturan_limit_pinjam;
+        //$data['count_borrow']   = count($this->input->post('simpus_koleksi_koleksi_kd'));
         $data['date_return']    = $this->date_return();
         $data['date_now']       = date('Y-m-d');
 

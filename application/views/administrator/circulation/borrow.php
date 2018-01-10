@@ -1,4 +1,4 @@
-        <form class="form-horizontal" action="" method="post">
+        <form name="FormBorrow" class="form-horizontal" action="<?php echo current_url() ?>" method="post">
             <div class="row clearfix">
                 <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
@@ -9,7 +9,7 @@
                                         <div class="input-group">
                                             <span class="input-group-addon">No Transaksi</span>
                                             <div class="form-line">
-                                                <input type="text" name="pengaturan_lamapinjam" class="form-control" placeholder="Masukkan Nomor Anggota" value="<?php echo $transaction_id ?>" disabled>
+                                                <input type="text" name="sirkulasi_pinjam_kd" class="form-control" placeholder="Masukkan Nomor Anggota" value="<?php echo $transaction_id ?>" readonly>
                                             </div>
 
                                         </div>
@@ -30,7 +30,7 @@
                                                 Tanggal Pinjam
                                             </span>
                                             <div class="form-line">
-                                                <input type="text" class="form-control date" placeholder="Ex: 30/07/2016" value="<?php echo date('d-M-Y', strtotime($date_now)); ?>" disabled>
+                                                <input type="text" class="form-control" name="sirkulasi_tgl_pinjam" value="<?php echo date('Y-m-d', strtotime($date_now)); ?>" readonly>
                                             </div>
                                         </div>
                                     </div>
@@ -40,7 +40,7 @@
                                                 Tanggal Kembali
                                             </span>
                                             <div class="form-line">
-                                                <input type="text" class="form-control date" placeholder="Ex: 30/07/2016" value="<?php echo date('d-M-Y', strtotime($date_return)); ?>" disabled>
+                                                <input type="text" class="form-control" name="sirkulasi_tgl_harus_kembali" value="<?php echo date('Y-m-d', strtotime($date_return)); ?>" readonly>
                                             </div>
                                         </div>
                                     </div>
@@ -77,7 +77,7 @@
                                         <div class="input-group">
                                             <span class="input-group-addon">Nama Anggota</span>
                                             <div class="form-line">
-                                                <input type="text" name="anggota_nm" class="form-control" id="member_nm" placeholder="Otomatis ketika Nomor Induk di inputkan" disabled>
+                                                <input type="text" name="anggota_nm" class="form-control" id="member_nm" placeholder="Otomatis ketika Nomor Induk di inputkan" readonly>
                                             </div>
                                         </div>
                                     </div>
@@ -107,88 +107,73 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php for ($i=1;$i<=$limit_book;$i++): ?>
+                                        <?php 
+
+                                        for ($i=1;$i<=2;$i++): ?>
                                         <tr>
-                                            <td>1</td>
+                                            <td><?php echo $i;?></td>
                                             <td width="100px">
                                                 <div class="input-group">
                                                     <div class="form-line">
-                                                        <input type="text" name="koleksi_kd" class="form-control" placeholder="Masukkan Nomor Anggota" onblur="isi_otomatis(<?php echo $i?>)" id="koleksi_kd_<?php echo $i;?>">
+                                                        <input type="text" name="simpus_koleksi_koleksi_kd[]" class="form-control" placeholder="Kode Koleksi" onblur="isi_otomatis(<?php echo $i?>)" id="koleksi_kd_<?php echo $i;?>">
                                                     </div>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="input-group">
                                                     <div class="form-line">
-                                                        <input type="text" name="koleksi_judul" class="form-control"  id="koleksi_judul_<?php echo $i;?>" disabled>
+                                                        <input type="text" name="koleksi_judul" class="form-control"  id="koleksi_judul_<?php echo $i;?>" readonly>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="input-group">
                                                     <div class="form-line">
-                                                        <input type="text" name="penerbit_nm" class="form-control" id="koleksi_penerbit_<?php echo $i;?>" disabled>
+                                                        <input type="text" name="penerbit_nm" class="form-control" id="koleksi_penerbit_<?php echo $i;?>" readonly>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="input-group">
                                                     <div class="form-line">
-                                                        <input type="text" name="penulis_nm" class="form-control" id="koleksi_penulis_<?php echo $i;?>" disabled>
+                                                        <input type="text" name="penulis_nm" class="form-control" id="koleksi_penulis_<?php echo $i;?>" readonly>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="input-group">
                                                     <div class="form-line">
-                                                        <input type="text" name="koleksi_isbn" class="form-control" id="koleksi_isbn_<?php echo $i;?>" disabled>
+                                                        <input type="text" name="koleksi_isbn" class="form-control" id="koleksi_isbn_<?php echo $i;?>" readonly>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="input-group">
+                                                    <div class="form-line">
+                                                        <input type="text" class="form-control" id="jumlah_buku_<?php echo $i;?>" readonly>
                                                     </div>
                                                 </div>
                                             </td>
                                         </tr>
                                     <?php endfor;?>
-                                        <tr>
-                                            <td>Bike</td>
-                                            <td>330</td>
-                                            <td>240</td>
-                                            <td>1</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Plane</td>
-                                            <td>430</td>
-                                            <td>540</td>
-                                            <td>3</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Yacht</td>
-                                            <td>100</td>
-                                            <td>200</td>
-                                            <td>0</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Segway</td>
-                                            <td>330</td>
-                                            <td>240</td>
-                                            <td>1</td>
-                                        </tr>
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <th><strong>TOTAL</strong></th>
-                                            <th>1290</th>
-                                            <th>1420</th>
-                                            <th>5</th>
+                                            <td colspan="6"></td>
+                                            <td> 
+                                                <input type="submit" class="btn btn-primary m-t-15 waves-effect" value="Simpan" name="submit">
+                                                <input type="reset" class="btn btn-primary m-t-15 waves-effect" value="Batal" name="reset">
+                                            </td>
                                         </tr>
                                     </tfoot>
                                 </table>
+
                             </fieldset>
                         </div>
                     </div>
                 </div>
             </div>
          </form>
-
-       
 
 
 

@@ -233,6 +233,7 @@ class Collection extends CI_Controller
                 'penulis_nm'=>$collection->nama_penulis,
                 'penerbit_nm'=>$collection->penerbit_nm,
                 'koleksi_isbn'=>$collection->koleksi_isbn,
+                'jumlah_buku'=>1,
             );
         else:
             $callback=array(

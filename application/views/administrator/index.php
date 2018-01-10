@@ -348,6 +348,7 @@
                         $("#koleksi_penerbit_"+i).val(response.penerbit_nm);
                         $("#koleksi_penulis_"+i).val(response.penulis_nm);
                         $("#koleksi_isbn_"+i).val(response.koleksi_isbn);
+                        $("#jumlah_buku_"+i).val(response.jumlah_buku);
                     } 
                 },
                 error: function(xhr, ajaxOptions, thrownError) { // Ketika ada error
