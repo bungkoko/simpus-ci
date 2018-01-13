@@ -16,7 +16,7 @@ class Circulation extends CI_Controller
 
     public function index()
     {
-        $this->borrow();
+        $this->choose_member();
     }
 
     public function get_transaction_id()
@@ -44,30 +44,45 @@ class Circulation extends CI_Controller
         return $transaction_id;
     }
 
+    public function choose_member()
+    {
+        $data['warning'] = '';
+
+        if ($this->input->post('submit')):
+            $member_id=$this->input->post('anggota_kd');
+            $count_book=$this->input->post('sirkulasi_jumlah_pinjam');
+
+            $this->session->set_userdata('member_id',$member_id);
+            $this->session->set_userdata('count_book',$count_book);
+            redirect('circulation/borrow');
+        endif;
+
+        $data['title']   = 'Anggota Yang Meminjam';
+        $data['content'] = 'circulation/choose_member';
+        $this->load->view('administrator/index', $data);
+    }
+
     public function borrow()
     {
         $data['warning'] = '';
         $data['title']   = 'Peminjaman';
 
-        $this->form_validation->set_rules('sirkulasi_pinjam_kd', 'Kode Transaksi', 'required');
-        $this->form_validation->set_rules('anggota_kd', 'Kode Anggota', 'required');
-       // $this->form_validation->set_rules('koleksi_kd', 'Kode Koleksi', 'required');
-        //$this->form_validation->set_rules('')
+    
         if ($this->input->post('submit')):
-            if ($this->form_validation->run() == true):
 
                 $this->Circulation_md->add_borrow($this->get_transaction_id(), $this->date_return(), date('Y-m-d'));
                 $this->session->set_flashdata('message', 'Transaksi peminjaman telah berhasil');
+                $this->session->unset_userdata('member_id');
+                $this->session->unset_userdata('count_book');
                 redirect('circulation');
-            else:
-                $data['warning'] = validation_errors();
-            endif;
+    
+        else:
+            $data['warning']='masalah pada database';
 
         endif;
 
         $data['transaction_id'] = $this->get_transaction_id();
         $data['limit_book']     = $this->Setting_md->read()->pengaturan_limit_pinjam;
-        //$data['count_borrow']   = count($this->input->post('simpus_koleksi_koleksi_kd'));
         $data['date_return']    = $this->date_return();
         $data['date_now']       = date('Y-m-d');
 

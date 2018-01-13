@@ -147,7 +147,7 @@
                         </a>
                         <ul class="ml-menu">
                             <li class="<?php if ($this->uri->segment(1) == 'circulation'): echo "active";endif;?>">
-                                <a href="<?php echo site_url('circulation/borrow') ?>">Peminjaman</a>
+                                <a href="<?php echo site_url('circulation') ?>">Peminjaman</a>
                             </li>
                             <li>
                                 <a href="#">Pengembalian</a>
@@ -247,7 +247,7 @@
 
     <script>
         <?php $limit=$this->Setting_md->read()->pengaturan_limit_pinjam;?> 
-        var target=document.getElementById("anggota_kd");
+        var target=document.getElementById("member_id");
         var batas_karakter=6;
         function character_limit(){
             // jika jumlah karakter yg diketikkan lebih dari atau sama dengan 100
@@ -314,13 +314,6 @@
                 success: function(response) { // Ketika proses pengiriman berhasil
                     if (response.status == "success") { // Jika isi dari array status adalah success
                         $("#member_nm").val(response.anggota_nm); // set textbox dengan id nama
-                    } else { // Jika isi dari array status adalah failed
-                        alert("Data Tidak Ditemukan");
-                        $("#member_id").val("");
-                        target.readOnly=false;
-                        var notif=document.getElementById("notif");
-                        notif.style.color="black";
-                        notif.innerHTML="";
                     }
                 },
                 error: function(xhr, ajaxOptions, thrownError) { // Ketika ada error
@@ -357,11 +350,7 @@
             });
         }
 
-    </script>
-
-
-
-    <script>
+ 
         $("#upload_image").fileinput({
             overwriteInitial: true,
             maxFileSize: 2000,
@@ -383,6 +372,56 @@
 
     </script>
 
+    <script type="text/javascript">
+    $(document).ready(function() {
+            var nomor = 0;
+            var status="";
+            $(".tambah").click(function(){
+            nomor ++;
+                $('#konten').append(
+                             '<tr class="baris">'
+                         + '<input name="nomor[]" value="'+ nomor +'" type="hidden"></td>'
+                         + '<td><input name="kode_barang_'+ nomor +'" type="text"></td>'
+                         + '<td><input name="nama_barang_'+ nomor +'" type="text"></td>'
+                         + '<td><input name="harga_barang_'+ nomor +'" type="text"></td>'
+                         + '<td><input type="button" id="hapus" value="Hapus"></td></tr>'
+                    );
+                });
+                
+                $("#hapus").live('click', function () {
+                    $(this).parents(".baris").remove();
+                });
+                
+                $("#myfrm").validate({
+                debug: false,
+                rules: {
+                },
+                messages: {
+                },
+                submitHandler: function(form) {
+                    $.post('simpan.php', $("#myfrm").serialize(), function(data) {
+                    $('#tabel').slideUp();
+                    $('#hasil').html(data);
+                    status = "";
+                    });
+                }
+            });
+        });
+        
+    function tampilTabel()
+    {
+        if(status=="")
+        {
+            $('#tabel').slideDown();
+            status="1";
+        }
+        else
+        {
+            $('#tabel').slideUp();
+            status="";
+        }
+    }
+    </script>
 
 </body>
 
