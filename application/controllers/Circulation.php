@@ -49,16 +49,16 @@ class Circulation extends CI_Controller
         $data['warning'] = '';
 
         if ($this->input->post('submit')):
-            $member_id=$this->input->post('anggota_kd');
-            $count_book=$this->input->post('sirkulasi_jumlah_pinjam');
+            $member_id  = $this->input->post('anggota_kd');
+            $count_book = $this->input->post('sirkulasi_jumlah_pinjam');
 
-            $this->session->set_userdata('member_id',$member_id);
-            $this->session->set_userdata('count_book',$count_book);
+            $this->session->set_userdata('member_id', $member_id);
+            $this->session->set_userdata('count_book', $count_book);
             redirect('circulation/borrow');
         endif;
 
         $data['title']   = 'Anggota Yang Meminjam';
-        $data['content'] = 'circulation/choose_member';
+        $data['content'] = 'circulation/circulation_choose_member';
         $this->load->view('administrator/index', $data);
     }
 
@@ -67,17 +67,16 @@ class Circulation extends CI_Controller
         $data['warning'] = '';
         $data['title']   = 'Peminjaman';
 
-    
         if ($this->input->post('submit')):
 
-                $this->Circulation_md->add_borrow($this->get_transaction_id(), $this->date_return(), date('Y-m-d'));
-                $this->session->set_flashdata('message', 'Transaksi peminjaman telah berhasil');
-                $this->session->unset_userdata('member_id');
-                $this->session->unset_userdata('count_book');
-                redirect('circulation');
-    
+            $this->Circulation_md->add_borrow($this->get_transaction_id(), $this->date_return(), date('Y-m-d'));
+            $this->session->set_flashdata('message', 'Transaksi peminjaman telah berhasil');
+            $this->session->unset_userdata('member_id');
+            $this->session->unset_userdata('count_book');
+            redirect('circulation');
+
         else:
-            $data['warning']='masalah pada database';
+            $data['warning'] = 'masalah pada database';
 
         endif;
 
@@ -86,7 +85,7 @@ class Circulation extends CI_Controller
         $data['date_return']    = $this->date_return();
         $data['date_now']       = date('Y-m-d');
 
-        $data['content'] = 'circulation/borrow';
+        $data['content'] = 'circulation/circulation_borrow';
 
         $this->load->view('administrator/index', $data);
 
@@ -103,6 +102,54 @@ class Circulation extends CI_Controller
 
         return $date_return;
 
+    }
+
+    public function returnbook()
+    {
+        $data['warning'] = '';
+        $data['title']   = 'Pengembalian';
+
+        $transaction_id     = $this->input->post('sirkulasi_pinjam_kd');
+        $data['borrowBook'] = '';
+        $data['member']='';
+
+        if ($this->input->post('go')):
+            $data['borrowBook'] = $this->Circulation_md->searchBorrow($transaction_id)->result();
+            $data['member']     = $this->Circulation_md->getAnggotaByKeyword($transaction_id);
+        endif;
+        //$transaction_id=$this->input->post('sirkulasi_pinjam_kd');
+        //$data['count_borrow']=$this->Circulation_md->get_circulationByStatus($transaction_id)->num_rows();
+        $data['content'] = 'circulation/circulation_return';
+        $this->load->view('administrator/index', $data);
+    }
+
+    public function getAttributeCirculation()
+    {
+        $transaction_id = $this->input->post('sirkulasi_pinjam_kd');
+
+        //$transaction_id = '0003/01/2018';
+        $circulation = $this->Circulation_md->get_circulationByStatus($transaction_id);
+
+        foreach ($circulation as $trans) {
+            if (!empty($trans)):
+                $callback[] = array(
+                    'status'         => 'success',
+                    'transaction_id' => $trans->sirkulasi_pinjam_kd,
+                    'koleksi_kd'     => $trans->koleksi_kd,
+                    'koleksi_judul'  => $trans->koleksi_judul,
+                    'koleksi_isbn'   => $trans->koleksi_isbn,
+                    'anggota_kd'     => $trans->anggota_kd,
+                    'anggota_nm'     => $trans->anggota_nm,
+                );
+            else:
+                $callback[] = array(
+                    'status' => 'failed',
+                );
+            endif;
+
+        }
+
+        echo json_encode($callback);
     }
 
 }

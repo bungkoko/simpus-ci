@@ -233,9 +233,9 @@
 
     <!--JS Autocomplete-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
-    
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js"></script>  
-        
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js"></script>
+
 
     <!-- Custom Js -->
 
@@ -246,7 +246,7 @@
     <script src="<?php echo base_url(); ?>asset/js/advanced-form-elements.js"></script>
 
     <script>
-        <?php $limit=$this->Setting_md->read()->pengaturan_limit_pinjam;?> 
+        <?php $limit = $this->Setting_md->read()->pengaturan_limit_pinjam;?>
         var target=document.getElementById("member_id");
         var batas_karakter=6;
         function character_limit(){
@@ -256,7 +256,7 @@
             target.readOnly=true;
             //memberikan warna merah pada text pemberitahuan
             document.getElementById("notif").style.color="red";
-            // menampilkan pemberitahuan 
+            // menampilkan pemberitahuan
             document.getElementById("notif").innerHTML="Maksimal "+batas_karakter+" karakter";
             }else{
             //menghitung jumlah karakter yg sudah diketikkan
@@ -278,22 +278,22 @@
 
         $('#member_id').typeahead({
             source:  function (query, process) {
-                return $.get('<?php echo site_url('member/getMemberbyId')?>', { query: query }, function (data) {
+                return $.get('<?php echo site_url('member/getMemberbyId') ?>', { query: query }, function (data) {
                 console.log(data);
                 data = $.parseJSON(data);
                 return process(data);
                 });
             }
         });
-      
-        <?php for($i=1;$i<=$limit;$i++): ?>
-        $('#koleksi_kd_<?php echo $i;?>').typeahead({
+
+        <?php for ($i = 1; $i <= $limit; $i++): ?>
+        $('#koleksi_kd_<?php echo $i; ?>').typeahead({
             source: function(query,process){
-                return $.get('<?php echo site_url('collection/getCollectionbyId')?>', { query: query }, function (data) {
+                return $.get('<?php echo site_url('collection/getCollectionbyId') ?>', { query: query }, function (data) {
                 console.log(data);
                 data = $.parseJSON(data);
                 return process(data);
-                }); 
+                });
             }
         });
         <?php endfor;?>
@@ -301,7 +301,7 @@
         function search() {
             $.ajax({
                 type: "POST", // Method pengiriman data bisa dengan GET atau POST
-                url: "<?php echo site_url('member/search_member')?>",
+                url: "<?php echo site_url('member/search_member') ?>",
                 data: {
                     anggota_kd: $("#member_id").val()
                 }, // data yang akan dikirim ke file proses
@@ -325,7 +325,7 @@
         function isi_otomatis(i){
             $.ajax({
                 type: "POST", // Method pengiriman data bisa dengan GET atau POST
-                url: "<?php echo site_url('collection/getAttributeCollection')?>",
+                url: "<?php echo site_url('collection/getAttributeCollection') ?>",
                 data: {
                     koleksi_kd: $("#koleksi_kd_"+i).val()
                 }, // data yang akan dikirim ke file proses
@@ -337,12 +337,12 @@
                 },
                 success: function(response) { // Ketika proses pengiriman berhasil
                     if (response.status == "success") { // Jika isi dari array status adalah success
-                        $("#koleksi_judul_"+i).val(response.koleksi_judul); 
+                        $("#koleksi_judul_"+i).val(response.koleksi_judul);
                         $("#koleksi_penerbit_"+i).val(response.penerbit_nm);
                         $("#koleksi_penulis_"+i).val(response.penulis_nm);
                         $("#koleksi_isbn_"+i).val(response.koleksi_isbn);
                         $("#jumlah_buku_"+i).val(response.jumlah_buku);
-                    } 
+                    }
                 },
                 error: function(xhr, ajaxOptions, thrownError) { // Ketika ada error
                     alert(xhr.responseText);
@@ -350,7 +350,7 @@
             });
         }
 
- 
+
         $("#upload_image").fileinput({
             overwriteInitial: true,
             maxFileSize: 2000,
@@ -368,59 +368,8 @@
             allowedFileExtensions: ["jpg","jpeg", "png", "gif"]
           });
 
-      
 
-    </script>
 
-    <script type="text/javascript">
-    $(document).ready(function() {
-            var nomor = 0;
-            var status="";
-            $(".tambah").click(function(){
-            nomor ++;
-                $('#konten').append(
-                             '<tr class="baris">'
-                         + '<input name="nomor[]" value="'+ nomor +'" type="hidden"></td>'
-                         + '<td><input name="kode_barang_'+ nomor +'" type="text"></td>'
-                         + '<td><input name="nama_barang_'+ nomor +'" type="text"></td>'
-                         + '<td><input name="harga_barang_'+ nomor +'" type="text"></td>'
-                         + '<td><input type="button" id="hapus" value="Hapus"></td></tr>'
-                    );
-                });
-                
-                $("#hapus").live('click', function () {
-                    $(this).parents(".baris").remove();
-                });
-                
-                $("#myfrm").validate({
-                debug: false,
-                rules: {
-                },
-                messages: {
-                },
-                submitHandler: function(form) {
-                    $.post('simpan.php', $("#myfrm").serialize(), function(data) {
-                    $('#tabel').slideUp();
-                    $('#hasil').html(data);
-                    status = "";
-                    });
-                }
-            });
-        });
-        
-    function tampilTabel()
-    {
-        if(status=="")
-        {
-            $('#tabel').slideDown();
-            status="1";
-        }
-        else
-        {
-            $('#tabel').slideUp();
-            status="";
-        }
-    }
     </script>
 
 </body>

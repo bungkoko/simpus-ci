@@ -220,24 +220,25 @@ class Collection extends CI_Controller
 
     public function getAttributeCollection()
     {
-        $collection_id=$this->input->post('koleksi_kd');
-       // $collection_id='FKS-0001';
+        $collection_id = $this->input->post('koleksi_kd');
+        // $collection_id='FKS-0001';
         //$data=array();
-        $collection=$this->Collection_md->getAttributeCollection($collection_id);
-       
-        if(!empty($collection)):
+        $collection = $this->Collection_md->getAttributeCollection($collection_id);
+
+        if (!empty($collection)):
             $callback = array(
-                'status'=>'success',
-                'koleksi_kd'=>$collection->koleksi_kd,
-                'koleksi_judul'=>$collection->koleksi_judul,
-                'penulis_nm'=>$collection->nama_penulis,
-                'penerbit_nm'=>$collection->penerbit_nm,
-                'koleksi_isbn'=>$collection->koleksi_isbn,
-                'jumlah_buku'=>1,
+                'status'        => 'success',
+                'koleksi_kd'    => $collection->koleksi_kd,
+                'koleksi_judul' => $collection->koleksi_judul,
+                'penulis_nm'    => $collection->nama_penulis,
+                'penerbit_nm'   => $collection->penerbit_nm,
+                'koleksi_isbn'  => $collection->koleksi_isbn,
+                'jumlah_buku'   => 1,
             );
         else:
-            $callback=array(
-                'status'=>'failed');
+            $callback = array(
+                'status' => 'failed'
+            );
         endif;
 
         echo json_encode($callback);
