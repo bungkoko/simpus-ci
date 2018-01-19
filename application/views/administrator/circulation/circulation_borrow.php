@@ -10,7 +10,7 @@
                                         <div class="input-group">
                                             <span class="input-group-addon">No Transaksi</span>
                                             <div class="form-line">
-                                                <input type="text" name="sirkulasi_pinjam_kd" class="form-control" placeholder="Masukkan Nomor Anggota" value="<?php echo $transaction_id ?>" readonly>
+                                                <input type="text" name="sirkulasi_pinjam_kd" class="form-control" placeholder="Masukkan Nomor Transaksi" value="<?php echo $transaction_id;?>" readonly>
                                             </div>
 
                                         </div>

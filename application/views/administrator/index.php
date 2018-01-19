@@ -30,11 +30,7 @@
      <!-- Fileinput Css -->
     <link href="<?php echo base_url(); ?>asset/css/fileinput.css" rel="stylesheet">
 
-    <!--AutoComplete-->
-     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>asset/plugins/autocomplete/jquery.autocomplete.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>asset/plugins/autocomplete/thickbox.css" />
-
-    <!-- Custom Css -->
+     <!-- Custom Css -->
     <link href="<?php echo base_url(); ?>asset/css/style.css" rel="stylesheet">
      <link href="<?php echo base_url(); ?>asset/css/custom.css" rel="stylesheet">
     <link href="<?php echo base_url() ?>asset/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
@@ -146,11 +142,11 @@
                             <span>Sirkulasi</span>
                         </a>
                         <ul class="ml-menu">
-                            <li class="<?php if ($this->uri->segment(1) == 'circulation'): echo "active";endif;?>">
-                                <a href="<?php echo site_url('circulation') ?>">Peminjaman</a>
+                            <li class="<?php if ($this->uri->segment(2) == 'choose_member'): echo "active";endif;?>">
+                                <a href="<?php echo site_url('circulation/choose_member') ?>">Peminjaman</a>
                             </li>
-                            <li>
-                                <a href="#">Pengembalian</a>
+                            <li class="<?php if ($this->uri->segment(2) == 'returnbook'): echo "active";endif;?>">
+                                <a href="<?php echo site_url('circulation/returnbook')?>">Pengembalian</a>
                             </li>
 
                         </ul>
@@ -348,6 +344,17 @@
                     alert(xhr.responseText);
                 }
             });
+        }
+
+        function setChecked(cb){
+            if(cb.checked == true)checkAll();
+            else uncheckAll();
+        }
+        function checkAll(){
+            $("input:checkbox",document.forms["dataForm"]).attr("checked","checked");
+        }
+        function uncheckAll(){
+            $("input:checkbox",document.forms["dataForm"]).attr("checked","");
         }
 
 

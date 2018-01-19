@@ -77,15 +77,15 @@
                                     $no=1;
                                     foreach($get_list->result() as $gt_list):?>
                                         <tr>
-                                            <th><?php echo $no++; ?></th>
-                                            <th><?php echo $gt_list->genre_judul; ?></th>
-                                            <th><?php echo $gt_list->genre_singkatan; ?></th>
-                                            <th>
+                                            <td><?php echo $no++; ?></td>
+                                            <td><?php echo $gt_list->genre_judul; ?></td>
+                                            <td><?php echo $gt_list->genre_singkatan; ?></td>
+                                            <td>
                                                 <a href="<?php echo site_url('genre/update').'/'.$gt_list->genre_singkatan;?>" title="Update Data"><i class="material-icons">update</i>
                                                 </a>
                                                 <a href="<?php echo site_url('genre/delete').'/'.$gt_list->genre_singkatan;?>" title="Hapus Data"> <i class="material-icons">delete</i>
                                                 </a>
-                                            </th>
+                                            </td>
                                         </tr>
                                     <?php endforeach;?>
                                     </tbody>
