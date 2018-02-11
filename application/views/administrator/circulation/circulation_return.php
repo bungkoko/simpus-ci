@@ -1,4 +1,10 @@
-
+          <?php if($warning != ""): ?>
+                            <div class="alert bg-red alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <p><?php echo $warning;?></p>
+                            </div>
+                        <?php endif; ?>
+        
         <form name="FormBorrow" class="form-horizontal" id="dataForm" action="<?php echo current_url() ?>" method="post">
             <div class="row clearfix">
                 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
@@ -17,7 +23,7 @@
                                         </div>
                                         <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
                                             <div class="input-group">
-                                                <input type="submit" name="go" class="btn btn-primary waves-effect" value="Go">
+                                                <input type="submit" name="submit" class="btn btn-primary waves-effect" value="Go">
                                             </div>
                                         </div>
                                     </div>
@@ -92,17 +98,14 @@
                                     <table class="table table-bordered">
                                         <thead style="background: #9E9E9E;">
                                             <tr>
-                                                <th>
-                                                    <input type="checkbox" name="allcollection" id="basic_checkbox_2" onclick="setChecked(this)" class="filled-in">
-                                                    <label for="basic_checkbox_2">#</label>
-                                                </th>
                                                 <th scope="row" width="10px">No</th>
                                                 <th style="vertical-align: middle;">Kode Koleksi</th>
                                                 <th style="vertical-align: middle;">Judul Koleksi</th>
-                                                 <th style="vertical-align: middle;">Penulis</th>
+                                                <th style="vertical-align: middle;">Penulis</th>
                                                 <th style="vertical-align: middle;">Penerbit</th>
                                                 <th style="vertical-align: middle;">ISBN</th>
-                                                <th style="vertical-align: middle;">Jumlah Pinjam</th>
+                                                <th style="vertical-align: middle;">Aksi</th>
+
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -112,17 +115,13 @@
                                                 ?>
                                           
                                             <tr>
-                                                <td>
-                                                   <input type="checkbox" id="basic_checkbox_2" class="filled-in" />
-                                                    <label for="basic_checkbox_2">Kembalikan</label>
-                                                </td>
                                                 <td><?php echo $no++;?></td>
                                                 <td width="100px"><?php echo $borrow->koleksi_kd;?></td>
                                                 <td><?php echo $borrow->koleksi_judul; ?></td>
                                                 <td><?php echo $borrow->nama_penulis; ?></td>
                                                 <td><?php echo $borrow->penerbit_nm; ?></td>
                                                 <td><?php echo $borrow->koleksi_isbn;  ?></td>
-                                                <td><?php echo "1" ?></td>
+                                                <td></td>
                                             </tr>
                                             
                                             <?php endforeach;
@@ -150,6 +149,8 @@
                 </div>
             </div>
          </form>
+
+      
 
 
 

@@ -43,7 +43,7 @@ class Circulation_md extends CI_Model
         $this->db->join('simpus_koleksi', 'simpus_sirkulasi.simpus_koleksi_koleksi_kd=simpus_koleksi.koleksi_kd', 'inner');
         $this->db->join('simpus_anggota', 'simpus_sirkulasi.simpus_anggota_anggota_kd=simpus_anggota.anggota_kd', 'inner');
         $this->db->where('simpus_sirkulasi.sirkulasi_pinjam_kd', $transaction_id);
-        $this->db->where('sirkulasi_status_pinjam', 'pinjam');
+        $this->db->where('sirkulasi_statuspinjam', 'pinjam');
         return $this->db->get()->result();
     }
 

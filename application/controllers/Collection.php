@@ -99,7 +99,7 @@ class Collection extends CI_Controller
                     $this->Collection_md->add_collection($cover_path, $this->get_kode_koleksi());
 
                     $this->session->set_flashdata('message', 'Koleksi berhasil ditambahkan');
-                    redirect('collection');
+                    redirect('collection'); 
                     exit();
                 endif;
             else:

@@ -49,12 +49,21 @@ class Circulation extends CI_Controller
         $data['warning'] = '';
 
         if ($this->input->post('submit')):
-            $member_id  = $this->input->post('anggota_kd');
-            $count_book = $this->input->post('sirkulasi_jumlah_pinjam');
+            $this->form_validation->set_rules('anggota_kd', 'Kode anggota', 'required');
+            $this->form_validation->set_rules('sirkulasi_jumlah_pinjam', 'Jumlah pinjam', 'required');
 
-            $this->session->set_userdata('member_id', $member_id);
-            $this->session->set_userdata('count_book', $count_book);
-            redirect('circulation/borrow');
+            if ($this->form_validation->run() == true):
+
+                $member_id  = $this->input->post('anggota_kd');
+                $count_book = $this->input->post('sirkulasi_jumlah_pinjam');
+
+                $this->session->set_userdata('member_id', $member_id);
+                $this->session->set_userdata('count_book', $count_book);
+                redirect('circulation/borrow');
+                exit();
+            else:
+                $data['warning'] = validation_errors();
+            endif;
         endif;
 
         $data['title']   = 'Anggota Yang Meminjam';
@@ -64,6 +73,9 @@ class Circulation extends CI_Controller
 
     public function borrow()
     {
+        if (empty($this->session->userdata('member_id'))):
+            redirect('circulation/choose_member');
+        endif;
         $data['warning'] = '';
         $data['title']   = 'Peminjaman';
 
@@ -74,6 +86,7 @@ class Circulation extends CI_Controller
             $this->session->unset_userdata('member_id');
             $this->session->unset_userdata('count_book');
             redirect('circulation');
+            exit();
 
         else:
             $data['warning'] = 'masalah pada database';
@@ -111,14 +124,19 @@ class Circulation extends CI_Controller
 
         $transaction_id     = $this->input->post('sirkulasi_pinjam_kd');
         $data['borrowBook'] = '';
-        $data['member']='';
+        $data['member']     = '';
 
-        if ($this->input->post('go')):
-            $data['borrowBook'] = $this->Circulation_md->searchBorrow($transaction_id)->result();
-            $data['member']     = $this->Circulation_md->getAnggotaByKeyword($transaction_id);
+        if ($this->input->post('submit')):
+            $this->form_validation->set_rules('sirkulasi_pinjam_kd', 'Kode transaksi', 'required');
+
+            if ($this->form_validation->run() == true):
+                $data['borrowBook'] = $this->Circulation_md->searchBorrow($transaction_id)->result();
+                $data['member']     = $this->Circulation_md->getAnggotaByKeyword($transaction_id);
+            else:
+                $data['warning'] = validation_errors();
+            endif;
         endif;
-        //$transaction_id=$this->input->post('sirkulasi_pinjam_kd');
-        //$data['count_borrow']=$this->Circulation_md->get_circulationByStatus($transaction_id)->num_rows();
+
         $data['content'] = 'circulation/circulation_return';
         $this->load->view('administrator/index', $data);
     }

@@ -1,3 +1,10 @@
+                  <?php if($warning != ""): ?>
+                            <div class="alert bg-red alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <p><?php echo $warning;?></p>
+                            </div>
+                        <?php endif; ?>
+
         <form action="<?php echo current_url() ?>" method="POST">
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -14,8 +21,8 @@
                                             </div>
                                             <span id="notif"></span>
                                         </div>
-                                    </div>                                    
-                                  
+                                    </div>
+
                                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon">Nama Anggota</span>
@@ -56,5 +63,41 @@
                     </div>
                 </div>
             </div>
-           
+
         </form>
+
+        <script>
+            $('#member_id').typeahead({
+                source:  function (query, process) {
+                    return $.get('<?php echo site_url('member/getMemberbyId') ?>', { query: query }, function (data) {
+                    console.log(data);
+                    data = $.parseJSON(data);
+                    return process(data);
+                    });
+                }
+            });
+
+            function search() {
+            $.ajax({
+                type: "POST", // Method pengiriman data bisa dengan GET atau POST
+                url: "<?php echo site_url('member/search_member') ?>",
+                data: {
+                    anggota_kd: $("#member_id").val()
+                }, // data yang akan dikirim ke file proses
+                dataType: "json",
+                beforeSend: function(e) {
+                    if (e && e.overrideMimeType) {
+                        e.overrideMimeType("application/json;charset=UTF-8");
+                    }
+                },
+                success: function(response) { // Ketika proses pengiriman berhasil
+                    if (response.status == "success") { // Jika isi dari array status adalah success
+                        $("#member_nm").val(response.anggota_nm); // set textbox dengan id nama
+                    }
+                },
+                error: function(xhr, ajaxOptions, thrownError) { // Ketika ada error
+                    alert(xhr.responseText);
+                }
+            });
+        }
+        </script>
