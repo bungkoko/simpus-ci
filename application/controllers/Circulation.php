@@ -27,16 +27,16 @@ class Circulation extends CI_Controller
         $gtday             = sprintf("%02d", $date['mday']);
         $gtMonth           = sprintf("%02d", $date['mon']);
         $gtYear            = $date['year'];
-        $trans             = $gtMonth . '/' . $gtYear;
+        $trans             = $gtMonth . '-' . $gtYear;
 
         foreach ($gt_transaction_id->result() as $gtTrans):
             if (($gtTrans->sirkulasi_pinjam_kd == null) || (substr($gtTrans->sirkulasi_pinjam_kd, 5, 2) != $gtMonth)):
-                $transaction_id = '0001' . '/' . $trans;
+                $transaction_id = '0001' . '-' . $trans;
                 //$transaction_id=substr($gtTrans->sirkulasi_pinjam_kd,6,2);
             else:
                 $substr_id      = (int) substr($gtTrans->sirkulasi_pinjam_kd, 0, 4);
                 $tmp            = $substr_id + 1;
-                $transaction_id = sprintf("%04s", $tmp) . '/' . $trans;
+                $transaction_id = sprintf("%04s", $tmp) . '-' . $trans;
             endif;
         endforeach;
 
@@ -114,17 +114,62 @@ class Circulation extends CI_Controller
         $date_return = date('Y-m-d', strtotime('+' . $lamapinjam . 'day', strtotime($now)));
 
         return $date_return;
+        //print_r($date_return);
 
     }
 
-    public function returnbook()
+    public function intervaldays($tgl_harus_kembali, $tgl_kembali)
+    {
+
+        $pisah_tgl_harus_kembali = explode("-", $tgl_harus_kembali);
+        $pisah_tgl_kembali       = explode("-", $tgl_kembali);
+
+        $date1 = mktime(0, 0, 0, $pisah_tgl_harus_kembali[1], $pisah_tgl_harus_kembali[2], $pisah_tgl_harus_kembali[0]);
+        $date2 = mktime(0, 0, 0, $pisah_tgl_kembali[1], $pisah_tgl_kembali[2], $pisah_tgl_kembali[0]);
+
+        $interval = ($date2 - $date1) / (3600 * 24);
+        return $interval;
+        //print_r($interval);
+    }
+
+    public function denda($transaction_id)
+    {
+        //$qty         = 1;
+        $denda = 0;
+
+        $get_circulation = $this->Circulation_md->get_circulationByStatus($transaction_id);
+
+        foreach ($get_circulation as $gtCirculation):
+            $tgl_harus_kembali = $gtCirculation->sirkulasi_tgl_harus_kembali;
+            $tgl_kembali       = date('Y-m-d');
+        endforeach;
+        $range = $this->intervaldays($tgl_harus_kembali, $tgl_kembali);
+
+        $get_setting = $this->Setting_md->get_setting();
+        foreach ($get_setting->result() as $gtSetting):
+            $denda_perhari = $gtSetting->pengaturan_dendaperhari;
+        endforeach;
+
+        if ($range > 0):
+            $denda = $range * $denda_perhari;
+        else:
+            $denda = 0;
+        endif;
+
+        return $denda;
+        //print_r('range :'.$range);
+        //print_r('denda :'.$denda);
+    }
+
+    public function returnlist()
     {
         $data['warning'] = '';
         $data['title']   = 'Pengembalian';
 
-        $transaction_id     = $this->input->post('sirkulasi_pinjam_kd');
-        $data['borrowBook'] = '';
-        $data['member']     = '';
+        $transaction_id      = $this->input->post('sirkulasi_pinjam_kd');
+        $data['borrowBook']  = '';
+        $data['member']      = '';
+        $data['count_denda'] = '';
 
         if ($this->input->post('submit')):
             $this->form_validation->set_rules('sirkulasi_pinjam_kd', 'Kode transaksi', 'required');
@@ -132,6 +177,8 @@ class Circulation extends CI_Controller
             if ($this->form_validation->run() == true):
                 $data['borrowBook'] = $this->Circulation_md->searchBorrow($transaction_id)->result();
                 $data['member']     = $this->Circulation_md->getAnggotaByKeyword($transaction_id);
+                $data['denda']      = $this->denda($transaction_id);
+                $this->session->set_userdata('transaction_id', $transaction_id);
             else:
                 $data['warning'] = validation_errors();
             endif;
@@ -139,6 +186,18 @@ class Circulation extends CI_Controller
 
         $data['content'] = 'circulation/circulation_return';
         $this->load->view('administrator/index', $data);
+    }
+
+    public function returnbook()
+    {
+        $transaction_id=$this->session->userdata('transaction_id');
+        if ($this->input->post('kembali')==TRUE):
+            //$this->db->set('sirkulasi_denda',$this->denda($transaction_id));
+            $this->Circulation_md->returnbook($transaction_id,$this->denda($transaction_id));
+            $this->session->set_flashdata('message','Koleksi telah dikembalikan');
+            $this->session->unset_userdata('transaction_id');
+            redirect('Circulation/returnlist');
+        endif;
     }
 
     public function getAttributeCirculation()

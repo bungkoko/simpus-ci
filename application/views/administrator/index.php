@@ -242,7 +242,7 @@
     <script src="<?php echo base_url(); ?>asset/js/advanced-form-elements.js"></script>
 
     <script>
-        <?php $limit = $this->Setting_md->read()->pengaturan_limit_pinjam;?>
+      
         var target=document.getElementById("member_id");
         var batas_karakter=6;
         function character_limit(){
@@ -272,79 +272,9 @@
         }
 
 
-        $('#member_id').typeahead({
-            source:  function (query, process) {
-                return $.get('<?php echo site_url('member/getMemberbyId') ?>', { query: query }, function (data) {
-                console.log(data);
-                data = $.parseJSON(data);
-                return process(data);
-                });
-            }
-        });
+     
 
-        <?php for ($i = 1; $i <= $limit; $i++): ?>
-        $('#koleksi_kd_<?php echo $i; ?>').typeahead({
-            source: function(query,process){
-                return $.get('<?php echo site_url('collection/getCollectionbyId') ?>', { query: query }, function (data) {
-                console.log(data);
-                data = $.parseJSON(data);
-                return process(data);
-                });
-            }
-        });
-        <?php endfor;?>
-
-        function search() {
-            $.ajax({
-                type: "POST", // Method pengiriman data bisa dengan GET atau POST
-                url: "<?php echo site_url('member/search_member') ?>",
-                data: {
-                    anggota_kd: $("#member_id").val()
-                }, // data yang akan dikirim ke file proses
-                dataType: "json",
-                beforeSend: function(e) {
-                    if (e && e.overrideMimeType) {
-                        e.overrideMimeType("application/json;charset=UTF-8");
-                    }
-                },
-                success: function(response) { // Ketika proses pengiriman berhasil
-                    if (response.status == "success") { // Jika isi dari array status adalah success
-                        $("#member_nm").val(response.anggota_nm); // set textbox dengan id nama
-                    }
-                },
-                error: function(xhr, ajaxOptions, thrownError) { // Ketika ada error
-                    alert(xhr.responseText);
-                }
-            });
-        }
-
-        function isi_otomatis(i){
-            $.ajax({
-                type: "POST", // Method pengiriman data bisa dengan GET atau POST
-                url: "<?php echo site_url('collection/getAttributeCollection') ?>",
-                data: {
-                    koleksi_kd: $("#koleksi_kd_"+i).val()
-                }, // data yang akan dikirim ke file proses
-                dataType: "json",
-                beforeSend: function(e) {
-                    if (e && e.overrideMimeType) {
-                        e.overrideMimeType("application/json;charset=UTF-8");
-                    }
-                },
-                success: function(response) { // Ketika proses pengiriman berhasil
-                    if (response.status == "success") { // Jika isi dari array status adalah success
-                        $("#koleksi_judul_"+i).val(response.koleksi_judul);
-                        $("#koleksi_penerbit_"+i).val(response.penerbit_nm);
-                        $("#koleksi_penulis_"+i).val(response.penulis_nm);
-                        $("#koleksi_isbn_"+i).val(response.koleksi_isbn);
-                        $("#jumlah_buku_"+i).val(response.jumlah_buku);
-                    }
-                },
-                error: function(xhr, ajaxOptions, thrownError) { // Ketika ada error
-                    alert(xhr.responseText);
-                }
-            });
-        }
+ 
 
         function setChecked(cb){
             if(cb.checked == true)checkAll();

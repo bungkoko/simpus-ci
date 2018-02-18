@@ -33,7 +33,8 @@
                     </div>
                 </div>
             </div>
-             <div class="row clearfix">
+        </form>
+            <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="body">
@@ -86,7 +87,6 @@
                     </div>
                 </div>
             </div>
-          
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
@@ -94,49 +94,70 @@
 
                             <fieldset>
                                 <legend>Buku yang dipinjam</legend>
-                                <form>
+                                <form class="form-horizontal" action="<?php echo site_url('circulation/returnbook') ?>" method="post">
                                     <table class="table table-bordered">
                                         <thead style="background: #9E9E9E;">
                                             <tr>
                                                 <th scope="row" width="10px">No</th>
+                                                <th>#</th>
+                                                <th>Tanggal pinjam</th>
                                                 <th style="vertical-align: middle;">Kode Koleksi</th>
                                                 <th style="vertical-align: middle;">Judul Koleksi</th>
                                                 <th style="vertical-align: middle;">Penulis</th>
                                                 <th style="vertical-align: middle;">Penerbit</th>
-                                                <th style="vertical-align: middle;">ISBN</th>
-                                                <th style="vertical-align: middle;">Aksi</th>
-
+                                                <th style="vertical-align: middle;">No. Rak</th>
+                                                <th style="vertical-align: middle;">Jumlah</th>
+                                                <th style="vertical-align: middle;">Denda (Rp.) </th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        <?php $no=1; 
+                                        <?php 
+                                         $no=1;
+                                            $qty=1;
+                                            $count_qty=0;
+                                            $count_denda=0;
                                         if(!empty($borrowBook)):
+                                           
+
                                             foreach ($borrowBook as $borrow):
+                                                $count_qty+=$qty;
+                                                $count_denda+=$denda;
                                                 ?>
                                           
                                             <tr>
                                                 <td><?php echo $no++;?></td>
+                                                <td>
+                                                    <input type="checkbox" name="bookcheck[]"  id="<?php echo $borrow->koleksi_kd;?>" class="filled-in" value="<?php echo $borrow->koleksi_kd;?>">
+                                                    <label for="<?php echo $borrow->koleksi_kd;?>"></label>
+                                                </td>
+                                                <td><?php echo $borrow->sirkulasi_tgl_pinjam; ?></td>
                                                 <td width="100px"><?php echo $borrow->koleksi_kd;?></td>
                                                 <td><?php echo $borrow->koleksi_judul; ?></td>
                                                 <td><?php echo $borrow->nama_penulis; ?></td>
                                                 <td><?php echo $borrow->penerbit_nm; ?></td>
-                                                <td><?php echo $borrow->koleksi_isbn;  ?></td>
-                                                <td></td>
+                                                <td><?php echo $borrow->koleksi_lokasi_rak;  ?></td>
+                                                <td align="center"><?php echo $qty; ?></td>
+                                                <td align="right"><?php echo number_format($denda, 0, ",", "."); ?></td>
                                             </tr>
-                                            
+
                                             <?php endforeach;
                                         else:                                   
                                             ?>
                                             <tr>
-                                                <td colspan="7"><center>Belum Ada Data / Tidak ada Data</center></td>
+                                                <td colspan="10"><center>Belum Ada Data / Tidak ada Data</center></td>
                                             </tr>
                                         <?php endif;?>
                                         </tbody>
                                         <tfoot>
+                                             <tr>
+                                                 <td colspan="8" align="right">Jumlah : </td>
+                                                 <td align="center"><?php echo $count_qty; ?></td>
+                                                 <td align="right"><?php echo number_format($count_denda, 0, ",", "."); ?></td>
+                                            </tr>
                                             <tr>
-                                                <td colspan="7">
-                                                    <input type="submit" class="btn btn-primary m-t-15 waves-effect" value="Simpan" name="submit">
-                                                    <input type="reset" class="btn btn-primary m-t-15 waves-effect" value="Batal" name="reset">
+                                                <td colspan="10">
+                                                    <input type="submit" class="btn btn-primary m-t-15 waves-effect" value="Kembalikan" name="kembali">
+                                                    <input type="submit" class="btn btn-primary m-t-15 waves-effect" value="Perpanjang" name="perpanjang">
                                                 </td>
                                             </tr>
                                         </tfoot>
@@ -148,7 +169,7 @@
                     </div>
                 </div>
             </div>
-         </form>
+
 
       
 

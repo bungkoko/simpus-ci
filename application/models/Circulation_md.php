@@ -43,7 +43,7 @@ class Circulation_md extends CI_Model
         $this->db->join('simpus_koleksi', 'simpus_sirkulasi.simpus_koleksi_koleksi_kd=simpus_koleksi.koleksi_kd', 'inner');
         $this->db->join('simpus_anggota', 'simpus_sirkulasi.simpus_anggota_anggota_kd=simpus_anggota.anggota_kd', 'inner');
         $this->db->where('simpus_sirkulasi.sirkulasi_pinjam_kd', $transaction_id);
-        $this->db->where('sirkulasi_statuspinjam', 'pinjam');
+        $this->db->where('sirkulasi_status_pinjam', 'pinjam');
         return $this->db->get()->result();
     }
 
@@ -51,7 +51,7 @@ class Circulation_md extends CI_Model
     {
 
         $query = "
-                SELECT sirkulasi_pinjam_kd, koleksi_kd, koleksi_judul, koleksi_isbn,
+                SELECT sirkulasi_pinjam_kd, koleksi_kd, koleksi_judul, koleksi_isbn, koleksi_lokasi_rak,
                     anggota_kd, anggota_nm , penerbit_nm, GROUP_CONCAT(simpus_penulis.penulis_nm) AS nama_penulis,
                     sirkulasi_tgl_pinjam, sirkulasi_tgl_harus_kembali, sirkulasi_tgl_dikembalikan,
                     sirkulasi_keterlambatan, sirkulasi_denda,
@@ -88,21 +88,28 @@ class Circulation_md extends CI_Model
         return $this->db->get()->row();
     }
 
-    public function update_status($transaction_id)
-    {
+    /*
 
-        $this->db->where('sirkulasi_pinjam_kd', $transaction_id);
-        $this->db->set('sirkulasi_status_pinjam', 'kembali');
-        return $this->db->update('simpus_sirkulasi');
+    public function return_status($transaction_id)
+    {
+    $this->db->where('sirkulasi_pinjam_kd', $transaction_id);
+    $this->db->set('sirkulasi_status_pinjam', 'kembali');
+    $this->db->update('simpus_sirkulasi');
     }
 
-    /*select anggota_kd, anggota_nm, sirkulasi_pinjam_kd
-from simpus_sirkulasi
-INNER JOIN
-simpus_anggota on simpus_sirkulasi.simpus_anggota_anggota_kd=simpus_anggota.anggota_kd
-WHERE
-sirkulasi_pinjam_kd = '0003/01/2018'
-GROUP BY sirkulasi_pinjam_kd
- */
+     */
+
+    public function returnbook($transaction_id,$denda)
+    {
+       $collection_id=$this->input->post('bookcheck');
+        for($i=0;$i<count($collection_id);$i++):
+            $this->db->where('simpus_koleksi_koleksi_kd',$collection_id[$i]);
+            $this->db->where('sirkulasi_pinjam_kd',$transaction_id);
+            $this->db->set('sirkulasi_denda',$denda);
+            $this->db->set('sirkulasi_status_pinjam','kembali');
+            $this->db->set('sirkulasi_tgl_dikembalikan',date('Y-m-d'));
+            $this->db->update('simpus_sirkulasi');
+        endfor;
+    }
 
 }
