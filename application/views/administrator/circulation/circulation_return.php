@@ -94,7 +94,7 @@
 
                             <fieldset>
                                 <legend>Buku yang dipinjam</legend>
-                                <form class="form-horizontal" action="<?php echo site_url('circulation/returnbook') ?>" method="post">
+                                <form class="form-horizontal" action="<?php echo site_url('circulation/statusbook') ?>" method="post">
                                     <table class="table table-bordered">
                                         <thead style="background: #9E9E9E;">
                                             <tr>

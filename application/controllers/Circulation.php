@@ -121,21 +121,21 @@ class Circulation extends CI_Controller
     public function intervaldays($tgl_harus_kembali, $tgl_kembali)
     {
 
-        $pisah_tgl_harus_kembali = explode("-", $tgl_harus_kembali);
-        $pisah_tgl_kembali       = explode("-", $tgl_kembali);
+        $tgl_kembali=strtotime($tgl_kembali);
+        $tgl_harus_kembali=strtotime($tgl_harus_kembali);
 
-        $date1 = mktime(0, 0, 0, $pisah_tgl_harus_kembali[1], $pisah_tgl_harus_kembali[2], $pisah_tgl_harus_kembali[0]);
-        $date2 = mktime(0, 0, 0, $pisah_tgl_kembali[1], $pisah_tgl_kembali[2], $pisah_tgl_kembali[0]);
-
-        $interval = ($date2 - $date1) / (3600 * 24);
-        return $interval;
-        //print_r($interval);
+        $interval = ($tgl_kembali - $tgl_harus_kembali) / (3600 * 24);
+        return $interval;       
+      
     }
 
     public function denda($transaction_id)
     {
         //$qty         = 1;
         $denda = 0;
+        $tgl_kembali='';
+        $tgl_harus_kembali='';
+
 
         $get_circulation = $this->Circulation_md->get_circulationByStatus($transaction_id);
 
@@ -161,7 +161,7 @@ class Circulation extends CI_Controller
         //print_r('denda :'.$denda);
     }
 
-    public function returnlist()
+    public function returnbook()
     {
         $data['warning'] = '';
         $data['title']   = 'Pengembalian';
@@ -176,6 +176,9 @@ class Circulation extends CI_Controller
 
             if ($this->form_validation->run() == true):
                 $data['borrowBook'] = $this->Circulation_md->searchBorrow($transaction_id)->result();
+                if(empty($data['borrowBook'])):
+                    $data['warning']=' Transaksi yang anda lakukan tidak ditemukan atau sudah diproses';
+                endif;
                 $data['member']     = $this->Circulation_md->getAnggotaByKeyword($transaction_id);
                 $data['denda']      = $this->denda($transaction_id);
                 $this->session->set_userdata('transaction_id', $transaction_id);
@@ -188,7 +191,7 @@ class Circulation extends CI_Controller
         $this->load->view('administrator/index', $data);
     }
 
-    public function returnbook()
+    public function statusbook()
     {
         $transaction_id=$this->session->userdata('transaction_id');
         if ($this->input->post('kembali')==TRUE):
@@ -196,9 +199,16 @@ class Circulation extends CI_Controller
             $this->Circulation_md->returnbook($transaction_id,$this->denda($transaction_id));
             $this->session->set_flashdata('message','Koleksi telah dikembalikan');
             $this->session->unset_userdata('transaction_id');
-            redirect('Circulation/returnlist');
+            redirect('Circulation/returnbook');
+        endif;
+        if($this->input->post('perpanjang')==TRUE):
+            $this->Circulation_md->extendsion($transaction_id,$this->date_return());
+            $this->session->set_flashdata('message','Masa pinjam koleksi telah diperpanjang');
+            $this->session->unset_userdata('transaction_id');
+            redirect('Circulation/returnbook');
         endif;
     }
+
 
     public function getAttributeCirculation()
     {
