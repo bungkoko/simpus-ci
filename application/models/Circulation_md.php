@@ -70,7 +70,7 @@ class Circulation_md extends CI_Model
                     simpus_penerbit.penerbit_kd=simpus_koleksi.simpus_penerbit_penerbit_kd
                 AND
                     simpus_sirkulasi.sirkulasi_pinjam_kd like '$keyword'
-                AND 
+                AND
                     simpus_sirkulasi.sirkulasi_status_pinjam='pinjam'
                 GROUP BY koleksi_kd
                 ";
@@ -78,6 +78,7 @@ class Circulation_md extends CI_Model
         return $this->db->query($query);
 
     }
+
 
     public function getAnggotaByKeyword($keyword)
     {
@@ -114,16 +115,16 @@ class Circulation_md extends CI_Model
         endfor;
     }
 
-    public function extendsion($transaction_id,$extends)
+    public function extendsion($transaction_id, $extends)
     {
-        $collection_id=$this->input->post('bookcheck');
-        for($i=0;$i<count($collection_id);$i++):
-            $this->db->where('simpus_koleksi_koleksi_kd',$collection_id[$i]);
-            $this->db->where('sirkulasi_pinjam_kd',$transaction_id);
+        $collection_id = $this->input->post('bookcheck');
+        for ($i = 0; $i < count($collection_id); $i++):
+            $this->db->where('simpus_koleksi_koleksi_kd', $collection_id[$i]);
+            $this->db->where('sirkulasi_pinjam_kd', $transaction_id);
             //$this->db->where('sirkulasi_tgl_pinjam',date('Y-m-d'));
-            $this->db->set('sirkulasi_tgl_pinjam',date('Y-m-d'));
-            $this->db->set('sirkulasi_tgl_harus_kembali',$extends);
-            $this->db->set('sirkulasi_tgl_dikembalikan',NULL);
+            $this->db->set('sirkulasi_tgl_pinjam', date('Y-m-d'));
+            $this->db->set('sirkulasi_tgl_harus_kembali', $extends);
+            $this->db->set('sirkulasi_tgl_dikembalikan', null);
             $this->db->update('simpus_sirkulasi');
         endfor;
     }

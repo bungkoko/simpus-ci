@@ -80,12 +80,14 @@ class Circulation extends CI_Controller
         $data['title']   = 'Peminjaman';
 
         if ($this->input->post('submit')):
-
+            $this->session->set_userdata('transaction_id',$this->get_transaction_id());
+            $this->session->set_userdata('date_return',$this->date_return());
             $this->Circulation_md->add_borrow($this->get_transaction_id(), $this->date_return(), date('Y-m-d'));
             $this->session->set_flashdata('message', 'Transaksi peminjaman telah berhasil');
             $this->session->unset_userdata('member_id');
+            //$this->session->unset_userdata('date_return',$this->date_return());
             $this->session->unset_userdata('count_book');
-            redirect('circulation');
+            redirect('cetak/borrow');
             exit();
 
         else:
@@ -121,21 +123,20 @@ class Circulation extends CI_Controller
     public function intervaldays($tgl_harus_kembali, $tgl_kembali)
     {
 
-        $tgl_kembali=strtotime($tgl_kembali);
-        $tgl_harus_kembali=strtotime($tgl_harus_kembali);
+        $tgl_kembali       = strtotime($tgl_kembali);
+        $tgl_harus_kembali = strtotime($tgl_harus_kembali);
 
         $interval = ($tgl_kembali - $tgl_harus_kembali) / (3600 * 24);
-        return $interval;       
-      
+        return $interval;
+
     }
 
     public function denda($transaction_id)
     {
         //$qty         = 1;
-        $denda = 0;
-        $tgl_kembali='';
-        $tgl_harus_kembali='';
-
+        $denda             = 0;
+        $tgl_kembali       = '';
+        $tgl_harus_kembali = '';
 
         $get_circulation = $this->Circulation_md->get_circulationByStatus($transaction_id);
 
@@ -176,11 +177,11 @@ class Circulation extends CI_Controller
 
             if ($this->form_validation->run() == true):
                 $data['borrowBook'] = $this->Circulation_md->searchBorrow($transaction_id)->result();
-                if(empty($data['borrowBook'])):
-                    $data['warning']=' Transaksi yang anda lakukan tidak ditemukan atau sudah diproses';
+                if (empty($data['borrowBook'])):
+                    $data['warning'] = ' Transaksi yang anda lakukan tidak ditemukan atau sudah diproses';
                 endif;
-                $data['member']     = $this->Circulation_md->getAnggotaByKeyword($transaction_id);
-                $data['denda']      = $this->denda($transaction_id);
+                $data['member'] = $this->Circulation_md->getAnggotaByKeyword($transaction_id);
+                $data['denda']  = $this->denda($transaction_id);
                 $this->session->set_userdata('transaction_id', $transaction_id);
             else:
                 $data['warning'] = validation_errors();
@@ -193,22 +194,25 @@ class Circulation extends CI_Controller
 
     public function statusbook()
     {
-        $transaction_id=$this->session->userdata('transaction_id');
-        if ($this->input->post('kembali')==TRUE):
+        $transaction_id = $this->session->userdata('transaction_id');
+        if ($this->input->post('kembali') == true):
             //$this->db->set('sirkulasi_denda',$this->denda($transaction_id));
-            $this->Circulation_md->returnbook($transaction_id,$this->denda($transaction_id));
-            $this->session->set_flashdata('message','Koleksi telah dikembalikan');
+            $this->Circulation_md->returnbook($transaction_id, $this->denda($transaction_id));
+            $this->session->set_flashdata('message', 'Koleksi telah dikembalikan');
             $this->session->unset_userdata('transaction_id');
             redirect('Circulation/returnbook');
         endif;
-        if($this->input->post('perpanjang')==TRUE):
-            $this->Circulation_md->extendsion($transaction_id,$this->date_return());
-            $this->session->set_flashdata('message','Masa pinjam koleksi telah diperpanjang');
+        if ($this->input->post('perpanjang') == true):
+            $this->Circulation_md->extendsion($transaction_id, $this->date_return());
+            $this->session->set_flashdata('message', 'Masa pinjam koleksi telah diperpanjang');
             $this->session->unset_userdata('transaction_id');
             redirect('Circulation/returnbook');
         endif;
     }
-
+    public function print_borrow()
+    {
+        $this->load->view('administrator/print/print_circulation_borrow');
+    }
 
     public function getAttributeCirculation()
     {

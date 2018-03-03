@@ -17,7 +17,7 @@
                                             <div class="input-group">
                                                 <span class="input-group-addon">No Transaksi</span>
                                                 <div class="form-line">
-                                                    <input type="text" name="sirkulasi_pinjam_kd" class="form-control" placeholder="Masukkan Kode Transaksi">
+                                                    <input type="text" name="sirkulasi_pinjam_kd" class="form-control" placeholder="Masukkan Kode Transaksi" value="<?php echo $this->session->userdata('transaction_id');?>">
                                                 </div>
                                             </div>
                                         </div>
