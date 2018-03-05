@@ -30,7 +30,7 @@ class Circulation extends CI_Controller
         $trans             = $gtMonth . '-' . $gtYear;
 
         foreach ($gt_transaction_id->result() as $gtTrans):
-            if (($gtTrans->sirkulasi_pinjam_kd == null) || (substr($gtTrans->sirkulasi_pinjam_kd, 5, 2) != $gtMonth)):
+            if (($gtTrans->sirkulasi_pinjam_kd == null)):
                 $transaction_id = '0001' . '-' . $trans;
                 //$transaction_id=substr($gtTrans->sirkulasi_pinjam_kd,6,2);
             else:
@@ -42,6 +42,7 @@ class Circulation extends CI_Controller
 
         //return $transaction_id;
         return $transaction_id;
+        //print_r($transaction_id);
     }
 
     public function choose_member()
