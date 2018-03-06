@@ -16,7 +16,14 @@ class Circulation extends CI_Controller
 
     public function index()
     {
-        $this->choose_member();
+        $data['title']='Daftar Sirkulasi';
+
+        $data['dt_circulation']=$this->Circulation_md->get_all_circulation();
+       // $data['dt_circulation']=$this->Collection_md->get_all_collection();
+        $data['content']='circulation/circulation_main';
+        $this->load->view('administrator/index',$data);
+
+
     }
 
     public function get_transaction_id()
@@ -210,10 +217,7 @@ class Circulation extends CI_Controller
             redirect('Circulation/returnbook');
         endif;
     }
-    public function print_borrow()
-    {
-        $this->load->view('administrator/print/print_circulation_borrow');
-    }
+   
 
     public function getAttributeCirculation()
     {

@@ -47,6 +47,18 @@ class Circulation_md extends CI_Model
         return $this->db->get()->result();
     }
 
+
+    function get_all_circulation(){
+        $this->db->select('*,count(simpus_koleksi.koleksi_kd) as jml_koleksi');
+        $this->db->from('simpus_sirkulasi');
+        $this->db->join('simpus_koleksi', 'simpus_sirkulasi.simpus_koleksi_koleksi_kd=simpus_koleksi.koleksi_kd', 'inner');
+        $this->db->join('simpus_anggota', 'simpus_sirkulasi.simpus_anggota_anggota_kd=simpus_anggota.anggota_kd', 'inner');
+        //$this->db->where('simpus_sirkulasi.sirkulasi_pinjam_kd', $transaction_id);
+        //$this->db->where('sirkulasi_status_pinjam', 'pinjam');
+        $this->db->group_by('sirkulasi_pinjam_kd');
+        return $this->db->get();
+    }
+
     public function searchBorrow($keyword)
     {
 

@@ -1,17 +1,14 @@
-<?php  defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 /*
- Created By Joko Purwanto 
+Created By Joko Purwanto
  */
 
 use Dompdf\Dompdf;
 
-/**
-* 
-*/
-class PDFGenerate extends Dompdf
+class Pdfgenerator extends Dompdf
 {
-	
-	/**
+
+     /**
      * PDF filename
      * @var String
      */
@@ -47,5 +44,3 @@ class PDFGenerate extends Dompdf
                $this->stream($this->filename, array("Attachment" => false));
     }
 }
-
- ?>
