@@ -47,6 +47,7 @@
         <br>
         <b>Tanggal Pinjam:</b> <?php echo tanggal_indo($gt_date->sirkulasi_tgl_pinjam); ?><br>
         <b>Tanggal Kembali:</b> <?php echo tanggal_indo($gt_date->sirkulasi_tgl_harus_kembali); ?><br>
+
       </div>
       <!-- /.col -->
     </div>
@@ -98,44 +99,32 @@
     <div class="row">
       <!-- accepted payments column -->
       <div class="col-xs-6">
-        <p class="lead">Payment Methods:</p>
-        <img src="../../dist/img/credit/visa.png" alt="Visa">
-        <img src="../../dist/img/credit/mastercard.png" alt="Mastercard">
-        <img src="../../dist/img/credit/american-express.png" alt="American Express">
-        <img src="../../dist/img/credit/paypal2.png" alt="Paypal">
-
-        <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
-          Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem plugg dopplr
-          jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
+        <p class="lead">Perhatian:</p>
+        <p style="margin-top: 10px;">
+          Nota ini wajib dibawa ketika mengembalikan buku/koleksi sebagai bukti peminjaman, harap disimpan dengan sebaiknya
         </p>
       </div>
       <!-- /.col -->
       <div class="col-xs-6">
-        <p class="lead">Amount Due 2/22/2014</p>
-
-        <div class="table-responsive">
-          <table class="table">
-            <tr>
-              <th style="width:50%">Subtotal:</th>
-              <td>$250.30</td>
-            </tr>
-            <tr>
-              <th>Tax (9.3%)</th>
-              <td>$10.34</td>
-            </tr>
-            <tr>
-              <th>Shipping:</th>
-              <td>$5.80</td>
-            </tr>
-            <tr>
-              <th>Total:</th>
-              <td>$265.24</td>
-            </tr>
-          </table>
-        </div>
+        <p class="text-right"><?php echo tanggal_indo(date('Y-m-d')); ?></p>  
+        <p align="center">Petugas Perpustakaan</p>
+        <center><img src="#" alt="signature"></center>
+        <p align="center"><?php echo $this->session->userdata('fullname') ?></p>
       </div>
       <!-- /.col -->
     </div>
     <!-- /.row -->
+
+  <?php if(($this->uri->segment(2)=='printed')):  
+    echo " ";
+    else:
+  ?>
+  <div class="row">
+    <div class="col-xs-12">
+      <a href="<?php echo site_url('invoice/printed').'/borrow/'.$transaction_id; ?>" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+    </div>
+  </div>
+  <?php endif;?>
+
   </section>
   <!-- /.content -->
