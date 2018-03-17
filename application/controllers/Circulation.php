@@ -34,21 +34,21 @@ class Circulation extends CI_Controller
         $gtday             = sprintf("%02d", $date['mday']);
         $gtMonth           = sprintf("%02d", $date['mon']);
         $gtYear            = $date['year'];
-        $trans             = $gtMonth . '-' . $gtYear;
+        $trans             = $gtMonth . '.' . $gtYear;
 
         foreach ($gt_transaction_id->result() as $gtTrans):
             if (($gtTrans->sirkulasi_pinjam_kd == null)):
-                $transaction_id = '0001' . '-' . $trans;
+                $transaction_id = '0001' . '.' . $trans;
                 //$transaction_id=substr($gtTrans->sirkulasi_pinjam_kd,6,2);
             else:
                 $substr_id      = (int) substr($gtTrans->sirkulasi_pinjam_kd, 0, 4);
                 $tmp            = $substr_id + 1;
-                $transaction_id = sprintf("%04s", $tmp) . '-' . $trans;
+                $transaction_id = sprintf("%04s", $tmp) . '.' . $trans;
             endif;
         endforeach;
 
         //return $transaction_id;
-        return $transaction_id;
+         return $transaction_id;
         //print_r($transaction_id);
     }
 
@@ -95,7 +95,7 @@ class Circulation extends CI_Controller
             $this->session->unset_userdata('member_id');
             //$this->session->unset_userdata('date_return',$this->date_return());
             $this->session->unset_userdata('count_book');
-            redirect('cetak/borrow');
+            redirect('invoice/borrow');
             exit();
 
         else:

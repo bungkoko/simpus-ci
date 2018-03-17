@@ -30,14 +30,17 @@
      <!-- Fileinput Css -->
     <link href="<?php echo base_url(); ?>asset/css/fileinput.css" rel="stylesheet">
 
+
      <!-- Custom Css -->
     <link href="<?php echo base_url(); ?>asset/css/style.css" rel="stylesheet">
-     <link href="<?php echo base_url(); ?>asset/css/custom.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>asset/css/custom.css" rel="stylesheet">
     <link href="<?php echo base_url() ?>asset/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="<?php echo base_url(); ?>asset/css/themes/theme-green.css" rel="stylesheet" />
 
+    <!--Custom Invoice-->
+    <link rel="stylesheet" href="<?php echo base_url(); ?>asset/invoice/style.css"/>
 
 
 </head>

@@ -3,8 +3,9 @@
     
  */
 if (!function_exists('bulan')) {
-    function bulan(){
-        $bulan = Date('m');
+    function bulan($bulan){
+       // $bulan = Date('m');
+        //$bulan="";
         switch ($bulan) {
             case 1:
                 $bulan = "Januari";
@@ -62,7 +63,11 @@ if (!function_exists('tanggal')) {
 
     function tanggal_indo($tanggal){
         $pecahkan=explode('-',$tanggal);
-        $tanggal=$pecahkan[2].' '.bulan((int)$pecahkan[1]).' '.$pecahkan[0];
+        $d=$pecahkan[2];
+        $m=$pecahkan[1];
+        $y=$pecahkan[0];
+        $tanggal=$d.' '.bulan($m).' '.$y;
+        //$tanggal=bulan($m);
         return $tanggal;
     }
 }

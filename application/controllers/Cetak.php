@@ -35,19 +35,19 @@ class Cetak extends CI_Controller
 
         $data['member'] = $this->Circulation_md->getAnggotaByKeyword($data['transaction_id']);
 
-        $data['content'] = 'cetak_borrow';
+        $data['content'] = 'cetak/borrow/borrow';
 
         //    $html=$this->load->view('administrator/cetak/cetak',$data,true);
         //$this->pdfgenerator->generate($html,'Nota Peminjaman-'.$this->session->userdata('transaction_id'));
 
         $this->pdfgenerator->setPaper('A4', 'portrait');
         $this->pdfgenerator->filename = "notapinjam-".$this->session->userdata('transaction_id').".pdf";
-        $this->pdfgenerator->load_view('administrator/cetak/cetak', $data);
+        //$this->pdfgenerator->load_view('administrator/cetak/cetak', $data);
 
         $this->session->unset_userdata('transaction_id');
         $this->session->unset_userdata('date_return');
 
-        //$this->load->view('administrator/cetak/cetak',$data);
+        $this->load->view('administrator/index',$data);
 
     }
 

@@ -80,4 +80,13 @@
   'bree serif' => array(
     'normal' => $fontDir . '/137a7344de7e26f04c4d4c0c4cf41a7e',
   ),
+  'roboto' => array(
+    'normal' => $fontDir . '/41ce0a4db0ccad1b72bbf9d8a10b297c',
+  ),
+  'material icons' => array(
+    'normal' => $fontDir . '/2df510fd6a1e9aab9c540b2adb81277a',
+  ),
+  'glyphicons halflings' => array(
+    'normal' => $fontDir . '/14f9fc8c531cda0d22cd8f25836869ae',
+  ),
 ) ?>
