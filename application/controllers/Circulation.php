@@ -16,13 +16,12 @@ class Circulation extends CI_Controller
 
     public function index()
     {
-        $data['title']='Daftar Sirkulasi';
+        $data['title'] = 'Daftar Sirkulasi';
 
-        $data['dt_circulation']=$this->Circulation_md->get_all_circulation();
-       // $data['dt_circulation']=$this->Collection_md->get_all_collection();
-        $data['content']='circulation/circulation_main';
-        $this->load->view('administrator/index',$data);
-
+        $data['dt_circulation'] = $this->Circulation_md->get_all_circulation();
+        // $data['dt_circulation']=$this->Collection_md->get_all_collection();
+        $data['content'] = 'circulation/circulation_main';
+        $this->load->view('administrator/index', $data);
 
     }
 
@@ -48,7 +47,7 @@ class Circulation extends CI_Controller
         endforeach;
 
         //return $transaction_id;
-         return $transaction_id;
+        return $transaction_id;
         //print_r($transaction_id);
     }
 
@@ -88,8 +87,8 @@ class Circulation extends CI_Controller
         $data['title']   = 'Peminjaman';
 
         if ($this->input->post('submit')):
-            $this->session->set_userdata('transaction_id',$this->get_transaction_id());
-            $this->session->set_userdata('date_return',$this->date_return());
+            $this->session->set_userdata('transaction_id', $this->get_transaction_id());
+            $this->session->set_userdata('date_return', $this->date_return());
             $this->Circulation_md->add_borrow($this->get_transaction_id(), $this->date_return(), date('Y-m-d'));
             $this->session->set_flashdata('message', 'Transaksi peminjaman telah berhasil');
             $this->session->unset_userdata('member_id');
@@ -172,19 +171,18 @@ class Circulation extends CI_Controller
 
     public function returnbook()
     {
-        $data['warning'] = '';
-        $data['title']   = 'Pengembalian';
-
+        $data['warning']     = '';
+        $data['title']       = 'Pengembalian';
         $transaction_id      = $this->input->post('sirkulasi_pinjam_kd');
         $data['borrowBook']  = '';
         $data['member']      = '';
         $data['count_denda'] = '';
-
+        //$status='pinjam';
         if ($this->input->post('submit')):
             $this->form_validation->set_rules('sirkulasi_pinjam_kd', 'Kode transaksi', 'required');
 
             if ($this->form_validation->run() == true):
-                $data['borrowBook'] = $this->Circulation_md->searchBorrow($transaction_id)->result();
+                $data['borrowBook'] = $this->Circulation_md->getTransaction($transaction_id)->result();
                 if (empty($data['borrowBook'])):
                     $data['warning'] = ' Transaksi yang anda lakukan tidak ditemukan atau sudah diproses';
                 endif;
@@ -217,7 +215,6 @@ class Circulation extends CI_Controller
             redirect('Circulation/returnbook');
         endif;
     }
-   
 
     public function getAttributeCirculation()
     {

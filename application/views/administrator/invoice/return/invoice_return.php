@@ -47,7 +47,7 @@
         <br>
         <b>Tanggal Pinjam:</b> <?php echo tanggal_indo($gt_date->sirkulasi_tgl_pinjam); ?><br>
         <b>Tanggal Kembali:</b> <?php echo tanggal_indo($gt_date->sirkulasi_tgl_harus_kembali); ?><br>
-
+        <b>Tanggal Pengembalian:</b> <?php echo tanggal_indo($gt_date->sirkulasi_tgl_dikembalikan); ?>
       </div>
       <!-- /.col -->
     </div>
@@ -64,30 +64,32 @@
             <th style="vertical-align: middle;">Pengarang</th>
             <th style="vertical-align: middle;">Penerbit</th>
             <th style="vertical-align: middle;">ISBN</th>
-            <th style="vertical-align: middle;" class="text-right">Jumlah Pinjam</th>
+            <th style="vertical-align: middle;" class="text-right">Denda Keterlambatan</th>
           </tr>
           </thead>
           <tbody>
           <?php 
             $qty=1;
             $count_qty=0;
-          foreach($borrowBook as $borrow): 
+            $count_denda=0;
+          foreach($returnbook as $return): 
             $count_qty+=$qty;
+            $count_denda+=$return->sirkulasi_denda;
             ?>
 
           <tr>
-            <td width="100px"><?php echo $borrow->koleksi_kd;?></td>
-            <td><?php echo $borrow->koleksi_judul; ?></td>
-            <td><?php echo $borrow->nama_penulis; ?></td>
-            <td><?php echo $borrow->penerbit_nm; ?></td>
-            <td><?php echo $borrow->koleksi_isbn; ?></td>
-            <td class="text-right"><?php echo $qty ?></td>
+            <td width="100px"><?php echo $return->koleksi_kd;?></td>
+            <td><?php echo $return->koleksi_judul; ?></td>
+            <td><?php echo $return->nama_penulis; ?></td>
+            <td><?php echo $return->penerbit_nm; ?></td>
+            <td><?php echo $return->koleksi_isbn; ?></td>
+            <td class="text-right">Rp. <?php echo number_format($return->sirkulasi_denda,0,",","."); ?></td>
           </tr>
           <?php endforeach; ?>
           <tr>
               <td colspan="2"></td>
-              <td colspan="3" class="text-right">Jumlah Pinjaman</td>
-              <td class="text-right"><?php echo $count_qty; ?></td>
+              <td colspan="3" class="text-right"><b>Jumlah Denda</b></td>
+              <td class="text-right"><b>Rp. <?php echo number_format($count_denda,0,",","."); ?></b></td>
           </tr>
           </tbody>
         </table>
@@ -99,9 +101,8 @@
     <div class="row">
       <!-- accepted payments column -->
       <div class="col-xs-6">
-        <p class="lead">Perhatian:</p>
         <p style="margin-top: 10px;">
-          Nota ini wajib dibawa ketika mengembalikan buku/koleksi sebagai bukti peminjaman, harap disimpan dengan sebaiknya
+          Terima kasih sudah meminjam buku di perpustakaan
         </p>
       </div>
       <!-- /.col -->
@@ -120,7 +121,7 @@
   ?>
   <div class="row">
     <div class="col-xs-12">
-      <a href="<?php echo site_url('invoice/printed').'/borrow/'.$transaction_id; ?>" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+      <a href="<?php echo site_url('invoice/printed').'/returnbook/'.$transaction_id; ?>" target="_blank" class="btn btn-default"><i class="material-icons">print</i> Print</a>
     </div>
   </div>
   <?php endif;?>

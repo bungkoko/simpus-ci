@@ -91,13 +91,41 @@ class Circulation_md extends CI_Model
 
     }
 
+    public function getReturnBook($transaction_id)
+    {
+         $query = "
+                SELECT sirkulasi_pinjam_kd, koleksi_kd, koleksi_judul, koleksi_isbn, koleksi_lokasi_rak,
+                    anggota_kd, anggota_nm , penerbit_nm, GROUP_CONCAT(simpus_penulis.penulis_nm) AS nama_penulis,
+                    sirkulasi_tgl_pinjam, sirkulasi_tgl_harus_kembali, sirkulasi_tgl_dikembalikan,
+                    sirkulasi_keterlambatan, sirkulasi_denda,
+                    sirkulasi_jumlah_pinjam
+                FROM
+                    simpus_sirkulasi,simpus_penulis_has_simpus_koleksi,simpus_koleksi,simpus_penulis,simpus_anggota,simpus_penerbit
+                WHERE
+                    simpus_penulis_has_simpus_koleksi.simpus_penulis_penulis_kd=simpus_penulis.penulis_kd
+                AND
+                    simpus_penulis_has_simpus_koleksi.simpus_koleksi_koleksi_kd=simpus_koleksi.koleksi_kd
+                AND
+                    simpus_sirkulasi.simpus_koleksi_koleksi_kd=simpus_koleksi.koleksi_kd
+                AND
+                    simpus_sirkulasi.simpus_anggota_anggota_kd=simpus_anggota.anggota_kd
+                AND
+                    simpus_penerbit.penerbit_kd=simpus_koleksi.simpus_penerbit_penerbit_kd
+                AND
+                    simpus_sirkulasi.sirkulasi_pinjam_kd like '$transaction_id'
+                GROUP BY koleksi_kd
+                ";
+
+        return $this->db->query($query);
+    }
+
     public function getAnggotaByKeyword($keyword)
     {
         $this->db->select('anggota_kd, anggota_nm, anggota_alamat,anggota_notelpon, anggota_email,sirkulasi_pinjam_kd');
         $this->db->from('simpus_sirkulasi');
         $this->db->join('simpus_anggota', 'simpus_sirkulasi.simpus_anggota_anggota_kd=simpus_anggota.anggota_kd', 'inner');
         $this->db->where('simpus_sirkulasi.sirkulasi_pinjam_kd', $keyword);
-        $this->db->where('sirkulasi_status_pinjam', 'pinjam');
+        //$this->db->where('sirkulasi_status_pinjam', 'pinjam');
         $this->db->GROUP_BY('sirkulasi_pinjam_kd');
         return $this->db->get()->row();
     }
@@ -142,9 +170,9 @@ class Circulation_md extends CI_Model
 
     public function getDatebyTransactionId($transaction_id)
     {
-        $this->db->select('sirkulasi_tgl_pinjam,sirkulasi_tgl_harus_kembali');
+        $this->db->select('sirkulasi_tgl_pinjam,sirkulasi_tgl_harus_kembali,sirkulasi_tgl_dikembalikan');
         $this->db->from('simpus_sirkulasi');
-        $this->db->where('sirkulasi_pinjam_kd',$transaction_id);
+        $this->db->where('sirkulasi_pinjam_kd', $transaction_id);
         //$this->db->GROUP_BY('sirkulasi_pinjam_kd');
         return $this->db->get()->row();
     }

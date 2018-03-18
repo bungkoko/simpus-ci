@@ -77,7 +77,7 @@ class Author extends CI_Controller
 
     public function update($kode)
     {
-        $data['warning']='';
+        $data['warning'] = '';
         $data['title']   = 'Pengarang/Penulis';
         $data['content'] = 'author/author_update';
         $data['read']    = $this->Author_md->read($kode);
