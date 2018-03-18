@@ -182,7 +182,7 @@ class Circulation extends CI_Controller
             $this->form_validation->set_rules('sirkulasi_pinjam_kd', 'Kode transaksi', 'required');
 
             if ($this->form_validation->run() == true):
-                $data['borrowBook'] = $this->Circulation_md->getTransaction($transaction_id)->result();
+                $data['borrowBook'] = $this->Circulation_md->searchBorrow($transaction_id)->result();
                 if (empty($data['borrowBook'])):
                     $data['warning'] = ' Transaksi yang anda lakukan tidak ditemukan atau sudah diproses';
                 endif;
