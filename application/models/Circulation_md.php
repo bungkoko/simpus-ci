@@ -113,6 +113,8 @@ class Circulation_md extends CI_Model
                     simpus_penerbit.penerbit_kd=simpus_koleksi.simpus_penerbit_penerbit_kd
                 AND
                     simpus_sirkulasi.sirkulasi_pinjam_kd like '$transaction_id'
+                AND 
+                    simpus_sirkulasi.sirkulasi_status_pinjam='kembali'
                 GROUP BY koleksi_kd
                 ";
 
