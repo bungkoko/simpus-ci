@@ -10,6 +10,18 @@ class Member extends CI_Controller
         parent::__construct();
     }
 
+    public function index()
+    {
+        $this->signup();
+    }
+
+    public function signup()
+    {
+        $data['title']='Pendaftaran Keanggotaan Perpustakaan';
+        $data['content']='member/signup';
+        $this->load->view('page',$data);
+    }
+
     public function search_member()
     {
         $member_id = $this->input->post('anggota_kd');
@@ -32,13 +44,13 @@ class Member extends CI_Controller
 
     public function getMemberbyId()
     {
-      $member_id=$this->input->post('anggota_kd');
-      $member=$this->Member_md->getMemberById($member_id);
+        $member_id = $this->input->post('anggota_kd');
+        $member    = $this->Member_md->getMemberById($member_id);
 
-      foreach($member->result() as $mbr):
-        $data[]=$mbr->anggota_kd;
-      endforeach;
-      echo json_encode($data);
+        foreach ($member->result() as $mbr):
+            $data[] = $mbr->anggota_kd;
+        endforeach;
+        echo json_encode($data);
     }
 
 }

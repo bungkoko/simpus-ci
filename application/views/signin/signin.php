@@ -1,41 +1,75 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-8 m-x-auto pull-xs-none vamiddle">
-      <div class="card-group ">
-        <div class="card p-a-2">
-          <div class="card-block">
-            <h1>Login</h1>
-            <p class="text-muted">Sign In to your account</p>
-            <form action="<?php echo site_url('member/signin')?>" method="post">
-              <div class="input-group m-b-1">
-                <span class="input-group-addon"><i class="icon-user"></i></span>
-                <input type="text" class="form-control" name="anggota_username" placeholder="Username">
-              </div>
-              <div class="input-group m-b-2">
-                <span class="input-group-addon"><i class="icon-lock"></i></span>
-                <input type="password" class="form-control" name="anggota_password" placeholder="Password">
-              </div>
-              <div class="row">
-                <div class="col-xs-6">
-                  <input type="submit" name="submit" class="btn btn-primary p-x-2" value="Login">
-                </div>
-                <div class="col-xs-6 text-xs-right">
-                  <button type="button" class="btn btn-link p-x-0">Forgot password?</button>
-                </div>
-              </div>
-            </form>
-          </div>
+<body class="login-page">
+    <div class="login-box">
+        <div class="logo">
+            <a href="javascript:void(0);">Administrator</a>
+            <small>Sistem Managemen Perpustakaan</small>
         </div>
-        <div class="card card-inverse card-primary p-y-3" style="width:44%">
-          <div class="card-block text-xs-center">
-            <div>
-              <h2>Sign up</h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-              <a href="<?php echo site_url('member/register');?>"<button type="button" class="btn btn-primary active m-t-1">Register Now!</button></a>
+        <div class="card">
+            <div class="body">
+
+                <?php if($warning != ""): ?>
+                <div class="alert bg-red alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <p><?php echo $warning;?></p>
+                </div>
+                <?php endif; ?>
+
+                <form id="sign_in" method="POST" action="<?php echo site_url('administrator/signin')?>">
+                <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>" style="display: none">
+                    <div class="msg">Sign In</div>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">person</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="text" class="form-control" name="user_name" placeholder="Username" required autofocus>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">lock</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="password" class="form-control" name="user_password" placeholder="Password" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-8 p-t-5">
+                            <input type="checkbox" name="rememberme" id="rememberme" class="filled-in chk-col-pink">
+                            <label for="rememberme">Remember Me</label>
+                        </div>
+                        <div class="col-xs-4">
+                            <button class="btn btn-block bg-pink waves-effect" type="submit">SIGN IN</button>
+                        </div>
+                    </div>
+                    <div class="row m-t-15 m-b--20">
+                        <div class="col-xs-6">
+                            <a href="sign-up.html">Register Now!</a>
+                        </div>
+                        <div class="col-xs-6 align-right">
+                            <a href="forgot-password.html">Forgot Password?</a>
+                        </div>
+                    </div>
+                </form>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-</div>
+
+    <!-- Jquery Core Js -->
+    <script src="<?php echo base_url(); ?>asset/plugins/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core Js -->
+    <script src="<?php echo base_url(); ?>asset/plugins/bootstrap/js/bootstrap.js"></script>
+
+    <!-- Waves Effect Plugin Js -->
+    <script src="<?php echo base_url(); ?>asset/plugins/node-waves/waves.js"></script>
+
+    <!-- Validation Plugin Js -->
+    <script src="<?php echo base_url(); ?>asset/plugins/jquery-validation/jquery.validate.js"></script>
+
+    <!-- Custom Js -->
+    <script src="<?php echo base_url(); ?>asset/js/admin.js"></script>
+    <script src="<?php echo base_url(); ?>asset/js/pages/examples/sign-in.js"></script>
+</body>
+
+</html>

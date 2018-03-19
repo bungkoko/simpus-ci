@@ -51,8 +51,9 @@ class Administrator extends CI_Controller
             $data['error'] = validation_errors();
         endif;
         $data['title'] = "Sign In Administator";
+        $data['content']='signin/signin';
         //$data['content']='administrator/signin';
-        $this->load->view('administrator/signin', $data);
+        $this->load->view('page', $data);
     }
 
     public function signout()
