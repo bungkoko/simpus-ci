@@ -40,6 +40,8 @@ $(function () {
             var tabCount = $tab.length;
             $tab.css('width', (100 / tabCount) + '%');
 
+
+
             //set button waves effect
             setButtonWavesEffect(event);
         },

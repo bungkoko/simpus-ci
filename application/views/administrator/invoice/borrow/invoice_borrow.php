@@ -71,7 +71,7 @@
           <?php 
             $qty=1;
             $count_qty=0;
-          foreach($borrowBook as $borrow): 
+          foreach($return as $borrow): 
             $count_qty+=$qty;
             ?>
 

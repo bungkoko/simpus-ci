@@ -17,9 +17,16 @@ class Member extends CI_Controller
 
     public function signup()
     {
-        $data['title']='Pendaftaran Keanggotaan Perpustakaan';
-        $data['content']='member/signup';
-        $this->load->view('page',$data);
+        $data['title']   = 'Pendaftaran Keanggotaan Perpustakaan';
+        $data['content'] = 'member/signup';
+
+        /*
+        
+        (if ($this->input->post('submit') == true);
+            $this->
+        endif;
+        */
+        $this->load->view('page', $data);
     }
 
     public function search_member()
