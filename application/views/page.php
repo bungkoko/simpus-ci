@@ -29,7 +29,7 @@
 
     <!-- Custom Css -->
     <link href="<?php echo base_url() ?>asset/css/style.css" rel="stylesheet">
-
+     <link href="<?php echo base_url() ?>asset/css/custom.css" rel="stylesheet">
 
        <!-- Fileinput Css -->
     <link href="<?php echo base_url(); ?>asset/css/fileinput.css" rel="stylesheet">

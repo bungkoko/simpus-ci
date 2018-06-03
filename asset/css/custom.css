@@ -15,3 +15,10 @@ legend {
     background-color: inherit;
 }
 fieldset a:hover { color: #A70B0B; background-color: inherit;}*/
+
+section.content-signup {
+  margin: 100px 150px 0 150px;
+  -moz-transition: 0.5s;
+  -o-transition: 0.5s;
+  -webkit-transition: 0.5s;
+  transition: 0.5s; }

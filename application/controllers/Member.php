@@ -20,22 +20,22 @@ class Member extends CI_Controller
     {
         $gt_kode   = $this->Member_md->get_kode_anggota();
         $member_kd = '';
-        $date    = getdate();
-        $gtYear=$date['year'];
-        $sub_year=substr($gtYear,2,4);
+        $date      = getdate();
+        $gtYear    = $date['year'];
+        $sub_year  = substr($gtYear, 2, 4);
 
-        foreach($gt_kode->result() as $gtKode):
-            if($gtKode->anggota_kd == null):
-                $member_kd=$sub_year.'0001';
-            //else:
+        foreach ($gt_kode->result() as $gtKode):
+            if ($gtKode->anggota_kd == null):
+                $member_kd = $sub_year . '0001';
+                //else:
             else:
-                $substr_member_kd=(int) substr($gtKode->anggota_kd,2,6);
-                $tmp=$substr_member_kd+1;
-                $member_kd=$sub_year.sprintf("%04s",$tmp);
+                $substr_member_kd = (int) substr($gtKode->anggota_kd, 2, 6);
+                $tmp              = $substr_member_kd + 1;
+                $member_kd        = $sub_year . sprintf("%04s", $tmp);
             endif;
         endforeach;
-           
-      return $member_kd;
+
+        return $member_kd;
     }
 
     public function signup()
@@ -44,7 +44,7 @@ class Member extends CI_Controller
         $data['content'] = 'member/signup';
 
         if ($this->input->post('submit') == true):
-            $this->db->set('anggota_kd',$this->get_kode_anggota());
+            $this->db->set('anggota_kd', $this->get_kode_anggota());
             $this->Member_md->signup();
         endif;
 
@@ -54,6 +54,15 @@ class Member extends CI_Controller
         $this->
         endif;
          */
+        $this->load->view('page', $data);
+    }
+
+    public function profiling()
+    {
+        $data['title']   = "Lengkapi Profil";
+        $data['content'] = "member/profiling";
+
+
         $this->load->view('page', $data);
     }
 

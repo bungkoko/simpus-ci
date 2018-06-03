@@ -1,3 +1,4 @@
+<body class="signup-page">    
     <div class="signup-box">
         <div class="logo">
             <a href="javascript:void(0);"><?php echo $title;?></b></a>
