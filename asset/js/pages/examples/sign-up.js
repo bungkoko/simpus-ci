@@ -1,11 +1,11 @@
 $(function () {
     $('#sign_up').validate({
         rules: {
-            'terms': {
+            /*'terms': {
                 required: true
-            },
+            },*/
             'confirm': {
-                equalTo: '[name="password"]'
+                equalTo: '[name="anggota_password"]'
             }
         },
         highlight: function (input) {

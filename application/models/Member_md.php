@@ -11,7 +11,8 @@ class Member_md extends CI_Model
         parent::__construct();
     }
 
-    public function set_member()
+
+    public function set_profiling()
     {
         $this->db->set('anggota_nm', $this->input->post('anggota_nm'));
         $this->db->set('anggota_email', $this->input->post('anggota_email'));
@@ -24,6 +25,12 @@ class Member_md extends CI_Model
         $this->db->set('anggota_tgldaftar', date('Y-m-d'));
         $this->db->set('anggota_alamat', $this->input->post('anggota_alamat'));
         $this->db->set('anggota_status', 'block');
+    }
+    function signup(){
+        $this->db->set('anggota_username',$this->input->post('anggota_username'));
+        $this->db->set('anggota_email',$this->input->post('anggota_email'));
+        $this->db->set('anggota_password',md5($this->input->post('anggota_password')));
+        return $this->db->insert('simpus_anggota');
     }
 
     public function add_member($avatar)

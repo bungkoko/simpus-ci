@@ -45,6 +45,7 @@ if ($page == 'signup' || $page=='index' || $page == '' && $menu=='member'): ?>
     <?php $this->load->view($content); 
 elseif ($page=='signin' || $page =='index' || $page=='' && $menu=='administrator' || $menu=='member'):
     $this->load->view($content); 
+
 endif;
 ?>
     <script src="<?php echo base_url() ?>asset/plugins/jquery/jquery.min.js"></script>
@@ -52,29 +53,19 @@ endif;
     <!-- Bootstrap Core Js -->
     <script src="<?php echo base_url() ?>asset/plugins/bootstrap/js/bootstrap.js"></script>
 
-    <!-- Select Plugin Js -->
-    <script src="<?php echo base_url() ?>asset/plugins/bootstrap-select/js/bootstrap-select.js"></script>
-
-    <!-- Slimscroll Plugin Js -->
-    <script src="<?php echo base_url() ?>asset/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
-
     <!-- Jquery Validation Plugin Css -->
     <script src="<?php echo base_url() ?>asset/plugins/jquery-validation/jquery.validate.js"></script>
 
-    <!-- JQuery Steps Plugin Js -->
-    <script src="<?php echo base_url() ?>asset/plugins/jquery-steps/jquery.steps.js"></script>
-
-    <!-- Sweet Alert Plugin Js -->
-    <script src="<?php echo base_url() ?>asset/plugins/sweetalert/sweetalert.min.js"></script>
-
+  
     <!-- Waves Effect Plugin Js -->
     <script src="<?php echo base_url() ?>asset/plugins/node-waves/waves.js"></script>
 
-    <!-- Input Mask Plugin Js -->
-    <script src="<?php echo base_url() ?>asset/plugins/jquery-inputmask/jquery.inputmask.bundle.js"></script>
-    
+  
     <script src="<?php echo base_url() ?>asset/js/admin.js"></script>
-    <script src="<?php echo base_url() ?>asset/js/pages/masked-input.js"></script>
+    <script src="<?php echo base_url() ?>asset/js/pages/examples/sign-in.js"></script>
+    <script src="<?php echo base_url() ?>asset/js/pages/examples/sign-up.js"></script>
+      
+  
         <!-- FileInput Plugin Js -->
     <script src="<?php echo base_url(); ?>asset/js/fileinput.js"></script>
     
@@ -97,79 +88,7 @@ endif;
             allowedFileExtensions: ["jpg","jpeg", "png", "gif"]
           });
 
-        $(function(){
-            var form = $('#validate').show();
-
-            form.steps({
-                headerTag:'h3',
-                bodyTag:'fieldset',
-                transitionEffect: 'slideLeft',
-                onInit: function(event, currentIndex){
-                    $.AdminBSB.input.activate();
-
-                    var $tab = $(event.currentTarget).find('ul[role="tablist"] li');
-                    var tabCount=$tab.length;
-                    $tab.css('width', (100/tabCount)+'%');
-
-                    setButtonWavesEffect(event);
-                },
-                
-                OnStepChanging: function (event, currentIndex,newIndex){
-                    if(currentIndex > newIndex){return true;}
-
-                    if(currentIndex < newIndex){
-                        form.find('.body:eq('+newIndex+') label.error').remove();
-                        form.find('.body:eq('+newIndex+') .error').removeClass('error');
-                    }
-
-                    form.validate().settings.ignore=':disabled,:hidden';
-                    return form.valid();
-                },
-
-                OnStepChanged: function (event, currentIndex, priorIndex){
-                    setButtonWavesEffect(event);
-                },
-                onFinishing: function(event, currentIndex){
-                    form.validate().setting.ignore=':disabled';
-                    return form.valid();
-                },
-
-                onFinished: function(event, currentIndex){
-                    swal("Selamat anda sudah terdaftar menjadi anggota perpustakaan. Lakukan Aktivasi Akun anda dengan membawa persyaratan-persyaratannya ","Submitted!","success");
-                }
-
-            });
-
-            form.validate({
-                highlight: function(input){
-                    $(input).parents('.form-line').addClass('error');
-                },
-                unhighlight: function(input){
-                    $(input).parents('.form-line').removeClass('error');
-                },
-                errorPlacement: function(error, element){
-                    $(element).parents('.form-group').append(error);
-                },
-                rules:{
-                    'confirm':{
-                        equalTo:'#password'
-                    }
-                }
-            });
-        });
-
-        function setButtonWavesEffect(event){
-            $(event.currentTarget).find('[role="menu"] li a').removeClass('waves-effect');
-            $(event.currentTarget).find('[role="menu"] li:not(.disabled) a').addClass('waves-effect');
-        }
-        
-
-
     </script>
    
-
-    <!-- Demo Js -->
-    <script src="<?php echo base_url() ?>asset/js/demo.js"></script>
-
 </body>
 </html>
