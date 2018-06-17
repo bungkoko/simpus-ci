@@ -45,23 +45,38 @@ class Member extends CI_Controller
 
         if ($this->input->post('submit') == true):
             $this->db->set('anggota_kd', $this->get_kode_anggota());
+            $this->session->set_userdata('anggota_kd',$this->get_kode_anggota());
             $this->Member_md->signup();
+            
+            redirect('member/profiling');
         endif;
 
-        /*
-
-        (if ($this->input->post('submit') == true);
-        $this->
-        endif;
-         */
         $this->load->view('page', $data);
+    }
+
+    public function signin()
+    {
+        $data['title']='Sign In Anggota';
+        $data['content']='member/signin';
+
+        $this->load->view('page',$data);
     }
 
     public function profiling()
     {
+        $anggota_kd=$this->session->userdata('anggota_kd');
         $data['title']   = "Lengkapi Profil";
         $data['content'] = "member/profiling";
 
+        //$data['read']=$this->Member_md->readprofil($data['anggota_kd']);
+        //testing read with data static 
+        $data['read']=$this->Member_md->readprofil($anggota_kd);
+ 
+        if($this->input->post('submit')):
+            $this->Member_md->profiling($anggota_kd);
+            redirect('member/signin');
+            $this->session->unset_userdata('anggota_kd');
+        endif;
 
         $this->load->view('page', $data);
     }

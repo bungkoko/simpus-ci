@@ -1,7 +1,7 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<?php  
-$ci=new CI_Controller();
-$ci=& get_instance();
+<?php defined('BASEPATH') or exit('No direct script access allowed');?>
+<?php
+$ci = new CI_Controller();
+$ci = &get_instance();
 $ci->load->helper('url');
 ?>
 
@@ -36,7 +36,7 @@ $ci->load->helper('url');
         <div class="error-code">404</div>
         <div class="error-message">This page doesn't exist</div>
         <div class="button-place">
-            <a href="<?php echo site_url('administrator')?>" class="btn btn-default btn-lg waves-effect">GO TO HOMEPAGE</a>
+            <a href="<?php echo site_url('administrator') ?>" class="btn btn-default btn-lg waves-effect">GO TO HOMEPAGE</a>
         </div>
     </div>
 

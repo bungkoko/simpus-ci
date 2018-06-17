@@ -33,6 +33,16 @@ class Member_md extends CI_Model
         return $this->db->insert('simpus_anggota');
     }
 
+    function profiling($anggota_kd){
+        $this->set_profiling();
+        $this->db->where('anggota_kd',$anggota_kd);
+        return $this->db->update('simpus_anggota');
+    }
+
+    function readprofil($anggota_kd){
+        $this->db->where('anggota_kd',$anggota_kd);
+        return $this->db->get('simpus_anggota')->row();
+    }
     public function add_member($avatar)
     {
         $this->set_member();

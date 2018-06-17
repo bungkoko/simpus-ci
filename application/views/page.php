@@ -41,7 +41,6 @@
 <?php 
 if ($page == 'signup' || $page=='index' || $page == '' && $menu=='member'): ?>
 
-<body class="signup-page">
     <?php $this->load->view($content); 
 elseif ($page=='signin' || $page =='index' || $page=='' && $menu=='administrator' || $menu=='member'):
     $this->load->view($content); 
@@ -53,9 +52,10 @@ endif;
     <!-- Bootstrap Core Js -->
     <script src="<?php echo base_url() ?>asset/plugins/bootstrap/js/bootstrap.js"></script>
 
+    <script src="<?php echo base_url() ?>asset/plugins/bootstrap-notify/bootstrap-notify.js"></script>
+
     <!-- Jquery Validation Plugin Css -->
     <script src="<?php echo base_url() ?>asset/plugins/jquery-validation/jquery.validate.js"></script>
-
   
     <!-- Waves Effect Plugin Js -->
     <script src="<?php echo base_url() ?>asset/plugins/node-waves/waves.js"></script>
@@ -64,6 +64,7 @@ endif;
     <script src="<?php echo base_url() ?>asset/js/admin.js"></script>
     <script src="<?php echo base_url() ?>asset/js/pages/examples/sign-in.js"></script>
     <script src="<?php echo base_url() ?>asset/js/pages/examples/sign-up.js"></script>
+    <script src="<?php echo base_url() ?>asset/js/pages/ui/dialogs.js"></script>
       
   
         <!-- FileInput Plugin Js -->

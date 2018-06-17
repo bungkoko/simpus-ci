@@ -41,10 +41,10 @@
                         </div>
                     </div>
 
-                    <input name="submit" class="btn btn-block btn-lg bg-pink waves-effect" type="submit" value="SIGN UP">
+                    <input name="submit" class="btn btn-block btn-lg bg-pink waves-effect" type="submit" data-type="success" value="SIGN UP">
 
                     <div class="m-t-25 m-b--5 align-center">
-                        <a href="sign-in.html">You already have a membership?</a>
+                        <a href="<?php echo site_url('member/signin')?>">You already have a membership?</a>
                     </div>
                 </form>
             </div>
