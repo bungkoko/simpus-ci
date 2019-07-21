@@ -140,8 +140,8 @@
             </div>
          </form>
 
-        <script>
-            <?php $limit = $limit_book;?>
+         <script> 
+             <?php $limit = $limit_book;?>
             <?php for ($i = 1; $i <= $limit; $i++): ?>
             $('#koleksi_kd_<?php echo $i; ?>').typeahead({
                 source: function(query,process){
@@ -181,7 +181,10 @@
                     }
                 });
             }
-        </script>
+
+
+        
+         </script>
 
 
 

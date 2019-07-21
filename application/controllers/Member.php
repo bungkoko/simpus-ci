@@ -45,10 +45,41 @@ class Member extends CI_Controller
 
         if ($this->input->post('submit') == true):
             $this->db->set('anggota_kd', $this->get_kode_anggota());
-            $this->session->set_userdata('anggota_kd',$this->get_kode_anggota());
+            //$this->session->set_userdata('anggota_kd',$this->get_kode_anggota());
             $this->Member_md->signup();
             
-            redirect('member/profiling');
+            $this->session->set_flashdata('message', 'Member Sudah Ditambahkan');
+            redirect('Member');
+        endif;
+
+        $this->load->view('page', $data);
+    }
+
+    public function signup_tab()
+    {
+        $data['title']='Registrasi Anggota';
+        $data['content']='member/signup-tab';
+
+
+        if ($this->input->post('submit') == true):
+            $this->form_validation->set_rules('anggota_nm','Nama Anggota','required');
+            $this->form_validation->set_rules('anggota_password','Password','required');
+            $this->form_validation->set_rules('anggota_jeniskelamin','Jenis Kelamin','required');
+            $this->form_validation->set_rules('anggota_notelpon','No Telpon','required');
+            $this->form_validation->set_rules('anggota_alamat','Alamat','required');
+            $this->form_validation->set_rules('anggota_username','Username','required');
+
+            if($this->form_validation->run()==true):
+                $this->db->set('anggota_kd', $this->get_kode_anggota());
+                //$this->session->set_userdata('anggota_kd',$this->get_kode_anggota());
+                $this->Member_md->signup();
+                
+                //$this->session->set_flashdata('message', 'Member Sudah Ditambahkan');
+                print_r('berhasil');
+
+            endif;
+        else:
+            print_r(validation_errors());
         endif;
 
         $this->load->view('page', $data);
@@ -61,6 +92,9 @@ class Member extends CI_Controller
 
         $this->load->view('page',$data);
     }
+
+
+
 
     public function profiling()
     {
@@ -84,7 +118,7 @@ class Member extends CI_Controller
     public function search_member()
     {
         $member_id = $this->input->post('anggota_kd');
-        //$member_id='160001';
+        //$member_id='180001';
         $member = $this->Member_md->viewByMemberId($member_id);
 
         if (!empty($member)):
@@ -103,6 +137,7 @@ class Member extends CI_Controller
     public function getMemberbyId()
     {
         $member_id = $this->input->post('anggota_kd');
+        //$member_id ='180001';
         $member    = $this->Member_md->getMemberById($member_id);
 
         foreach ($member->result() as $mbr):

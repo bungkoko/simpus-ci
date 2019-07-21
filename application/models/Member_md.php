@@ -12,12 +12,12 @@ class Member_md extends CI_Model
     }
 
 
-    public function set_profiling()
+    public function set_member()
     {
         $this->db->set('anggota_nm', $this->input->post('anggota_nm'));
         $this->db->set('anggota_email', $this->input->post('anggota_email'));
-        $this->db->set('anggota_username', $this->input->post('anggota_username'));
-        $this->db->set('anggota_password', md5($this->input->post('anggota_password')));
+        $this->db->set('anggota_username',$this->input->post('anggota_username'));
+        $this->db->set('anggota_password',md5($this->input->post('anggota_password')));
         $this->db->set('anggota_notelpon', $this->input->post('anggota_notelpon'));
         $this->db->set('anggota_tmplahir', $this->input->post('anggota_tmplahir'));
         $this->db->set('anggota_tgllahir', $this->input->post('tahun_lahir') . '-' . $this->input->post('bulan_lahir') . '-' . $this->input->post('tanggal_lahir'));
@@ -26,14 +26,14 @@ class Member_md extends CI_Model
         $this->db->set('anggota_alamat', $this->input->post('anggota_alamat'));
         $this->db->set('anggota_status', 'block');
     }
+
+
     function signup(){
-        $this->db->set('anggota_username',$this->input->post('anggota_username'));
-        $this->db->set('anggota_email',$this->input->post('anggota_email'));
-        $this->db->set('anggota_password',md5($this->input->post('anggota_password')));
+        $this->set_member();
         return $this->db->insert('simpus_anggota');
     }
 
-    function profiling($anggota_kd){
+    /*function profiling($anggota_kd){
         $this->set_profiling();
         $this->db->where('anggota_kd',$anggota_kd);
         return $this->db->update('simpus_anggota');
@@ -42,7 +42,8 @@ class Member_md extends CI_Model
     function readprofil($anggota_kd){
         $this->db->where('anggota_kd',$anggota_kd);
         return $this->db->get('simpus_anggota')->row();
-    }
+    }*/
+
     public function add_member($avatar)
     {
         $this->set_member();

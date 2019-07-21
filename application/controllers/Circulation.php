@@ -94,7 +94,7 @@ class Circulation extends CI_Controller
             $this->session->unset_userdata('member_id');
             //$this->session->unset_userdata('date_return',$this->date_return());
             $this->session->unset_userdata('count_book');
-            redirect('invoice/borrow');
+            redirect('invoice/borrow/'.$this->session->userdata('transaction_id'));
             exit();
 
         else:

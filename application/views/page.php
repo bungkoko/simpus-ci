@@ -69,6 +69,10 @@ endif;
   
         <!-- FileInput Plugin Js -->
     <script src="<?php echo base_url(); ?>asset/js/fileinput.js"></script>
+      <!-- JQuery Steps Plugin Js -->
+    <script src="<?php echo base_url() ?>asset/plugins/jquery-steps/jquery.steps.js"></script>
+    <script src="<?php echo base_url() ?>asset/js/pages/forms/form-wizard.js"></script>
+
     
     <script>
          

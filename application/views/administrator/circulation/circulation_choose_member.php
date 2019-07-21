@@ -66,38 +66,3 @@
 
         </form>
 
-        <script>
-            $('#member_id').typeahead({
-                source:  function (query, process) {
-                    return $.get('<?php echo site_url('member/getMemberbyId') ?>', { query: query }, function (data) {
-                    console.log(data);
-                    data = $.parseJSON(data);
-                    return process(data);
-                    });
-                }
-            });
-
-            function search() {
-            $.ajax({
-                type: "POST", // Method pengiriman data bisa dengan GET atau POST
-                url: "<?php echo site_url('member/search_member') ?>",
-                data: {
-                    anggota_kd: $("#member_id").val()
-                }, // data yang akan dikirim ke file proses
-                dataType: "json",
-                beforeSend: function(e) {
-                    if (e && e.overrideMimeType) {
-                        e.overrideMimeType("application/json;charset=UTF-8");
-                    }
-                },
-                success: function(response) { // Ketika proses pengiriman berhasil
-                    if (response.status == "success") { // Jika isi dari array status adalah success
-                        $("#member_nm").val(response.anggota_nm); // set textbox dengan id nama
-                    }
-                },
-                error: function(xhr, ajaxOptions, thrownError) { // Ketika ada error
-                    alert(xhr.responseText);
-                }
-            });
-        }
-        </script>
