@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
-<?php 
+<?php
     $menu= $this->uri->segment(1);
-    $page = $this->uri->segment(2); 
+    $page = $this->uri->segment(2);
 ?>
 <head>
     <meta charset="UTF-8">
@@ -38,13 +38,12 @@
     <link href="<?php echo base_url() ?>asset/css/themes/all-themes.css" rel="stylesheet" />
 </head>
 
-<?php 
+<?php
 if ($page == 'signup' || $page=='index' || $page == '' && $menu=='member'): ?>
 
-    <?php $this->load->view($content); 
-elseif ($page=='signin' || $page =='index' || $page=='' && $menu=='administrator' || $menu=='member'):
-    $this->load->view($content); 
-
+    <?php $this->load->view($content);
+elseif ($page=='signin' || $page =='index' || $page=='' && $menu=='Administrator' || $menu=='member'):
+    $this->load->view($content);
 endif;
 ?>
     <script src="<?php echo base_url() ?>asset/plugins/jquery/jquery.min.js"></script>
@@ -56,26 +55,26 @@ endif;
 
     <!-- Jquery Validation Plugin Css -->
     <script src="<?php echo base_url() ?>asset/plugins/jquery-validation/jquery.validate.js"></script>
-  
+
     <!-- Waves Effect Plugin Js -->
     <script src="<?php echo base_url() ?>asset/plugins/node-waves/waves.js"></script>
 
-  
+
     <script src="<?php echo base_url() ?>asset/js/admin.js"></script>
     <script src="<?php echo base_url() ?>asset/js/pages/examples/sign-in.js"></script>
     <script src="<?php echo base_url() ?>asset/js/pages/examples/sign-up.js"></script>
     <script src="<?php echo base_url() ?>asset/js/pages/ui/dialogs.js"></script>
-      
-  
+
+
         <!-- FileInput Plugin Js -->
     <script src="<?php echo base_url(); ?>asset/js/fileinput.js"></script>
       <!-- JQuery Steps Plugin Js -->
     <script src="<?php echo base_url() ?>asset/plugins/jquery-steps/jquery.steps.js"></script>
     <script src="<?php echo base_url() ?>asset/js/pages/forms/form-wizard.js"></script>
 
-    
+
     <script>
-         
+
             $("#upload_avatar").fileinput({
             overwriteInitial: true,
             maxFileSize: 2000,
@@ -94,6 +93,6 @@ endif;
           });
 
     </script>
-   
+
 </body>
 </html>

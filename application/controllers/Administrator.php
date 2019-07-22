@@ -7,7 +7,7 @@ class Administrator extends CI_Controller
 
     public function __construct()
     {
-        parent::__construct(); 
+        parent::__construct();
     }
 
     public function index()
@@ -20,7 +20,7 @@ class Administrator extends CI_Controller
 
     public function signin()
     {
-      
+
         $data['warning'] = '';
         $data['error']   = '';
 
@@ -52,6 +52,7 @@ class Administrator extends CI_Controller
         endif;
         $data['title'] = "Sign In Administator";
         $data['content']='signin/signin';
+        
         //$data['content']='administrator/signin';
         $this->load->view('page', $data);
     }
