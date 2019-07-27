@@ -29,5 +29,4 @@ class Setting_md extends CI_Model
     {
         return $this->db->get('simpus_pengaturan');
     }
-
 }

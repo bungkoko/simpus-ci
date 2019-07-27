@@ -51,7 +51,7 @@
                     </div>
                 </div>
             </div>
-          
+
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
@@ -72,7 +72,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php 
+                                        <?php
                                         $count_book=$this->session->userdata('count_book');
                                         for ($i=1;$i<=$count_book;$i++): ?>
                                         <tr>
@@ -125,7 +125,7 @@
                                     <tfoot>
                                         <tr>
                                             <td colspan="6"></td>
-                                            <td> 
+                                            <td>
                                                 <input type="submit" class="btn btn-primary m-t-15 waves-effect" value="Simpan" name="submit">
                                                 <input type="reset" class="btn btn-primary m-t-15 waves-effect" value="Batal" name="reset">
                                             </td>
@@ -140,7 +140,7 @@
             </div>
          </form>
 
-         <script> 
+         <script>
              <?php $limit = $limit_book;?>
             <?php for ($i = 1; $i <= $limit; $i++): ?>
             $('#koleksi_kd_<?php echo $i; ?>').typeahead({
@@ -183,11 +183,5 @@
             }
 
 
-        
+
          </script>
-
-
-
-
-
-
