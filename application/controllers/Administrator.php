@@ -12,9 +12,11 @@ class Administrator extends CI_Controller
 
     public function index()
     {
+        /*
         if ($this->session->userdata('logged') == true):
             redirect('dashboard');
         endif;
+        */
         $this->signin();
     }
 
@@ -34,8 +36,9 @@ class Administrator extends CI_Controller
             //Check Administator Auth
             $this->db->where('user_name', $username);
             $this->db->where('user_password', $password);
-            $query = $this->db->get('simpus_user')->row();
-            if (count($query)):
+            $gt_user = $this->db->get('simpus_user');
+            $query=$gt_user->row();
+            if ($gt_user->num_rows()>0):
                 $admin_auth = array('username' => $query->user_name,
                     'fullname'                     => $query->user_namalengkap,
                     'email'                        => $query->user_email,
@@ -52,7 +55,7 @@ class Administrator extends CI_Controller
         endif;
         $data['title'] = "Sign In Administator";
         $data['content']='signin/signin';
-        
+
         //$data['content']='administrator/signin';
         $this->load->view('page', $data);
     }

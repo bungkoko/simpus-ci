@@ -196,16 +196,16 @@ class Circulation_md extends CI_Model
 
     public function filter_view_all()
     {
-      return $this-db->get('simpus_sirkulasi')->result();
+        return $this->db->get('simpus_sirkulasi')->result();
     }
 
     public function filter_option_year()
     {
-      $this->db->select('YEAR(sirkulasi_tgl_dikembalikan) as tahun');
-      $this->db->from('simpus_sirkulasi');
-      $this->db->order_by('YEAR(sirkulasi_tgl_dikembalikan)');
-      $this->db->group_by('YEAR(sirkulasi_tgl_dikembalikan)');
+        $this->db->select('YEAR(sirkulasi_tgl_dikembalikan) as tahun');
+        $this->db->from('simpus_sirkulasi');
+        $this->db->order_by('YEAR(sirkulasi_tgl_dikembalikan)');
+        $this->db->group_by('YEAR(sirkulasi_tgl_dikembalikan)');
 
-      return $this->db->get()->result();
+        return $this->db->get()->result();
     }
 }

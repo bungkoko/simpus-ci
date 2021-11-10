@@ -65,10 +65,10 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th>No</th>
-                                            <th>Kategori</th>
-                                            <th>Kode Kategori</th>
-                                            <th>Aksi</th>
+                                            <th style="font-size: 14px">No</th>
+                                            <th style="font-size: 14px">Kategori</th>
+                                            <th style="font-size: 14px">Kode Kategori</th>
+                                            <th style="font-size: 14px">Aksi</th>
                                         </tr>
                                     </thead>
                                     
@@ -77,10 +77,10 @@
                                     $no=1;
                                     foreach($get_list->result() as $gt_list):?>
                                         <tr>
-                                            <td><?php echo $no++; ?></td>
-                                            <td><?php echo $gt_list->genre_judul; ?></td>
-                                            <td><?php echo $gt_list->genre_singkatan; ?></td>
-                                            <td>
+                                            <td style="font-size: 14px"><?php echo $no++; ?></td>
+                                            <td style="font-size: 14px"><?php echo $gt_list->genre_judul; ?></td>
+                                            <td style="font-size: 14px"><?php echo $gt_list->genre_singkatan; ?></td>
+                                            <td style="font-size: 14px">
                                                 <a href="<?php echo site_url('genre/update').'/'.$gt_list->genre_singkatan;?>" title="Update Data"><i class="material-icons">update</i>
                                                 </a>
                                                 <a href="<?php echo site_url('genre/delete').'/'.$gt_list->genre_singkatan;?>" title="Hapus Data"> <i class="material-icons">delete</i>

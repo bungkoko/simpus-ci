@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0.1
+-- version 4.9.5deb2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Jun 03, 2018 at 05:28 PM
--- Server version: 10.1.32-MariaDB
--- PHP Version: 5.6.36
+-- Host: localhost:3306
+-- Waktu pembuatan: 13 Agu 2021 pada 08.48
+-- Versi server: 10.3.30-MariaDB-0ubuntu0.20.04.1
+-- Versi PHP: 7.4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `simpus_anggota`
+-- Struktur dari tabel `simpus_anggota`
 --
 
 CREATE TABLE `simpus_anggota` (
@@ -36,8 +36,8 @@ CREATE TABLE `simpus_anggota` (
   `anggota_tgllahir` date DEFAULT NULL,
   `anggota_jeniskelamin` enum('L','P') DEFAULT NULL,
   `anggota_notelpon` varchar(13) DEFAULT NULL,
-  `anggota_alamat` text,
-  `anggota_avatar` text,
+  `anggota_alamat` text DEFAULT NULL,
+  `anggota_avatar` text DEFAULT NULL,
   `anggota_tgldaftar` date DEFAULT NULL,
   `anggota_status` enum('active','block') DEFAULT NULL,
   `anggota_username` varchar(45) DEFAULT NULL,
@@ -45,16 +45,16 @@ CREATE TABLE `simpus_anggota` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `simpus_anggota`
+-- Dumping data untuk tabel `simpus_anggota`
 --
 
 INSERT INTO `simpus_anggota` (`anggota_kd`, `anggota_nm`, `anggota_email`, `anggota_tmplahir`, `anggota_tgllahir`, `anggota_jeniskelamin`, `anggota_notelpon`, `anggota_alamat`, `anggota_avatar`, `anggota_tgldaftar`, `anggota_status`, `anggota_username`, `anggota_password`) VALUES
-('180001', NULL, 'putridian@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'putridian', '25dc5fc7cfd6ec7da027dcbcce3d9d0e');
+('180001', 'Putri Dian Rahayu', 'putridian@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'putridian', '25dc5fc7cfd6ec7da027dcbcce3d9d0e');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `simpus_genre`
+-- Struktur dari tabel `simpus_genre`
 --
 
 CREATE TABLE `simpus_genre` (
@@ -66,7 +66,7 @@ CREATE TABLE `simpus_genre` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `simpus_koleksi`
+-- Struktur dari tabel `simpus_koleksi`
 --
 
 CREATE TABLE `simpus_koleksi` (
@@ -74,10 +74,10 @@ CREATE TABLE `simpus_koleksi` (
   `koleksi_judul` varchar(45) DEFAULT NULL,
   `koleksi_tebal` varchar(45) DEFAULT NULL,
   `koleksi_isbn` varchar(45) DEFAULT NULL,
-  `koleksi_deskripsi` text,
+  `koleksi_deskripsi` text DEFAULT NULL,
   `koleksi_lokasi_rak` varchar(7) DEFAULT NULL,
   `koleksi_stok` int(11) DEFAULT NULL,
-  `koleksi_cover` text,
+  `koleksi_cover` text DEFAULT NULL,
   `simpus_penerbit_penerbit_kd` int(11) NOT NULL,
   `simpus_genre_genre_kd` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -85,7 +85,7 @@ CREATE TABLE `simpus_koleksi` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `simpus_penerbit`
+-- Struktur dari tabel `simpus_penerbit`
 --
 
 CREATE TABLE `simpus_penerbit` (
@@ -93,13 +93,13 @@ CREATE TABLE `simpus_penerbit` (
   `penerbit_nm` varchar(45) DEFAULT NULL,
   `penerbit_notelp` varchar(13) DEFAULT NULL,
   `penerbit_email` varchar(45) DEFAULT NULL,
-  `penerbit_alamat` text
+  `penerbit_alamat` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `simpus_pengaturan`
+-- Struktur dari tabel `simpus_pengaturan`
 --
 
 CREATE TABLE `simpus_pengaturan` (
@@ -110,7 +110,7 @@ CREATE TABLE `simpus_pengaturan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `simpus_pengaturan`
+-- Dumping data untuk tabel `simpus_pengaturan`
 --
 
 INSERT INTO `simpus_pengaturan` (`pengaturan_kd`, `pengaturan_lamapinjam`, `pengaturan_dendaperhari`, `pengaturan_limit_pinjam`) VALUES
@@ -119,7 +119,7 @@ INSERT INTO `simpus_pengaturan` (`pengaturan_kd`, `pengaturan_lamapinjam`, `peng
 -- --------------------------------------------------------
 
 --
--- Table structure for table `simpus_penulis`
+-- Struktur dari tabel `simpus_penulis`
 --
 
 CREATE TABLE `simpus_penulis` (
@@ -131,7 +131,7 @@ CREATE TABLE `simpus_penulis` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `simpus_penulis_has_simpus_koleksi`
+-- Struktur dari tabel `simpus_penulis_has_simpus_koleksi`
 --
 
 CREATE TABLE `simpus_penulis_has_simpus_koleksi` (
@@ -142,7 +142,7 @@ CREATE TABLE `simpus_penulis_has_simpus_koleksi` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `simpus_sirkulasi`
+-- Struktur dari tabel `simpus_sirkulasi`
 --
 
 CREATE TABLE `simpus_sirkulasi` (
@@ -161,7 +161,7 @@ CREATE TABLE `simpus_sirkulasi` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `simpus_user`
+-- Struktur dari tabel `simpus_user`
 --
 
 CREATE TABLE `simpus_user` (
@@ -174,7 +174,7 @@ CREATE TABLE `simpus_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `simpus_user`
+-- Dumping data untuk tabel `simpus_user`
 --
 
 INSERT INTO `simpus_user` (`user_name`, `user_password`, `user_namalengkap`, `user_email`, `user_status`, `user_rule`) VALUES
@@ -185,19 +185,19 @@ INSERT INTO `simpus_user` (`user_name`, `user_password`, `user_namalengkap`, `us
 --
 
 --
--- Indexes for table `simpus_anggota`
+-- Indeks untuk tabel `simpus_anggota`
 --
 ALTER TABLE `simpus_anggota`
   ADD PRIMARY KEY (`anggota_kd`);
 
 --
--- Indexes for table `simpus_genre`
+-- Indeks untuk tabel `simpus_genre`
 --
 ALTER TABLE `simpus_genre`
   ADD PRIMARY KEY (`genre_kd`);
 
 --
--- Indexes for table `simpus_koleksi`
+-- Indeks untuk tabel `simpus_koleksi`
 --
 ALTER TABLE `simpus_koleksi`
   ADD PRIMARY KEY (`koleksi_kd`),
@@ -205,32 +205,32 @@ ALTER TABLE `simpus_koleksi`
   ADD KEY `fk_simpus_koleksi_simpus_genre1_idx` (`simpus_genre_genre_kd`);
 
 --
--- Indexes for table `simpus_penerbit`
+-- Indeks untuk tabel `simpus_penerbit`
 --
 ALTER TABLE `simpus_penerbit`
   ADD PRIMARY KEY (`penerbit_kd`);
 
 --
--- Indexes for table `simpus_pengaturan`
+-- Indeks untuk tabel `simpus_pengaturan`
 --
 ALTER TABLE `simpus_pengaturan`
   ADD PRIMARY KEY (`pengaturan_kd`);
 
 --
--- Indexes for table `simpus_penulis`
+-- Indeks untuk tabel `simpus_penulis`
 --
 ALTER TABLE `simpus_penulis`
   ADD PRIMARY KEY (`penulis_kd`);
 
 --
--- Indexes for table `simpus_penulis_has_simpus_koleksi`
+-- Indeks untuk tabel `simpus_penulis_has_simpus_koleksi`
 --
 ALTER TABLE `simpus_penulis_has_simpus_koleksi`
   ADD PRIMARY KEY (`simpus_penulis_penulis_kd`,`simpus_koleksi_koleksi_kd`),
   ADD KEY `fk_simpus_penulis_has_simpus_koleksi_simpus_koleksi1_idx` (`simpus_koleksi_koleksi_kd`);
 
 --
--- Indexes for table `simpus_sirkulasi`
+-- Indeks untuk tabel `simpus_sirkulasi`
 --
 ALTER TABLE `simpus_sirkulasi`
   ADD PRIMARY KEY (`simpus_koleksi_koleksi_kd`,`simpus_anggota_anggota_kd`,`sirkulasi_pinjam_kd`),
@@ -238,53 +238,53 @@ ALTER TABLE `simpus_sirkulasi`
   ADD KEY `fk_simpus_koleksi_has_simpus_anggota_simpus_koleksi1_idx` (`simpus_koleksi_koleksi_kd`);
 
 --
--- Indexes for table `simpus_user`
+-- Indeks untuk tabel `simpus_user`
 --
 ALTER TABLE `simpus_user`
   ADD PRIMARY KEY (`user_name`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `simpus_genre`
+-- AUTO_INCREMENT untuk tabel `simpus_genre`
 --
 ALTER TABLE `simpus_genre`
   MODIFY `genre_kd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `simpus_penerbit`
+-- AUTO_INCREMENT untuk tabel `simpus_penerbit`
 --
 ALTER TABLE `simpus_penerbit`
   MODIFY `penerbit_kd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `simpus_pengaturan`
+-- AUTO_INCREMENT untuk tabel `simpus_pengaturan`
 --
 ALTER TABLE `simpus_pengaturan`
   MODIFY `pengaturan_kd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `simpus_koleksi`
+-- Ketidakleluasaan untuk tabel `simpus_koleksi`
 --
 ALTER TABLE `simpus_koleksi`
   ADD CONSTRAINT `fk_simpus_koleksi_simpus_genre1` FOREIGN KEY (`simpus_genre_genre_kd`) REFERENCES `simpus_genre` (`genre_kd`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_simpus_koleksi_simpus_penerbit1` FOREIGN KEY (`simpus_penerbit_penerbit_kd`) REFERENCES `simpus_penerbit` (`penerbit_kd`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `simpus_penulis_has_simpus_koleksi`
+-- Ketidakleluasaan untuk tabel `simpus_penulis_has_simpus_koleksi`
 --
 ALTER TABLE `simpus_penulis_has_simpus_koleksi`
   ADD CONSTRAINT `fk_simpus_penulis_has_simpus_koleksi_simpus_koleksi1` FOREIGN KEY (`simpus_koleksi_koleksi_kd`) REFERENCES `simpus_koleksi` (`koleksi_kd`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_simpus_penulis_has_simpus_koleksi_simpus_penulis1` FOREIGN KEY (`simpus_penulis_penulis_kd`) REFERENCES `simpus_penulis` (`penulis_kd`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `simpus_sirkulasi`
+-- Ketidakleluasaan untuk tabel `simpus_sirkulasi`
 --
 ALTER TABLE `simpus_sirkulasi`
   ADD CONSTRAINT `fk_simpus_koleksi_has_simpus_anggota_simpus_anggota1` FOREIGN KEY (`simpus_anggota_anggota_kd`) REFERENCES `simpus_anggota` (`anggota_kd`) ON DELETE CASCADE ON UPDATE CASCADE,

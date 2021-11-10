@@ -17,43 +17,33 @@
         <!-- Tab panes -->
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane fade in active" id="peminjaman">
-            <table width="100%" border="0" cellspacing="5">
-               <tr>
-                       <td>
-                       <form id="borrowReportForm" name="borrowReportForm">
-                       <fieldset style="padding:10px;">
-                          <legend>Query</legend>
-                       <fieldset>
-                          <legend>Periode</legend>
-                           <select name="periode" id="periode" onchange="choosePeriode(this.value,\'borrowReportForm\',\'periodeResponse-1\')"><option value="">-- pilih --</option>
-                              <option value="pertanggal">per tanggal</option>
-                              <option value="perbulan">per bulan</option>
-                              <option value="custom">custom</option>
-                           </select>
-                           <div id="periodeResponse-1"></div>
-                       </fieldset>
-                       <fieldset>
-                          <legend>Anggota</legend>
-                           <input type="radio" name="member" value="all" checked="checked"> Semua<br/>
-                           <input type="radio" id="member_custom" name="member" value="custom">
-                           Anggota dengan Nomor Induk <input type="text" id="id_anggota" name="id_anggota" value=""/>
-                       </fieldset>
-                       <br/><input type="button" class="lbutton" value="OK" onclick="borrowReport()">
-                       </fieldset>
-                       </form>
-                       </td>
-                       <td width="50"></td>
-                       <td valign="top">
-                          <fieldset>
-                          <legend>Lainnya</legend>
-                            <ul>
-                               <li><a href="#" onclick="borrowedBooks(\'all\')">Laporan buku yang terpinjam dan belum dikembalikan</a></li>
-                               <li><a href="#" onclick="borrowedBooks(\'expired\')">Laporan buku terpinjam yang melewati batas waktu pengembalian</a></li>
-                            </ul>
-                       </fieldset>
-                       </td>
-                     </tr>
-            </table>
+            <form name="borrowReport" action="" class="form-horizontal">
+              <div class="row clearfix">
+                <fieldset style="padding:10px;">
+                  <legend>Laporan Peminjaman</legend>
+                  <div class="col-lg-1 col-md-2 col-sm-2 col-xs-5 form-control-label">
+                    <label for="Periode">Periode</label>
+                  </div>
+                  <div class="col-lg-4 col-md-4 col-xs-7">
+                    <div class="form-group">
+                      <div class="form-line">
+                        <select name="periode" class="form-control show-tick">
+                          <option value="">-- Please Select --</option>
+                          <option value="harian">Harian</option>
+                          <option value="bulanan">Bulanan</option>
+                          <option value="tahunan">Tahunan</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-md-2 col-xs-7">
+                    <div>
+                    
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+            </form>
           </div>
           <div role="tabpanel" class="tab-pane fade" id="pengembalian">
             <table width="100%" border="0" cellspacing="5">
@@ -77,7 +67,7 @@
                            <input type="radio" id="member_custom2" name="member" value="custom">
                              Anggota dengan Nomor Induk <input type="text" id="id_anggota2" name="id_anggota" value=""/>
                          </fieldset>
-                         <br/><input type="button" class="lbutton" value="OK" onclick="returnReport()">
+                         <br/><input type="button" class="lbutton" value="OK" onclick="returnReport();>
                         </fieldset>
                       </form>
                     </td>
@@ -87,6 +77,7 @@
                     </td>
               </tr>
             </table>
+
           </div>
           <div role="tabpanel" class="tab-pane fade" id="denda">
             <table width="100%" border="0" cellspacing="5">

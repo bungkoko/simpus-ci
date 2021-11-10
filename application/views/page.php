@@ -39,10 +39,9 @@
 </head>
 
 <?php
-if ($page == 'signup' || $page=='index' || $page == '' && $menu=='member'): ?>
-
+if (($page == 'signup' && $menu=='member') || ($page=='index' && $menu='member') || ($page == '' && $member='member') || $menu=='member'): ?>
     <?php $this->load->view($content);
-elseif ($page=='signin' || $page =='index' || $page=='' && $menu=='Administrator' || $menu=='member'):
+elseif ($page=='signin' || $page =='index' || $page==''|| $menu=='Administrator' || $menu=='member'):
     $this->load->view($content);
 endif;
 ?>
