@@ -38,14 +38,18 @@ class Genre extends CI_Controller
 
         $this->pagination->initialize($config);
 
-        $data['get_list']   = $this->Genres_md->all_genre($config['per_page'], $this->uri->segment(3));
-        $data['pagination'] = $this->pagination->create_links();
+        $data['get_list']   = $this->Genres_md->all_genre();
+        //$data['pagination'] = $this->pagination->create_links();
 
         $data['title']   = 'Genre Buku';
         $data['content'] = 'genre/genre_main';
 
         $this->load->view('administrator/index', $data);
 
+    }
+
+    public function add_genre_popup(){
+        return $this->Genres_md->add_genres();
     }
 
     public function delete($abbrev)

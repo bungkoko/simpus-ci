@@ -2,7 +2,7 @@
     <div class="signup-box">
         <div class="logo">
             <a href="javascript:void(0);"><?php echo $title;?></b></a>
-            <small>Perpustakaan Daerah</small>
+            <small>Perpustakaan</small>
         </div>
     </div>
 

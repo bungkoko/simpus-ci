@@ -3,7 +3,7 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                <?php echo $title; ?> | <a href="<?php echo site_url('collection/add')?>"><button type="button" class="btn btn-primary waves-effect">Tambah Koleksi</button> </a>
+                                <?php echo $title; ?> | <a href="<?php echo site_url('collection/add')?>"><button type="button" class="btn bg-green waves-effect">Tambah Koleksi</button> </a>
                             </h2>
                         </div>
                         <div class="body">

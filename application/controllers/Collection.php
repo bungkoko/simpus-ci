@@ -1,5 +1,6 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
-
+require_once('Author.php');
+//$author=new Author;
 /**
  * source by : Joko Purwanto
  */
@@ -9,6 +10,8 @@ class Collection extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        //$this->load->controller('Author');
+        //$author=new Author;
         if ($this->session->userdata('logged') == false):
             redirect('administrator');
             exit();
@@ -17,6 +20,8 @@ class Collection extends CI_Controller
 
     public function index()
     {
+       
+
         $data['warning'] = '';
         $data['title']   = "Daftar Koleksi";
 
@@ -111,8 +116,9 @@ class Collection extends CI_Controller
         $data['content']        = 'collection/collection_main';
         $data['list_genre']     = $this->Collection_md->getGenreList();
         $data['list_author']    = $this->Collection_md->getAuthorList();
+        
         $data['list_publisher'] = $this->Collection_md->getPublisherList();
-
+        $data['gt_kode'] = $this->get_kode_author_collection();
         $this->load->view('administrator/index', $data);
     }
 
@@ -242,6 +248,24 @@ class Collection extends CI_Controller
         endif;
 
         echo json_encode($callback);
+    }
+
+    public function get_kode_author_collection()
+    {
+        $gt_kode   = $this->Author_md->get_kode_author();
+        $author_kd = '';
+        $kar       = 'PNL-';
+        foreach ($gt_kode->result() as $gtkode):
+            if ($gtkode->penulis_kd == null):
+                $author_kd = $kar . '0001';
+            else:
+                $substr_kd = (int) substr($gtkode->penulis_kd, 4, 8);
+                $tmp       = $substr_kd + 1;
+                $author_kd = $kar . sprintf("%04s", $tmp);
+            endif;
+        endforeach;
+        return $author_kd;
+        //print_r($author_kd);
     }
 
 }

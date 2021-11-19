@@ -18,7 +18,7 @@
                         <?php endif; ?>
                     
                             <form class="form-horizontal" action="<?php echo current_url()?>" method="post">
-                                 <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>" style="display: none">
+                                <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>" style="display: none">
                                 <div class="row clearfix">
                                     <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
                                         <label for="categories_title">Judul Kategori</label>
@@ -62,7 +62,7 @@
                         </div>
                         <div class="body">
                             <div class="table-responsive">
-                                <table class="table">
+                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                     <thead>
                                         <tr>
                                             <th style="font-size: 14px">No</th>
@@ -90,7 +90,7 @@
                                     <?php endforeach;?>
                                     </tbody>
                                 </table>
-                                <?php echo $pagination; ?>
+                                <?php //echo $pagination; ?>
                             </div>
                         </div>
                     </div>

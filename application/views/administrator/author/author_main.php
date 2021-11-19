@@ -58,7 +58,7 @@
                                 <div class="row clearfix">
                                     <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
                                         <input type="submit" class="btn btn-primary m-t-15 waves-effect" value="Simpan" name="submit">
-                                         <input type="reset" class="btn btn-primary m-t-15 waves-effect" value="Batal" name="reset">
+                                        <input type="reset" class="btn btn-primary m-t-15 waves-effect" value="Batal" name="reset">
                                     </div>
                                 </div>
                             </form>

@@ -57,7 +57,7 @@ class Administrator extends CI_Controller
         $data['content']='signin/signin';
 
         //$data['content']='administrator/signin';
-        $this->load->view('page', $data);
+        $this->load->view('index', $data);
     }
 
     public function signout()

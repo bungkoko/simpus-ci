@@ -73,7 +73,7 @@ class Collection_md extends CI_Model
 
     public function getAuthorList()
     {
-        $this->db->order_by('penulis_nm', 'ASC');
+        $this->db->order_by('penulis_kd', 'ASC');
         return $this->db->get('simpus_penulis');
     }
 

@@ -22,10 +22,10 @@ class Genres_md extends CI_Model
         $this->db->insert('simpus_genre');
     }
 
-    public function all_genre($num = '', $offset = '')
+    public function all_genre()
     {
-        $this->db->limit($num, $offset);
-        $this->db->order_by('genre_kd', 'ASC');
+        //$this->db->limit($num, $offset);
+        $this->db->order_by('genre_judul', 'ASC');
         return $this->db->get('simpus_genre');
     }
 

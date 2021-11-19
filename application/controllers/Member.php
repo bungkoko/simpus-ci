@@ -37,7 +37,7 @@ class Member extends CI_Controller
 
         return $member_kd;
     }
-
+    
     public function signup()
     {
         $data['title']   = 'Registrasi Anggota';
@@ -52,7 +52,7 @@ class Member extends CI_Controller
             redirect('Member');
         endif;
 
-        $this->load->view('page', $data);
+        $this->load->view('index', $data);
     }
 
     public function signup_tab()
@@ -90,7 +90,7 @@ class Member extends CI_Controller
         $data['title']='Sign In Anggota';
         $data['content']='member/signin';
 
-        $this->load->view('page',$data);
+        $this->load->view('index',$data);
     }
 
 

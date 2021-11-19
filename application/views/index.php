@@ -12,9 +12,12 @@
     <link rel="icon" href="../../favicon.ico" type="image/x-icon">
 
     <!-- Google Fonts -->
+    <link href="<?php echo base_url() ?>asset/css/material-icon.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo base_url() ?>asset/css/google-font.css" rel="stylesheet" type="text/css">
+    <!--
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
-
+    -->
     <!-- Bootstrap Core Css -->
     <link href="<?php echo base_url() ?>asset/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
 
@@ -39,11 +42,11 @@
 </head>
 
 <?php
-if (($page == 'signup' && $menu=='member') || ($page=='index' && $menu='member') || ($page == '' && $member='member') || $menu=='member'): ?>
-    <?php $this->load->view($content);
-elseif ($page=='signin' || $page =='index' || $page==''|| $menu=='Administrator' || $menu=='member'):
+//if (($page == 'signup' && $menu=='member') ||($page == 'signup_tab' && $menu=='member')||  ($page=='index' && $menu='member') || ($page == '' && $member='member')):
     $this->load->view($content);
-endif;
+//elseif ($page=='signin' || $page =='index' || $page==''|| $menu=='Administrator' || $menu=='member'):
+    //$this->load->view($content);
+//endif;
 ?>
     <script src="<?php echo base_url() ?>asset/plugins/jquery/jquery.min.js"></script>
 

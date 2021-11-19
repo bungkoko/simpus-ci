@@ -49,6 +49,12 @@ class Author extends CI_Controller
         $this->load->view('administrator/index', $data);
     }
 
+    public function add_author_popup(){
+
+            return $this->Author_md->add_author();
+           
+    }
+
     public function get_kode_author()
     {
         $gt_kode   = $this->Author_md->get_kode_author();

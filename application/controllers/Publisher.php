@@ -35,7 +35,7 @@ class Publisher extends CI_Controller
         $this->load->view('administrator/index', $data);
     }
 
-    function add(){
+    public function add(){
     	$data['warning']='';
         if ($this->input->post('submit')):
             $this->form_validation->set_rules('penerbit_nm', 'Penerbit', 'required');
@@ -58,14 +58,18 @@ class Publisher extends CI_Controller
 
     }
 
-    function delete($publisher_id){
+    public function add_publisher_popup(){
+        return $this->Publisher_md->add_publisher();
+    }
+
+    public function delete($publisher_id){
     	$this->Publisher_md->delete_publisher($publisher_id);
     	$this->session->set_flashdata('message','Penerbit telah dihapus');
     	redirect('publisher');
     	exit();
     }
 
-    function update($publisher_id){
+    public function update($publisher_id){
     	$data['warning']='';
     	$data['title']='Penerbit';
     	$data['content']='publisher/publisher_update';
