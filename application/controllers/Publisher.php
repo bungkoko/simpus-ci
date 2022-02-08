@@ -41,12 +41,12 @@ class Publisher extends CI_Controller
             $this->form_validation->set_rules('penerbit_nm', 'Penerbit', 'required');
             $this->form_validation->set_rules('penerbit_email', 'Email Penerbit', 'required|valid_email');
             $this->form_validation->set_rules('penerbit_alamat', 'Alamat Penerbit', 'required');
-            $this->form_validation->set_rules('penerbit_notelp', 'Nomer Telepon Penerbit', 'required');
+            $this->form_validation->set_rules('penerbit_notelp', 'Nomer Telepon Penerbit', 'required|max_length[13]|numeric');
 
             if ($this->form_validation->run() == true):
                 $this->Publisher_md->add_publisher();
                 $this->session->set_flashdata('message','Penerbit telah ditambahkan');
-                redirect('Publisher');
+                redirect('publisher/index');
                 exit();
             else:
                 $data['warning'] = validation_errors();

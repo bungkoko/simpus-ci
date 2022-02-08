@@ -32,6 +32,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="row clearfix">
                                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-5 form-control-label">
                                         <label for="koleksi_isbn">Nomor ISBN</label>
@@ -44,6 +45,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="row clearfix">
                                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-5 form-control-label">
                                         <label for="koleksi_judul">Tebal Koleksi</label>
@@ -56,6 +58,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="row clearfix">
                                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-5 form-control-label">
                                         <label for="">Genre Koleksi</label>
@@ -122,6 +125,7 @@
                                     </div>
                                     <?php endif; ?>
                                 </div>
+
                                 <div class="row clearfix">
                                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-5 form-control-label">
                                         <label for="">Penulis/Pengarang</label>
@@ -303,17 +307,21 @@
                                     <?php endif; ?>
 
                                 </div>
+
                                 <div class="row clearfix">
                                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-5 form-control-label">
                                         <label for="product_description">Upload Cover</label>
                                     </div>
                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-7">
-                                        <div id="kv-avatar-errors-2"></div>
-                                        <div class="kv-avatar" style="width:200px;text-align:center">
-                                            <input id="upload_image" name="koleksi_cover" type="file" class="file-loading">
+                                        <div>
+                                            <div id="kv-avatar-errors-2"></div>
+                                            <div class="kv-avatar" style="width:200px;text-align:center">
+                                                <input id="upload_image" name="koleksi_cover" type="file" class="file-loading">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="row clearfix">
                                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-5 form-control-label">
                                         <label for="koleksi_rak">Lokasi Rak</label>
@@ -326,7 +334,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row clearfix">
+
+                                <div class="row clearfix" style="padding-bottom: 30px;">
                                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-5 form-control-label">
                                         <label for="koleksi_deskripsi">Deskripsi</label>
                                     </div>
@@ -335,6 +344,7 @@
                                         </textarea>
                                     </div>
                                 </div>
+
                                 <div class="row clearfix">
                                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-5 form-control-label">
                                         <label for="koleksi_stok">Stok Koleksi</label>
@@ -351,10 +361,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                               
+                                </div>  
+
                                 <div class="row clearfix">
-                                    <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
+                                    <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5" style="padding-bottom:30px;">
                                         <input type="submit" class="btn btn-primary m-t-15 waves-effect" value="Simpan" name="submit">
                                         <input type="reset" class="btn btn-primary m-t-15 waves-effect" value="Batal" name="reset">
                                     </div>

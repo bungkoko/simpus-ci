@@ -61,7 +61,7 @@ class Member extends CI_Controller
         $data['content']='member/signup-tab';
 
 
-        if ($this->input->post('submit') == true):
+        if ($this->input->post('acceptTerms') == true):
             $this->form_validation->set_rules('anggota_nm','Nama Anggota','required');
             $this->form_validation->set_rules('anggota_password','Password','required');
             $this->form_validation->set_rules('anggota_jeniskelamin','Jenis Kelamin','required');
@@ -72,17 +72,22 @@ class Member extends CI_Controller
             if($this->form_validation->run()==true):
                 $this->db->set('anggota_kd', $this->get_kode_anggota());
                 //$this->session->set_userdata('anggota_kd',$this->get_kode_anggota());
+                $this->session->set_userdata('anggota_nm',$this->input->post('anggota_nm'));
+                $this->session->set_userdata('anggota_jeniskelamin',$this->input->post('anggota_jeniskelamin'));
+                $this->session->set_userdata('anggota_notelpon',$this->input->post('anggota_alamat'));
+                $this->session->set_userdata('anggota_username',$this->input->post('anggota_username'));
+               
                 $this->Member_md->signup();
                 
-                //$this->session->set_flashdata('message', 'Member Sudah Ditambahkan');
-                print_r('berhasil');
+                $this->session->set_flashdata('message', 'Anda berhasil menambahkan keanggotaan di perpustakaan xyz. Segera lakukan aktivasi akun manual dengan datang ke perpustakaan xyz dengan membawa kartu anggota yang bisa anda dapatkan di menu "cetak kartu anggota"');
+                redirect('administrator/signin');
 
             endif;
         else:
-            print_r(validation_errors());
+            $data['error']=validation_errors();
         endif;
 
-        $this->load->view('page', $data);
+        $this->load->view('index', $data);
     }
 
     public function signin()
@@ -90,6 +95,15 @@ class Member extends CI_Controller
         $data['title']='Sign In Anggota';
         $data['content']='member/signin';
 
+        $this->load->view('index',$data);
+    }
+
+    public function proof_regis(){
+        $data['anggota_nm']=$this->session->userdata('anggota_nm');
+        $data['anggota_jeniskelamin']=$this->session->userdata('anggota_jeniskelamin');
+        $data['anggota_notelpon']=$this->session->userdata('anggota_notelpon');
+        $data['anggota_alamat']=$this->session->userdata('anggota_alamat');
+        
         $this->load->view('index',$data);
     }
 

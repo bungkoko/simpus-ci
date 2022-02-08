@@ -13,81 +13,75 @@
                     <div class="card">
                         <div class="body">
                             <form id="wizard_with_validation" method="POST" action="<?php echo current_url(); ?>" >
-                                <h3>Account Information</h3>
+                                <h3>Petunjuk Pengisian Form</h3>
+                                <fieldset style="border:0px">
+                                    
+                                        <ol>
+                                            <li>Pastikan data yang anda masukkan sesuai kartu identitas yang berlaku, benar, dan dapat dipertanggungjawabkan.</li>
+                                            <li>Silahkan hubungi bagian layanan Perpustakaan, jika anda pernah mendaftarkan diri sebelumnya namun akun anda tidak aktif.</li>
+                                            <li>Inputan dengan tanda <span class="mandatory">*</span> wajib diisi.</li>
+                                        </ol>
+                                    
+                                </fieldset>
+
+                                <h3>Account</h3>
                                 <fieldset>
-                                    <div class="form-group form-float">
+                               
+                                    <label for="username">Username*</label>
+                                    <div class="form-group">
                                         <div class="form-line">
-                                            <input type="text" class="form-control" name="anggota_username" required>
-                                            <label class="form-label">Username*</label>
+                                            <input type="text" id="username" name="anggota_username" class="form-control" placeholder="Masukkan username anda" required>
                                         </div>
                                     </div>
-                                    <div class="form-group form-float">
+
+                                    <label for="password">Password*</label>
+                                    <div class="form-group">
                                         <div class="form-line">
-                                            <input type="password" class="form-control" name="anggota_password" id="password" required>
-                                            <label class="form-label">Password*</label>
+                                            <input type="password" class="form-control" name="anggota_password" id="password" placeholder="Masukkan password anda" required>
+                                         </div>
+                                    </div>
+                                    <label for="confirm_password">Konfirmasi Password*</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="password" class="form-control" name="confirm" placeholder="Masukkan konfirmasi password anda" required>
                                         </div>
                                     </div>
-                                    <div class="form-group form-float">
+                                    <label for="email">Email*</label>
+                                    <div class="form-group">
                                         <div class="form-line">
-                                            <input type="password" class="form-control" name="confirm" required>
-                                            <label class="form-label">Confirm Password*</label>
+                                            <input type="email" name="anggota_email" placeholder="Masukkan email anda" class="form-control" required>
                                         </div>
                                     </div>
                                 </fieldset>
-
                                 <h3>Profile Information</h3>
                                 <fieldset>
-                                    <div class="form-group form-float">
+                                    
+                                    <label for="fullname">Nama Lengkap*</label>
+                                    <div class="form-group">
                                         <div class="form-line">
-                                            <input type="text" name="anggota_nm" class="form-control" required>
-                                            <label class="form-label">Nama Lengkap</label>
+                                            <input type="text"  name="anggota_nm" class="form-control" placeholder="Masukkan nama lengkap anda" required>
                                         </div>
                                     </div>
-                                    <div class="form-group form-float">
-                                        <div class="form-line">
-                                            <input type="email" name="anggota_email" class="form-control" required>
-                                            <label class="form-label">Email</label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group form-float">
-                                        <div class="form-line">
-                                            <input type="text" name="anggota_tmplahir" class="form-control" required>
-                                            <label class="form-label">Tempat Lahir</label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group form-float">
-                                        <div class="form-line">
-                                             <div class="col-lg-4">
-                                                <label>Tanggal</label>
-                                                <select name="Tanggal" class="form-control">
-                                                <?php for($i=1;$i<=31;$i++):?>
-                                                    <option value="<?php echo $i?>"><?php echo $i?></option>        
-                                                <?php endfor;?>
-                                                </select>
+                                    <label for="tempatlahir">Tempat Tanggal Lahir*</label>                    
+                                    <div class="form-group">
+                                        <div class="row clearfix">
+                                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                                <div class="form-line">
+                                                    <input type="email" name="txtTempatLahir" id="txtTempatLahir" placeholder="Masukkan Tempat Lahir" class="form-control" required>
+                                                </div>
                                             </div>
-
-                                            <div class="col-lg-4">
-                                                <label>Bulan</label>
-                                                <select name="bulan_lahir" class="form-control">
-                                                <?php for($i=1;$i<=12;$i++):?>
-                                                    <option value="<?php echo $i?>"><?php echo $i?></option>        
-                                                <?php endfor;?>
-                                                </select>
-                                            </div>
-                                            
-                                            <div class="col-lg-4">
-                                                <label>Tahun</label>
-                                                <select name="tahun_lahir" class="form-control">
-                                                <?php for($i=1970;$i<=2018;$i++):?>
-                                                    <option value="<?php echo $i?>"><?php echo $i?></option>        
-                                                <?php endfor;?>
-                                                </select>
+                                            <div class="col-lg-8 col-md-6 col-sm-12">
+                                                <div class="form-inline">
+                                                    <input name="txtTanggalLahir" type="text" id="txtTanggalLahir" class="form-control" data-format="YYYY-MM-DD" data-template="D - MMM - YYYY" required>
+                                                </div>
+                                                <small id="Small5" class="form-text text-muted mb-4">
+                                                    Format : Tgl-Bln-Thn
+                                                </small>
                                             </div>
                                         </div>
                                     </div>
-    
-                                    <div class="form-group form-float">
-                                        <label class="form-label">Jenis Kelamin</label>
+                                    <label for="jeniskelamin">Jenis Kelamin</label>
+                                    <div class="form-group">    
                                         <div class="form-line">
                                             <input id="jenis_kelamin_L" type="radio" name="anggota_jeniskelamin" class="with-gap" value="L" checked required>
                                             <label for="jenis_kelamin_L">Laki-Laki</label>
@@ -95,21 +89,41 @@
                                             <label for="jenis_kelamin_P">Perempuan</label>
                                         </div>
                                     </div>
-                                    <div class="form-group form-float">
-                                        <div class="form-line">
-                                            <input type="text" name="anggota_notelpon" class="form-control" required>
-                                            <label class="form-label">No. Handphone</label>
+                                    <div class="row clearfix">
+                                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                            <label for="txtAlamatRumah">Alamat Tinggal Sesuai Identitas <span style="color: Red;">*</span></label>
+                                            <fieldset>
+                                                <div class="form-group">
+                                                    <textarea name="anggota_alamat" cols="40" rows="4" id="txtAlamatIdentitas" class="form-control" required placeholder="Masukan alamat Anda sesuai identitas" data-toggle="popover" title="format penulisan" data-placement="bottom" data-content="&lt;b>&lt;i>format penulisan&lt;/b>&lt;/i> : Jalan/Gang/Blok/Dusun, RT, RW&lt;br/>Kelurahan, Kecamatan, KodePos&lt;br> &lt;br/>&lt;b>&lt;i>contoh&lt;/i>&lt;/b> : &lt;div style=&quot;padding:10px;border:1px solid #ccc;display:block;background:#fff;font-size:10pt !important&quot;>JL. Surabaya 281, RT.001, RW.009&lt;br/>Sukamaju, Subur Makmur&lt;br/>109202&lt;/div>" ></textarea>
+                                                  
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                            <label for="txtAlamatSekarang">Alamat Tinggal Sekarang <span style="color: Red;">*</span></label>
+                                            <label >( <input id="CekSameAdd" class="filled-in" type="checkbox" name="CekSameAdd" onclick="fillAddressInput()"/><label for="CekSameAdd" > Centang jika sama dengan alamat identitas</label>)</label>
+                                            <fieldset>
+                                                <div class="form-group">
+                                                    <textarea name="txtAlamatSekarang" rows="2" cols="40" id="txtAlamatSekarang" class="form-control" placeholder="Masukan alamat Anda sekarang" data-toggle="popover" title="format penulisan" data-placement="bottom" data-content="&lt;b>&lt;i>format penulisan&lt;/b>&lt;/i> : Jalan/Gang/Blok/Dusun, RT, RW&lt;br/>Kelurahan, Kecamatan, KodePos&lt;br> &lt;br/>&lt;b>&lt;i>contoh&lt;/i>&lt;/b> : &lt;div style=&quot;padding:10px;border:1px solid #ccc;display:block;background:#fff;font-size:10pt !important&quot;>JL. Surabaya 281, RT.001, RW.009&lt;br/>Sukamaju, Subur Makmur&lt;br/>109202&lt;/div>"></textarea>
+                                                    
+                                                </div>
+                                            </fieldset>                          
                                         </div>
                                     </div>
-                                    
-                                    <div class="form-group form-float">
+                                    <hr/>
+                                    <label for="">No Telpon/Handphone</label>
+                                    <div class="form-group">
                                         <div class="form-line">
-                                            <textarea name="anggota_alamat" cols="20" rows="6" class="form-control no-resize" required></textarea>
-                                            <label class="form-label">Alamat</label>
+                                            <input type="text" name="anggota_notelp" class="form-control" placeholder="Masukkan Nomor Telepon/Handphone" required>
+                                        </div>
+                                    </div>
+                                    <label for="">Pendidikan Terakhir</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" name="anggota_pendidikan" class="form-control" placeholder="Masukkan pendidikan terakhir anda">
                                         </div>
                                     </div>
                                 </fieldset>
-
                                 <h3>Terms & Conditions - Finish</h3>
                                 <fieldset>
                                     <input id="acceptTerms-2" name="acceptTerms" type="checkbox" required>
@@ -123,4 +137,7 @@
         </div>
 </section>
 
+<script>
+   
+</script>
   

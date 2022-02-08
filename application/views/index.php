@@ -21,18 +21,24 @@
     <!-- Bootstrap Core Css -->
     <link href="<?php echo base_url() ?>asset/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
 
+    <link href="<?php echo base_url() ?>asset/css/mdb.min.css" rel="stylesheet" />
     <!-- Waves Effect Css -->
     <link href="<?php echo base_url() ?>asset/plugins/node-waves/waves.css" rel="stylesheet" />
 
     <!-- Animation Css -->
     <link href="<?php echo base_url() ?>asset/plugins/animate-css/animate.css" rel="stylesheet" />
 
+    <!--bootstrap Select css-->
+    <link href="<?php echo base_url(); ?>asset/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+   
     <!-- Sweet Alert Css -->
     <link href="<?php echo base_url() ?>asset/plugins/sweetalert/sweetalert.css" rel="stylesheet" />
 
     <!-- Custom Css -->
     <link href="<?php echo base_url() ?>asset/css/style.css" rel="stylesheet">
-     <link href="<?php echo base_url() ?>asset/css/custom.css" rel="stylesheet">
+    <link href="<?php echo base_url() ?>asset/css/custom.css" rel="stylesheet">
+    
+
 
        <!-- Fileinput Css -->
     <link href="<?php echo base_url(); ?>asset/css/fileinput.css" rel="stylesheet">
@@ -41,9 +47,16 @@
     <link href="<?php echo base_url() ?>asset/css/themes/all-themes.css" rel="stylesheet" />
 </head>
 
-<?php
+<?php if ($this->session->flashdata('message')): ?>
+        <div class="alert alert-success" role="alert">
+             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Sukses!</strong>
+            <p><?php echo $this->session->flashdata('message'); ?></p>
+        </div>
+<?php endif;
+
 //if (($page == 'signup' && $menu=='member') ||($page == 'signup_tab' && $menu=='member')||  ($page=='index' && $menu='member') || ($page == '' && $member='member')):
-    $this->load->view($content);
+ $this->load->view($content);
 //elseif ($page=='signin' || $page =='index' || $page==''|| $menu=='Administrator' || $menu=='member'):
     //$this->load->view($content);
 //endif;
@@ -54,6 +67,9 @@
     <script src="<?php echo base_url() ?>asset/plugins/bootstrap/js/bootstrap.js"></script>
 
     <script src="<?php echo base_url() ?>asset/plugins/bootstrap-notify/bootstrap-notify.js"></script>
+
+     <!-- Select Plugin Js -->
+    <script src="<?php echo base_url(); ?>asset/plugins/bootstrap-select/js/bootstrap-select.js"></script>
 
     <!-- Jquery Validation Plugin Css -->
     <script src="<?php echo base_url() ?>asset/plugins/jquery-validation/jquery.validate.js"></script>
@@ -73,6 +89,9 @@
       <!-- JQuery Steps Plugin Js -->
     <script src="<?php echo base_url() ?>asset/plugins/jquery-steps/jquery.steps.js"></script>
     <script src="<?php echo base_url() ?>asset/js/pages/forms/form-wizard.js"></script>
+    <script src="<?php echo base_url() ?>asset/js/moment.min.js" type="text/javascript"></script>
+    <script src="<?php echo base_url() ?>asset/js/combodate.js"></script>
+    <script src="<?php echo base_url() ?>asset/js/popper.min.js"></script>
 
 
     <script>
@@ -94,6 +113,39 @@
             allowedFileExtensions: ["jpg","jpeg", "png", "gif"]
           });
 
+    $(function () {
+        $('[data-toggle="popover"]').popover(
+        {
+            trigger: 'focus',
+            html: true
+        })
+    })
+    $(function () {
+        $('#txtTanggalLahir').combodate(
+        {
+            minYear: 1920,
+            maxYear: 2016,
+            customClass: 'form-control show-tick'
+        });
+    });
+    
+    function fillAddressInput()
+    {
+       let checkBox= document.getElementById('CekSameAdd');     
+       let AlamatIdentitas = document.getElementById("txtAlamatIdentitas");
+       let AlamatSekarang = document.getElementById("txtAlamatSekarang");
+      
+        if (checkBox.checked == true)
+        {
+            let AlamatIdentitasValue = AlamatIdentitas.value;   
+            AlamatSekarang.value = AlamatIdentitasValue; 
+         }
+        else
+        {
+            AlamatSekarang.value = "";
+        }
+    }
+  
     </script>
 
 </body>

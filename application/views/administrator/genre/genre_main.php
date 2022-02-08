@@ -65,10 +65,10 @@
                                 <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                     <thead>
                                         <tr>
-                                            <th style="font-size: 14px">No</th>
-                                            <th style="font-size: 14px">Kategori</th>
-                                            <th style="font-size: 14px">Kode Kategori</th>
-                                            <th style="font-size: 14px">Aksi</th>
+                                            <th width="10%" style="font-size: 14px">No</th>
+                                            <th width="40%" style="font-size: 14px">Kategori</th>
+                                            <th width="25%" style="font-size: 14px">Kode Kategori</th>
+                                            <th width="20%" style="font-size: 14px">Aksi</th>
                                         </tr>
                                     </thead>
                                     

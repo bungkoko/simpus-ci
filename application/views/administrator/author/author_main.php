@@ -77,10 +77,10 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th>Kode Penulis</th>
-                                            <th>Nama Penulis</th>
-                                            <th>Email Penulis</th>
-                                            <th>Aksi</th>
+                                            <th width="20%">Kode Penulis</th>
+                                            <th width="30%">Nama Penulis</th>
+                                            <th width="30%">Email Penulis</th>
+                                            <th width="20%">Aksi</th>
                                         </tr>
                                     </thead>
                                     

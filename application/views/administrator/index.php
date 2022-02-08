@@ -331,7 +331,7 @@
             elErrorContainer: '#kv-avatar-errors-2',
             msgErrorClass: 'alert alert-block alert-danger',
             defaultPreviewContent: '<img src="<?php echo base_url() ?>asset/images/book-cover-default.png" alt="book_cover" style="width:160px;text-align:center;"><h6 class="text-muted" style="text-align:center">Pilih Gambar Max 2 MB</h6>',
-            layoutTemplates: {main2: '{preview} ' + '<div style="text-align:center">' + ' {remove} {browse}'+'</div>'},
+            layoutTemplates: {main2: '{preview} ' + '<div style="text-align:center;padding-bottom:30px">' + ' {remove} {browse}'+'</div>'},
             allowedFileExtensions: ["jpg","jpeg", "png", "gif"]
           });
 
