@@ -350,14 +350,15 @@
             kd_author=$('#penulis_kd').val();
            
             if(name.trim() == '' ){
-                alert('Please enter your name.');
+                $('.statusMsg').html('<span style="color:green;">Silahkan Input Nama Penulis/Pengarang </span>');
                 $('#penulis_nm').focus();
                 return false;
             }else if(email.trim() == '' ){
-                alert('Please enter your email.');
+                $('.statusMsg').html('<span style="color:green;">Silahkan Input Email Penulis/Pengarang </span>');
                 $('#penulis_email').focus();
                 return false;
-            }else{
+            }
+            else{
                 
                 $.ajax({
                     type:'POST',
@@ -384,21 +385,34 @@
         }
         function simpan_genre(){
             subject=$('#genre_judul').val();
-            singkatan = $('#genre_singkatan').val();
-            $.ajax({
-                type:'POST',
-                url:'<?php echo site_url('genre/add_genre_popup')?>',
-                data:{
-                    genre_judul:subject,
-                    genre_singkatan:singkatan
-                },
-                success:function(data){
-                    $('#genre_judul').val('');
-                    $('#genre_singkatan').val('');
-                    $('.statusMsg').html('<span style="color:green;">Penambahan genre berhasil</span>');
-                    setInterval('location.reload()',1000);
-                }
-            });
+            singkatan = $('#genre_singkatan').val();    
+            if(subject.trim()==''){
+                $('.statusMsg').html('<span style="color:green;">Silahkan Input Judul Genre</span>');
+                $('#genre_judul').focus();
+                return false;
+            }
+            else if(singkatan.trim()==''){
+                $('.statusMsg').html('<span style="color:green;">Silahkan Input Singkatan Genre</span>');
+                $('#genre_singkatan').focus();
+                return false;
+            }
+            else
+            {
+                $.ajax({
+                    type:'POST',
+                    url:'<?php echo site_url('genre/add_genre_popup')?>',
+                    data:{
+                        genre_judul:subject,
+                        genre_singkatan:singkatan
+                    },
+                    success:function(data){
+                        $('#genre_judul').val('');
+                        $('#genre_singkatan').val('');
+                        $('.statusMsg').html('<span style="color:green;">Penambahan genre berhasil</span>');
+                        setInterval('location.reload()',1000);
+                    }
+                });
+            }
         }
 
         function simpan_publisher(){
@@ -407,24 +421,43 @@
             penerbit_notelp=$('#penerbit_notelp').val();
             penerbit_alamat=$('#penerbit_alamat').val();
 
-            $.ajax({
-                type:'POST',
-                url:'<?php echo site_url('publisher/add_publisher_popup')?>',
-                data:{
-                    penerbit_nm:penerbit_nm,
-                    penerbit_email:penerbit_email,
-                    penerbit_notelp:penerbit_notelp,
-                    penerbit_alamat:penerbit_alamat
-                },
-                success:function(data){
-                    $('#penerbit_nm').val('');
-                    $('#penerbit_email').val('');
-                    $('#penerbit_notelp').val('');
-                    $('#penerbit_alamat').val('');
-                    $('.statusMsg').html('<span style="color:green;">Penambahan penerbit berhasil</span>');
-                    setInterval('location.reload()',1000);
-                }
-            });
+            if(penerbit_nm.trim()=='')
+            {
+                $('.statusMsg').html('<span style="color:green;">Nama Penerbit harus diisi </span>');
+                $('#penerbit_nm').focus();
+                return false;
+            } else if(penerbit_email.trim()==''){
+                $('.statusMsg').html('<span style="color:green;">Email Penerbit harus diisi </span>');
+                $('#penerbit_email').focus();
+                return false;
+            } else if(penerbit_notelp.trim()==''){
+                $('.statusMsg').html('<span style="color:green;">No Telepon harus diisi </span>');
+                $('#penerbit_notelp').focus();
+                return false;
+            } else if(penerbit_alamat.trim()==''){
+                $('.statusMsg').html('<span style="color:green;">Alamat Penerbit harus diisi </span>');
+                $('#penerbit_alamat').focus();
+                return false;
+            } else{
+                $.ajax({
+                    type:'POST',
+                    url:'<?php echo site_url('publisher/add_publisher_popup')?>',
+                    data:{
+                        penerbit_nm:penerbit_nm,
+                        penerbit_email:penerbit_email,
+                        penerbit_notelp:penerbit_notelp,
+                        penerbit_alamat:penerbit_alamat
+                    },
+                    success:function(data){
+                        $('#penerbit_nm').val('');
+                        $('#penerbit_email').val('');
+                        $('#penerbit_notelp').val('');
+                        $('#penerbit_alamat').val('');
+                        $('.statusMsg').html('<span style="color:green;">Penambahan penerbit berhasil</span>');
+                        setInterval('location.reload()',1000);
+                    }
+                });
+            }
         }
     </script>
 

@@ -21,24 +21,21 @@
     <!-- Bootstrap Core Css -->
     <link href="<?php echo base_url() ?>asset/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
 
-    <link href="<?php echo base_url() ?>asset/css/mdb.min.css" rel="stylesheet" />
     <!-- Waves Effect Css -->
     <link href="<?php echo base_url() ?>asset/plugins/node-waves/waves.css" rel="stylesheet" />
 
     <!-- Animation Css -->
     <link href="<?php echo base_url() ?>asset/plugins/animate-css/animate.css" rel="stylesheet" />
 
-    <!--bootstrap Select css-->
-    <link href="<?php echo base_url(); ?>asset/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
-   
     <!-- Sweet Alert Css -->
     <link href="<?php echo base_url() ?>asset/plugins/sweetalert/sweetalert.css" rel="stylesheet" />
 
+    <!-- Bootstrap Select Css -->
+    <link href="<?php echo base_url(); ?>asset/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+
     <!-- Custom Css -->
     <link href="<?php echo base_url() ?>asset/css/style.css" rel="stylesheet">
-    <link href="<?php echo base_url() ?>asset/css/custom.css" rel="stylesheet">
-    
-
+     <link href="<?php echo base_url() ?>asset/css/custom.css" rel="stylesheet">
 
        <!-- Fileinput Css -->
     <link href="<?php echo base_url(); ?>asset/css/fileinput.css" rel="stylesheet">
@@ -89,7 +86,10 @@
       <!-- JQuery Steps Plugin Js -->
     <script src="<?php echo base_url() ?>asset/plugins/jquery-steps/jquery.steps.js"></script>
     <script src="<?php echo base_url() ?>asset/js/pages/forms/form-wizard.js"></script>
+    
+    
     <script src="<?php echo base_url() ?>asset/js/moment.min.js" type="text/javascript"></script>
+    
     <script src="<?php echo base_url() ?>asset/js/combodate.js"></script>
     <script src="<?php echo base_url() ?>asset/js/popper.min.js"></script>
 
@@ -125,7 +125,7 @@
         {
             minYear: 1920,
             maxYear: 2016,
-            customClass: 'form-control show-tick'
+            customClass: 'form-control'
         });
     });
     

@@ -111,6 +111,16 @@
                                         </div>
                                     </div>
                                     <hr/>
+                                    <label for="anggota_status_kawin">Status Perkawinan</label>
+                                 
+                                            <select name="anggota_status_kawin" class="form-control show-tick" id="anggota_status_kawin">
+                                                <option value=""> -- Silahkan Pilih Status Perkawinan -- </option>
+                                                <option value="1">Kawin</option>
+                                                <option value="2">Belum Kawin</option>
+                                                <option value="3">Cerai Hidup</option>
+                                                <option value="4">Cerai Mati</option>     
+                                            </select>
+                                   
                                     <label for="">No Telpon/Handphone</label>
                                     <div class="form-group">
                                         <div class="form-line">
@@ -121,6 +131,12 @@
                                     <div class="form-group">
                                         <div class="form-line">
                                             <input type="text" name="anggota_pendidikan" class="form-control" placeholder="Masukkan pendidikan terakhir anda">
+                                        </div>
+                                    </div>
+                                    <label for="">Pekerjaan</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" name="anggota_pekerjaan" class="form-control" placeholder="Masukkan pekerjaan anda">
                                         </div>
                                     </div>
                                 </fieldset>
