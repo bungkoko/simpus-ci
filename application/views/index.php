@@ -75,7 +75,7 @@
     <script src="<?php echo base_url() ?>asset/plugins/node-waves/waves.js"></script>
 
 
-    <script src="<?php echo base_url() ?>asset/js/admin.js"></script>
+   
     <script src="<?php echo base_url() ?>asset/js/pages/examples/sign-in.js"></script>
     <script src="<?php echo base_url() ?>asset/js/pages/examples/sign-up.js"></script>
     <script src="<?php echo base_url() ?>asset/js/pages/ui/dialogs.js"></script>
@@ -87,6 +87,7 @@
     <script src="<?php echo base_url() ?>asset/plugins/jquery-steps/jquery.steps.js"></script>
     <script src="<?php echo base_url() ?>asset/js/pages/forms/form-wizard.js"></script>
     
+    <script src="<?php echo base_url() ?>asset/js/admin.js"></script>
     
     <script src="<?php echo base_url() ?>asset/js/moment.min.js" type="text/javascript"></script>
     

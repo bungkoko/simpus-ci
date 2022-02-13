@@ -113,7 +113,7 @@
                                     <hr/>
                                     <label for="anggota_status_kawin">Status Perkawinan</label>
                                  
-                                            <select name="anggota_status_kawin" class="form-control show-tick" id="anggota_status_kawin">
+                                            <select name="anggota_status_kawin" class="form-control show-tick">
                                                 <option value=""> -- Silahkan Pilih Status Perkawinan -- </option>
                                                 <option value="1">Kawin</option>
                                                 <option value="2">Belum Kawin</option>
