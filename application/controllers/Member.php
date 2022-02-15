@@ -45,31 +45,17 @@ class Member extends CI_Controller
 
 
         if ($this->input->post('acceptTerms') == true) {
-            $this->form_validation->set_rules('anggota_nm', 'Nama Anggota', 'required');
-            $this->form_validation->set_rules('anggota_password', 'Password', 'required');
-            $this->form_validation->set_rules('anggota_jeniskelamin', 'Jenis Kelamin', 'required');
-            $this->form_validation->set_rules('anggota_notelpon', 'No Telpon', 'required');
-            $this->form_validation->set_rules('anggota_alamat_identitas', 'Alamat Identitas', 'required');
-            $this->form_validation->set_rules('anggota_alamat_sekarang', 'Alamat Sekarang', 'required');
-            $this->form_validation->set_rules('anggota_username', 'Username', 'required');
-            $this->form_validation->set_rules('anggota_pekerjaan', 'Pekerjaan', 'required');
-            $this->form_validation->set_rules('anggota_status_kawin', 'Status Kawin', 'required');
-            $this->form_validation->set_rules('anggota_pendidikan', 'Pendidikan', 'required');
-            $this->form_validation->set_rules('anggota_email', 'Email', 'required');
-
-            if ($this->form_validation->run()==true) {
-                $this->db->set('anggota_kd', $this->get_kode_anggota());
-                //$this->session->set_userdata('anggota_kd',$this->get_kode_anggota());
-                $this->session->set_userdata('anggota_nm', $this->input->post('anggota_nm'));
-                $this->session->set_userdata('anggota_jeniskelamin', $this->input->post('anggota_jeniskelamin'));
-                $this->session->set_userdata('anggota_notelpon', $this->input->post('anggota_notelpon'));
-                $this->session->set_userdata('anggota_username', $this->input->post('anggota_username'));
-               
-                $this->Member_md->signup();
+            $this->db->set('anggota_kd', $this->get_kode_anggota());
+            //$this->session->set_userdata('anggota_kd',$this->get_kode_anggota());
+            $this->session->set_userdata('anggota_nm', $this->input->post('anggota_nm'));
+            $this->session->set_userdata('anggota_jeniskelamin', $this->input->post('anggota_jeniskelamin'));
+            $this->session->set_userdata('anggota_notelpon', $this->input->post('anggota_notelpon'));
+            $this->session->set_userdata('anggota_username', $this->input->post('anggota_username'));
                 
-                $this->session->set_flashdata('message', 'Anda berhasil menambahkan keanggotaan di perpustakaan xyz. Segera lakukan aktivasi akun manual dengan datang ke perpustakaan xyz dengan membawa kartu anggota yang bisa anda dapatkan di menu "cetak kartu anggota"');
-                redirect('administrator/signin');
-            }
+            $this->Member_md->signup();
+                
+            $this->session->set_flashdata('message', 'Anda berhasil menambahkan keanggotaan di perpustakaan xyz. Segera lakukan aktivasi akun manual dengan datang ke perpustakaan xyz dengan membawa kartu anggota yang bisa anda dapatkan di menu "cetak kartu anggota"');
+            redirect('administrator/signin');
         } else {
             $data['error']=validation_errors();
         }

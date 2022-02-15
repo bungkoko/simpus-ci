@@ -13,20 +13,20 @@ class Member_md extends CI_Model
 
     public function set_member()
     {
-        $this->db->set('anggota_nm', $this->input->post('anggota_nm'));
-        $this->db->set('anggota_email', $this->input->post('anggota_email'));
         $this->db->set('anggota_username', $this->input->post('anggota_username'));
-        $this->db->set('anggota_password', md5($this->input->post('anggota_password')));
-        $this->db->set('anggota_notelpon', $this->input->post('anggota_notelpon'));
+        $this->db->set('anggota_password', $this->input->post('anggota_password'));
+        $this->db->set('anggota_email', $this->input->post('anggota_email'));
+        $this->db->set('anggota_nm', $this->input->post('anggota_nm'));
         $this->db->set('anggota_tmplahir', $this->input->post('anggota_tmplahir'));
-        $this->db->set('anggota_tanggalLahir', $this->input->post('anggota_tgllahir'));
-        $this->db->set('anggota_jeniskelamin', $this->input->post('anggota_jeniskelamin'));
+        $this->db->set('anggota_tgllahir', $this->input->post('anggota_tgllahir'));
         $this->db->set('anggota_tgldaftar', date('Y-m-d'));
+        $this->db->set('anggota_jeniskelamin', $this->input->post('anggota_jeniskelamin'));
         $this->db->set('anggota_alamat_identitas', $this->input->post('anggota_alamat_identitas'));
         $this->db->set('anggota_alamat_sekarang', $this->input->post('anggota_alamat_sekarang'));
         $this->db->set('anggota_status_kawin', $this->input->post('anggota_status_kawin'));
-        $this->db->set('anggota_pekerjaan', $this->input->post('anggota_pekerjaan'));
+        $this->db->set('anggota_notelpon', $this->input->post('anggota_notelpon'));
         $this->db->set('anggota_pendidikan', $this->input->post('anggota_pendidikan'));
+        $this->db->set('anggota_pekerjaan', $this->input->post('anggota_pekerjaan'));
         $this->db->set('anggota_status', 'block');
     }
 
