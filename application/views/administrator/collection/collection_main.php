@@ -63,11 +63,11 @@
                                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-5 form-control-label">
                                         <label for="">Genre Koleksi</label>
                                     </div>
-                                    <?php if($list_genre->num_rows()!='NULL'):?>
+                                    <?php if ($list_genre->num_rows()!='NULL'):?>
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-7">
                                         <select class="form-control show-tick" name="simpus_genre_genre_kd">
                                             <option value="">-- Please select --</option>
-                                            <?php foreach($list_genre->result() as $genre): ?>
+                                            <?php foreach ($list_genre->result() as $genre): ?>
                                             <option value='<?php echo $genre->genre_kd?>'>
                                                 <?php echo $genre->genre_judul;?>
                                             </option>
@@ -112,7 +112,7 @@
                                                     <div class="modal-footer">
                                                        
                                                         <button type="button" class="btn btn-link submitBtn waves-effect" onclick="simpan_genre()">Simpan</button>
-                                                        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                                                        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">Close</button>
                                                         
                                                     </div>
                                                 </div>
@@ -120,9 +120,53 @@
                                         </div>
                                     </div>
                                     <?php else: ?>
-                                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-7">
-                                        <a style="text-decoration:none" href="<?php echo site_url('genre/index')?>"><span class="btn btn-sm bg-green">Tambah</span></a>
-                                    </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-7">
+                                        <button type="button" class="btn bg-green waves-effect m-r-20" data-toggle="modal" data-target="#defaultModal">Tambah Kategori</button>
+                                            <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content" id="author-modal" >
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title" id="defaultModalLabel">Tambah Genre</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p class="statusMsg"></p>
+                                                                <div class="row clearfix">
+                                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                                        <label for="categories_title">Judul Genre</label>
+                                                                    </div>
+                                                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                                        <div class="form-group">
+                                                                            <div class="form-line">
+                                                                                <input type="text" name="genre_judul" id="genre_judul" class="form-control" placeholder="Masukkan Judul Kategori">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row clearfix">
+                                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                                        <label for="categories_abbrev">Kode Genre</label>
+                                                                    </div>
+                                                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                                        <div class="form-group">
+                                                                            <div class="form-line">
+                                                                                <input type="text" name="genre_singkatan" id="genre_singkatan" class="form-control" placeholder="Masukkan Kode Genre (3 huruf)">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                        
+                                                            <button type="button" class="btn btn-link submitBtn waves-effect" onclick="simpan_genre()">Simpan</button>
+                                                            <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">Close</button>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                       
+                                                                                   
                                     <?php endif; ?>
                                 </div>
 
@@ -203,7 +247,7 @@
                                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
                                         <div class="body">
                                             <select name="simpus_penulis_penulis_kd[]" id="optgroup" class="ms" multiple="multiple">
-                                                <?php foreach($list_author->result() as $author): ?>
+                                                <?php foreach ($list_author->result() as $author): ?>
                                                 <option value='<?php echo $author->penulis_kd?>'>
                                                     <?php echo $author->penulis_kd.' '.$author->penulis_nm;?>
                                                 </option>
@@ -218,11 +262,11 @@
                                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-5 form-control-label">
                                         <label for="">Penerbit</label>
                                     </div>
-                                    <?php if($list_publisher->num_rows()!='NULL'):?>
+                                    <?php if ($list_publisher->num_rows()!='NULL'):?>
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-7">
                                         <select class="form-control show-tick" name="simpus_penerbit_penerbit_kd">
                                             <option value="">-- Please select --</option>
-                                            <?php foreach($list_publisher->result() as $publisher): ?>
+                                            <?php foreach ($list_publisher->result() as $publisher): ?>
                                             <option value='<?php echo $publisher->penerbit_kd?>'>
                                                 <?php echo $publisher->penerbit_nm;?>
                                             </option>
@@ -301,8 +345,76 @@
                                         </div> 
                                     </div>
                                     <?php else: ?>
-                                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-7">
-                                        <a style="text-decoration:none" href="<?php echo site_url('publisher/add')?>"><span class="btn btn-sm bg-green">Tambah</span></a>
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-7">
+                                        <button type="button" class="btn bg-green waves-effect m-r-20" data-toggle="modal" data-target="#defaultModalPenerbit">Tambah Penerbit</button>
+                                        <div class="modal fade" id="defaultModalPenerbit" tabindex="-1" role="dialog">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content" id="author-modal" >
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title" id="defaultModalLabel">Tambah Penerbit</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p class="statusMsg"></p>                                    
+                                                            <div class="row clearfix">
+                                                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-5 form-control-label">
+                                                                    <label for="penerbit_nm">Nama Penerbit</label>
+                                                                </div>
+                                                                <div class="col-lg-9 col-md-9 col-sm-8 col-xs-7">
+                                                                    <div class="form-group">
+                                                                        <div class="form-line">
+                                                                            <input type="text" name="penerbit_nm" id="penerbit_nm" class="form-control" placeholder="Masukkan Nama Penerbit">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row clearfix">
+                                                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-5 form-control-label">
+                                                                    <label for="penerbit_notelp">No Telepon</label>
+                                                                </div>
+                                                                <div class="col-lg-9 col-md-9 col-sm-8 col-xs-7">
+                                                                    <div class="form-group">
+                                                                        <div class="form-line">
+                                                                            <input type="text" name="penerbit_notelp" id="penerbit_notelp" class="form-control" placeholder="Masukkan Nomor telpon Penerbit">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row clearfix">
+                                                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-5 form-control-label">
+                                                                    <label for="penerbit_email">Email</label>
+                                                                </div>
+                                                                <div class="col-lg-9 col-md-9 col-sm-8 col-xs-7">
+                                                                    <div class="form-group">
+                                                                        <div class="form-line">
+                                                                            <input type="text" name="penerbit_email" id="penerbit_email" class="form-control" placeholder="Masukkan Email Penerbit">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row clearfix">
+                                                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-5 form-control-label">
+                                                                    <label for="penerbit_alamat">Alamat Penerbit</label>
+                                                                </div>
+                                                                <div class="col-lg-9 col-md-9 col-sm-8 col-xs-7">
+                                                                    <div class="form-group">
+                                                                        <div class="form-line">
+                                                                        <textarea name="penerbit_alamat" id='penerbit_alamat' rows="4" class="form-control no-resize" placeholder="Please type what you want..."></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                        
+                                                            <button type="button" class="btn btn-link submitBtn waves-effect" onclick="simpan_publisher()">Simpan</button>
+                                                            <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">Close</button>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
                                     </div>
                                     <?php endif; ?>
 
@@ -354,7 +466,7 @@
                                             <div class="form-line">
                                                 <select name="koleksi_stok" class="form-control show-tick">
                                                     <option value="">-- Please select --</option>
-                                                    <?php for($i=1;$i<=10;$i++): ?>
+                                                    <?php for ($i=1;$i<=10;$i++): ?>
                                                     <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
                                                     <?php endfor; ?>
                                                 </select>

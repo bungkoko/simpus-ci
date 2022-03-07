@@ -4,25 +4,21 @@
  */
 class Administrator extends CI_Controller
 {
-
     public function __construct()
     {
         parent::__construct();
+        if ($this->session->userdata('logged') == true):
+            redirect('dashboard');
+        endif;
     }
 
     public function index()
     {
-        /*
-        if ($this->session->userdata('logged') == true):
-            redirect('dashboard');
-        endif;
-        */
         $this->signin();
     }
 
     public function signin()
     {
-
         $data['warning'] = '';
         $data['error']   = '';
 
@@ -31,26 +27,24 @@ class Administrator extends CI_Controller
 
         if ($this->form_validation->run() == true):
             $username = $this->input->post('user_name');
-            $password = md5($this->input->post('user_password'));
+        $password = md5($this->input->post('user_password'));
 
-            //Check Administator Auth
-            $this->db->where('user_name', $username);
-            $this->db->where('user_password', $password);
-            $gt_user = $this->db->get('simpus_user');
-            $query=$gt_user->row();
-            if ($gt_user->num_rows()>0):
+        //Check Administator Auth
+        $this->db->where('user_name', $username);
+        $this->db->where('user_password', $password);
+        $gt_user = $this->db->get('simpus_user');
+        $query=$gt_user->row();
+        if ($gt_user->num_rows()>0):
                 $admin_auth = array('username' => $query->user_name,
                     'fullname'                     => $query->user_namalengkap,
                     'email'                        => $query->user_email,
                     'user_role'                    => $query->user_role,
                     'logged'                       => true,
                 );
-                $this->session->set_userdata($admin_auth);
-                redirect('dashboard');
-            else:
+        $this->session->set_userdata($admin_auth);
+        redirect('dashboard'); else:
                 $data['warning'] = "Username atau password tidak sesuai";
-            endif;
-        else:
+        endif; else:
             $data['error'] = validation_errors();
         endif;
         $data['title'] = "Sign In Administator";
@@ -69,5 +63,4 @@ class Administrator extends CI_Controller
         $this->session->unset_userdata('logged');
         redirect('administrator/signin');
     }
-
 }

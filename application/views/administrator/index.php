@@ -51,6 +51,7 @@
 
 <body class="theme-green">
     <!-- Page Loader -->
+    
     <div class="page-loader-wrapper">
         <div class="loader">
             <div class="preloader">
@@ -66,6 +67,7 @@
             <p>Please wait...</p>
         </div>
     </div>
+    
     <!-- #END# Page Loader -->
     <!-- Overlay For Sidebars -->
     <div class="overlay"></div>
@@ -177,6 +179,11 @@
 
                         </ul>
                     </li>
+                    <li class="<?php if ($this->uri->segment(1)=='report'):echo "active";endif;?>">
+                    <a href="<?php echo site_url('report') ?>">
+                            <i class="material-icons">home</i>
+                            <span>Report</span>
+                        </a></li>
                     <li class="<?php if ($this->uri->segment(1) == 'setting'): echo "active";endif;?>">
                         <a href="<?php echo site_url('setting') ?>">
                             <i class="material-icons">settings_applications</i>
@@ -266,12 +273,12 @@
 
     <!-- Custom Js -->
 
-    <script src="<?php echo base_url(); ?>asset/js/admin.js"></script>
+    <script src="<?php echo base_url(); ?>asset/js/admin.js"></script>  
     <script src="<?php echo base_url(); ?>asset/js/pages/index.js"></script>
     <script src="<?php echo base_url(); ?>asset/js/pages/ui/dialogs.js"></script>
     <script src="<?php echo base_url(); ?>asset/js/pages/forms/editors.js"></script>
     <script src="<?php echo base_url(); ?>asset/js/advanced-form-elements.js"></script>
-
+                      
 
     <script>
 

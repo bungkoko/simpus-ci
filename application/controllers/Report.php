@@ -9,11 +9,15 @@
      {
          parent::__construct();
          $this->load->model('Circulation_md');
+         if ($this->session->userdata('logged') == false):
+            redirect('administrator');
+         exit();
+         endif;
      }
 
      public function index()
      {
-        /*
+         /*
          if (isset($this->input->get('filter'))&& !empty($this->input->get('filter'))) {
              $filter=$this->input->get('filter');
 
@@ -48,12 +52,8 @@
          $data['sirkulasi']=$sirkulasi;
          $data['option_tahun']=$this->Circulation_md->filter_option_year();
          */
+         $data['title']='Report';
          $data['content']='report/report';
          $this->load->view('administrator/index', $data);
-     }
-
-     public function borrowReport()
-     {
-        
      }
  }
