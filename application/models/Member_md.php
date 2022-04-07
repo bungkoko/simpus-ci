@@ -14,7 +14,7 @@ class Member_md extends CI_Model
     public function set_member()
     {
         $this->db->set('anggota_username', $this->input->post('anggota_username'));
-        $this->db->set('anggota_password', $this->input->post('anggota_password'));
+        $this->db->set('anggota_password', md5($this->input->post('anggota_password')));
         $this->db->set('anggota_email', $this->input->post('anggota_email'));
         $this->db->set('anggota_nm', $this->input->post('anggota_nm'));
         $this->db->set('anggota_tmplahir', $this->input->post('anggota_tmplahir'));

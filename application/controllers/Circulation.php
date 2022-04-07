@@ -8,7 +8,7 @@ class Circulation extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        if ($this->session->userdata('logged') == false):
+        if ($this->session->userdata('logged') == false) :
             redirect('administrator');
             exit();
         endif;
@@ -22,7 +22,6 @@ class Circulation extends CI_Controller
         // $data['dt_circulation']=$this->Collection_md->get_all_collection();
         $data['content'] = 'circulation/circulation_main';
         $this->load->view('administrator/index', $data);
-
     }
 
     public function get_transaction_id()
@@ -35,11 +34,11 @@ class Circulation extends CI_Controller
         $gtYear            = $date['year'];
         $trans             = $gtMonth . '.' . $gtYear;
 
-        foreach ($gt_transaction_id->result() as $gtTrans):
-            if (($gtTrans->sirkulasi_pinjam_kd == null)):
+        foreach ($gt_transaction_id->result() as $gtTrans) :
+            if (($gtTrans->sirkulasi_pinjam_kd == null)) :
                 $transaction_id = '0001' . '.' . $trans;
-                //$transaction_id=substr($gtTrans->sirkulasi_pinjam_kd,6,2);
-            else:
+            //$transaction_id=substr($gtTrans->sirkulasi_pinjam_kd,6,2);
+            else :
                 $substr_id      = (int) substr($gtTrans->sirkulasi_pinjam_kd, 0, 4);
                 $tmp            = $substr_id + 1;
                 $transaction_id = sprintf("%04s", $tmp) . '.' . $trans;
@@ -55,11 +54,11 @@ class Circulation extends CI_Controller
     {
         $data['warning'] = '';
 
-        if ($this->input->post('submit')):
+        if ($this->input->post('submit')) :
             $this->form_validation->set_rules('anggota_kd', 'Kode anggota', 'required');
             $this->form_validation->set_rules('sirkulasi_jumlah_pinjam', 'Jumlah pinjam', 'required');
 
-            if ($this->form_validation->run() == true):
+            if ($this->form_validation->run() == true) :
 
                 $member_id  = $this->input->post('anggota_kd');
                 $count_book = $this->input->post('sirkulasi_jumlah_pinjam');
@@ -68,7 +67,7 @@ class Circulation extends CI_Controller
                 $this->session->set_userdata('count_book', $count_book);
                 redirect('circulation/borrow');
                 exit();
-            else:
+            else :
                 $data['warning'] = validation_errors();
             endif;
         endif;
@@ -80,13 +79,13 @@ class Circulation extends CI_Controller
 
     public function borrow()
     {
-        if (empty($this->session->userdata('member_id'))):
+        if (empty($this->session->userdata('member_id'))) :
             redirect('circulation/choose_member');
         endif;
         $data['warning'] = '';
         $data['title']   = 'Peminjaman';
 
-        if ($this->input->post('submit')):
+        if ($this->input->post('submit')) :
             $this->session->set_userdata('transaction_id', $this->get_transaction_id());
             $this->session->set_userdata('date_return', $this->date_return());
             $this->Circulation_md->add_borrow($this->get_transaction_id(), $this->date_return(), date('Y-m-d'));
@@ -94,10 +93,10 @@ class Circulation extends CI_Controller
             $this->session->unset_userdata('member_id');
             //$this->session->unset_userdata('date_return',$this->date_return());
             $this->session->unset_userdata('count_book');
-            redirect('invoice/borrow/'.$this->session->userdata('transaction_id'));
+            redirect('invoice/borrow/' . $this->session->userdata('transaction_id'));
             exit();
 
-        else:
+        else :
             $data['warning'] = 'masalah pada database';
 
         endif;
@@ -110,14 +109,13 @@ class Circulation extends CI_Controller
         $data['content'] = 'circulation/circulation_borrow';
 
         $this->load->view('administrator/index', $data);
-
     }
 
     public function date_return()
     {
         $now         = date('Y-m-d');
         $get_setting = $this->Setting_md->get_setting();
-        foreach ($get_setting->result() as $gtSetting):
+        foreach ($get_setting->result() as $gtSetting) :
             $lamapinjam = $gtSetting->pengaturan_lamapinjam;
         endforeach;
         $date_return = date('Y-m-d', strtotime('+' . $lamapinjam . 'day', strtotime($now)));
@@ -135,7 +133,6 @@ class Circulation extends CI_Controller
 
         $interval = ($tgl_kembali - $tgl_harus_kembali) / (3600 * 24);
         return $interval;
-
     }
 
     public function denda($transaction_id)
@@ -147,20 +144,20 @@ class Circulation extends CI_Controller
 
         $get_circulation = $this->Circulation_md->get_circulationByStatus($transaction_id);
 
-        foreach ($get_circulation as $gtCirculation):
+        foreach ($get_circulation as $gtCirculation) :
             $tgl_harus_kembali = $gtCirculation->sirkulasi_tgl_harus_kembali;
             $tgl_kembali       = date('Y-m-d');
         endforeach;
         $range = $this->intervaldays($tgl_harus_kembali, $tgl_kembali);
 
         $get_setting = $this->Setting_md->get_setting();
-        foreach ($get_setting->result() as $gtSetting):
+        foreach ($get_setting->result() as $gtSetting) :
             $denda_perhari = $gtSetting->pengaturan_dendaperhari;
         endforeach;
 
-        if ($range > 0):
+        if ($range > 0) :
             $denda = $range * $denda_perhari;
-        else:
+        else :
             $denda = 0;
         endif;
 
@@ -178,18 +175,18 @@ class Circulation extends CI_Controller
         $data['member']      = '';
         $data['count_denda'] = '';
         //$status='pinjam';
-        if ($this->input->post('submit')):
+        if ($this->input->post('submit')) :
             $this->form_validation->set_rules('sirkulasi_pinjam_kd', 'Kode transaksi', 'required');
 
-            if ($this->form_validation->run() == true):
+            if ($this->form_validation->run() == true) :
                 $data['borrowBook'] = $this->Circulation_md->searchBorrow($transaction_id)->result();
-                if (empty($data['borrowBook'])):
+                if (empty($data['borrowBook'])) :
                     $data['warning'] = ' Transaksi yang anda lakukan tidak ditemukan atau sudah diproses';
                 endif;
                 $data['member'] = $this->Circulation_md->getAnggotaByKeyword($transaction_id);
                 $data['denda']  = $this->denda($transaction_id);
                 $this->session->set_userdata('transaction_id', $transaction_id);
-            else:
+            else :
                 $data['warning'] = validation_errors();
             endif;
         endif;
@@ -201,14 +198,14 @@ class Circulation extends CI_Controller
     public function statusbook()
     {
         $transaction_id = $this->session->userdata('transaction_id');
-        if ($this->input->post('kembali') == true):
+        if ($this->input->post('kembali') == true) :
             //$this->db->set('sirkulasi_denda',$this->denda($transaction_id));
             $this->Circulation_md->returnbook($transaction_id, $this->denda($transaction_id));
             $this->session->set_flashdata('message', 'Koleksi telah dikembalikan');
             $this->session->unset_userdata('transaction_id');
             redirect('Circulation/returnbook');
         endif;
-        if ($this->input->post('perpanjang') == true):
+        if ($this->input->post('perpanjang') == true) :
             $this->Circulation_md->extendsion($transaction_id, $this->date_return());
             $this->session->set_flashdata('message', 'Masa pinjam koleksi telah diperpanjang');
             $this->session->unset_userdata('transaction_id');
@@ -224,7 +221,7 @@ class Circulation extends CI_Controller
         $circulation = $this->Circulation_md->get_circulationByStatus($transaction_id);
 
         foreach ($circulation as $trans) {
-            if (!empty($trans)):
+            if (!empty($trans)) :
                 $callback[] = array(
                     'status'         => 'success',
                     'transaction_id' => $trans->sirkulasi_pinjam_kd,
@@ -234,15 +231,13 @@ class Circulation extends CI_Controller
                     'anggota_kd'     => $trans->anggota_kd,
                     'anggota_nm'     => $trans->anggota_nm,
                 );
-            else:
+            else :
                 $callback[] = array(
                     'status' => 'failed',
                 );
             endif;
-
         }
 
         echo json_encode($callback);
     }
-
 }

@@ -9,7 +9,7 @@ class Author extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        if ($this->session->userdata('logged') == false):
+        if ($this->session->userdata('logged') == false) :
             redirect('administrator');
             exit();
         endif;
@@ -21,15 +21,15 @@ class Author extends CI_Controller
         $data['title']   = "Pengarang/Penulis";
         $data['content'] = "author/author_main";
 
-        if ($this->input->post('submit')):
+        if ($this->input->post('submit')) :
             $this->form_validation->set_rules('penulis_nm', 'Nama Penulis', 'required');
             $this->form_validation->set_rules('penulis_email', 'Email Penulis', 'required');
 
-            if ($this->form_validation->run() == true):
+            if ($this->form_validation->run() == true) :
                 $this->Author_md->add_author();
                 redirect('author');
                 exit();
-            else:
+            else :
                 $data['warning'] = validation_errors();
             endif;
         endif;
@@ -49,10 +49,10 @@ class Author extends CI_Controller
         $this->load->view('administrator/index', $data);
     }
 
-    public function add_author_popup(){
+    public function add_author_popup()
+    {
 
-            return $this->Author_md->add_author();
-           
+        return $this->Author_md->add_author();
     }
 
     public function get_kode_author()
@@ -60,10 +60,10 @@ class Author extends CI_Controller
         $gt_kode   = $this->Author_md->get_kode_author();
         $author_kd = '';
         $kar       = 'PNL-';
-        foreach ($gt_kode->result() as $gtkode):
-            if ($gtkode->penulis_kd == null):
+        foreach ($gt_kode->result() as $gtkode) :
+            if ($gtkode->penulis_kd == null) :
                 $author_kd = $kar . '0001';
-            else:
+            else :
                 $substr_kd = (int) substr($gtkode->penulis_kd, 4, 8);
                 $tmp       = $substr_kd + 1;
                 $author_kd = $kar . sprintf("%04s", $tmp);
@@ -78,7 +78,6 @@ class Author extends CI_Controller
         $this->Author_md->delete_author($kode);
         redirect('Author');
         exit();
-
     }
 
     public function update($kode)
@@ -87,12 +86,11 @@ class Author extends CI_Controller
         $data['title']   = 'Pengarang/Penulis';
         $data['content'] = 'author/author_update';
         $data['read']    = $this->Author_md->read($kode);
-        if ($this->input->post('submit')):
+        if ($this->input->post('submit')) :
             $this->Author_md->update_author($kode);
             redirect('author');
             exit();
         endif;
         $this->load->view('administrator/index', $data);
     }
-
 }

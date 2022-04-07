@@ -7,6 +7,7 @@ class Member extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->library('zend');
     }
 
     public function index()
@@ -20,16 +21,17 @@ class Member extends CI_Controller
         $member_kd = '';
         $date      = getdate();
         $gtYear    = $date['year'];
+        //$gtMonth= $date['month'];
         $sub_year  = substr($gtYear, 2, 4);
 
         foreach ($gt_kode->result() as $gtKode):
             if ($gtKode->anggota_kd == null):
-                $member_kd = $sub_year . '0001';
+                $member_kd = $sub_year. '0001';
         //else:
         else:
                 $substr_member_kd = (int) substr($gtKode->anggota_kd, 2, 6);
         $tmp              = $substr_member_kd + 1;
-        $member_kd        = $sub_year . sprintf("%04s", $tmp);
+        $member_kd        = $sub_year. sprintf("%04s", $tmp);
         endif;
         endforeach;
 
@@ -42,10 +44,10 @@ class Member extends CI_Controller
     {
         $data['title']='Registrasi Anggota';
         $data['content']='member/signup-tab';
-
+        $kode=$this->get_kode_anggota();
 
         if ($this->input->post('acceptTerms') == true) {
-            $this->db->set('anggota_kd', $this->get_kode_anggota());
+            $this->db->set('anggota_kd', $kode);
             //$this->session->set_userdata('anggota_kd',$this->get_kode_anggota());
             $this->session->set_userdata('anggota_nm', $this->input->post('anggota_nm'));
             $this->session->set_userdata('anggota_jeniskelamin', $this->input->post('anggota_jeniskelamin'));
@@ -53,6 +55,13 @@ class Member extends CI_Controller
             $this->session->set_userdata('anggota_username', $this->input->post('anggota_username'));
                 
             $this->Member_md->signup();
+            
+            // Load in folder Zend
+            $this->zend->load('Zend/Barcode');
+            // Generate barcode
+            $imageResource = Zend_Barcode::factory('code128', 'image', array('text'=>$kode), array())->draw();
+            //Zend_Barcode::render('code128', 'image', array('text'=>$kode), array())->draw();
+            imagepng($imageResource,'upload/member/barcode/'.$kode.'.png');
                 
             $this->session->set_flashdata('message', 'Anda berhasil menambahkan keanggotaan di perpustakaan xyz. Segera lakukan aktivasi akun manual dengan datang ke perpustakaan xyz dengan membawa kartu anggota yang bisa anda dapatkan di menu "cetak kartu anggota"');
             redirect('administrator/signin');
@@ -61,6 +70,18 @@ class Member extends CI_Controller
         }
 
         $this->load->view('index', $data);
+    }
+
+    public function barcode($kode)
+    {
+       //$kode='220002';
+        $this->load->library('zend');
+        // Load in folder Zend
+        $this->zend->load('Zend/Barcode');
+        // Generate barcode
+       /// $imageResource = Zend_Barcode::factory('code128', 'image', array('text'=>$kode), array())->draw();
+        Zend_Barcode::render('code128', 'image', array('text'=>$kode), array());
+        //imagepng($imageResource,'upload/member/barcode/'.$kode.'.png');
     }
 
     public function signin()

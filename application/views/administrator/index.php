@@ -46,7 +46,6 @@
     <!--Custom Invoice-->
     <link rel="stylesheet" href="<?php echo base_url(); ?>asset/invoice/style.css"/>
 
-
 </head>
 
 <body class="theme-green">
@@ -466,6 +465,8 @@
                 });
             }
         }
+
+       
     </script>
 
 </body>

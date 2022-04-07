@@ -8,9 +8,9 @@ class Publisher extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        if ($this->session->userdata('logged') == false):
+        if ($this->session->userdata('logged') == false) :
             redirect('administrator');
-        exit();
+            exit();
         endif;
     }
 
@@ -28,29 +28,30 @@ class Publisher extends CI_Controller
 
         $data['title']   = 'Penerbit';
         $data['content'] = 'publisher/publisher_list';
-        
+
         $this->load->view('administrator/index', $data);
     }
 
     public function add()
     {
-        $data['warning']='';
-        if ($this->input->post('submit')):
+        $data['warning'] = '';
+        if ($this->input->post('submit')) :
             $this->form_validation->set_rules('penerbit_nm', 'Penerbit', 'required');
-        $this->form_validation->set_rules('penerbit_email', 'Email Penerbit', 'required|valid_email');
-        $this->form_validation->set_rules('penerbit_alamat', 'Alamat Penerbit', 'required');
-        $this->form_validation->set_rules('penerbit_notelp', 'Nomer Telepon Penerbit', 'required|max_length[13]|numeric');
+            $this->form_validation->set_rules('penerbit_email', 'Email Penerbit', 'required|valid_email');
+            $this->form_validation->set_rules('penerbit_alamat', 'Alamat Penerbit', 'required');
+            $this->form_validation->set_rules('penerbit_notelp', 'Nomer Telepon Penerbit', 'required|max_length[13]|numeric');
 
-        if ($this->form_validation->run() == true):
+            if ($this->form_validation->run() == true) :
                 $this->Publisher_md->add_publisher();
-        $this->session->set_flashdata('message', 'Penerbit telah ditambahkan');
-        redirect('publisher/index');
-        exit(); else:
+                $this->session->set_flashdata('message', 'Penerbit telah ditambahkan');
+                redirect('publisher/index');
+                exit();
+            else :
                 $data['warning'] = validation_errors();
+            endif;
         endif;
-        endif;
-        $data['title']='Penerbit';
-        $data['content']='publisher/publisher_main';
+        $data['title'] = 'Penerbit';
+        $data['content'] = 'publisher/publisher_main';
         $this->load->view('administrator/index', $data);
     }
 
@@ -69,16 +70,16 @@ class Publisher extends CI_Controller
 
     public function update($publisher_id)
     {
-        $data['warning']='';
-        $data['title']='Penerbit';
-        $data['content']='publisher/publisher_update';
-        $data['read']=$this->Publisher_md->read($publisher_id);
+        $data['warning'] = '';
+        $data['title'] = 'Penerbit';
+        $data['content'] = 'publisher/publisher_update';
+        $data['read'] = $this->Publisher_md->read($publisher_id);
 
-        if ($this->input->post('submit')):
+        if ($this->input->post('submit')) :
             $this->Publisher_md->update_publisher($publisher_id);
-        $this->session->set_flashdata('message', 'Penerbit telah diubah');
-        redirect('publisher');
-        exit();
+            $this->session->set_flashdata('message', 'Penerbit telah diubah');
+            redirect('publisher');
+            exit();
         endif;
         $this->load->view('administrator/index', $data);
     }

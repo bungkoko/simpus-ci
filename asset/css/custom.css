@@ -5,11 +5,13 @@ fieldset {
     border: 1px solid #4CAF50;
     background: #FBFFF4;
 }
+
 legend {
     font-weight: bold;
     color: #2D74BE;
     padding: 8px;
 }
+
 /*fieldset a {
     color: #3B5998;
     background-color: inherit;
@@ -17,8 +19,14 @@ legend {
 fieldset a:hover { color: #A70B0B; background-color: inherit;}*/
 
 section.content-signup {
-  margin: 100px 150px 0 150px;
-  -moz-transition: 0.5s;
-  -o-transition: 0.5s;
-  -webkit-transition: 0.5s;
-  transition: 0.5s; }
+    margin: 100px 150px 0 150px;
+    -moz-transition: 0.5s;
+    -o-transition: 0.5s;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+}
+
+/*
+select[disabled]  {
+  cursor: not-allowed;
+}

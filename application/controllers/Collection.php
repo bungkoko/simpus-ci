@@ -59,17 +59,20 @@ class Collection extends CI_Controller
     {
         $data['warning'] = '';
         if ($this->input->post('submit')):
-            $this->form_validation->set_rules('koleksi_judul', 'Judul Koleksi', 'required');
-            $this->form_validation->set_rules('koleksi_isbn', 'ISBN', 'required');
-            $this->form_validation->set_rules('koleksi_stok', 'Stok', 'required');
-            $this->form_validation->set_rules('koleksi_lokasi_rak', 'Lokasi Rak', 'required');
-            $this->form_validation->set_rules('koleksi_tebal', 'Tebal Koleksi', 'required');
-            $this->form_validation->set_rules('koleksi_deskripsi', 'Deskripsi Koleksi', 'required');
-            $this->form_validation->set_rules('simpus_penulis_penulis_kd[]', 'Penulis', 'required');
-            $this->form_validation->set_rules('simpus_genre_genre_kd', 'Genre', 'required');
-            $this->form_validation->set_rules('simpus_penerbit_penerbit_kd', 'Penerbit', 'required');
-
+            
+            //$this->form_validation->set_rules('koleksi_judul', 'Judul Koleksi', 'required');
+            //$this->form_validation->set_rules('koleksi_isbn', 'ISBN', 'required');
+            //$this->form_validation->set_rules('koleksi_stok', 'Stok', 'required');
+            $this->form_validation->set_rules('koleksi_stok','Stok','required');
+           // $this->form_validation->set_rules('koleksi_lokasi_rak', 'Lokasi Rak', 'required');
+           // $this->form_validation->set_rules('koleksi_tebal', 'Tebal Koleksi', 'required');
+           // $this->form_validation->set_rules('koleksi_deskripsi', 'Deskripsi Koleksi', 'required');
+           // $this->form_validation->set_rules('simpus_penulis_penulis_kd[]', 'Penulis', 'required');
+           // $this->form_validation->set_rules('simpus_genre_genre_kd', 'Genre', 'required');
+           // $this->form_validation->set_rules('simpus_penerbit_penerbit_kd', 'Penerbit', 'required');
+            
             if ($this->form_validation->run() == true):
+                
                 $config['upload_path']   = '.' . $this->config->item('upload_path_koleksi');
                 $config['allowed_types'] = $this->config->item('allowed_types');
                 $config['encrypt_name']  = true;
@@ -107,11 +110,13 @@ class Collection extends CI_Controller
                     redirect('collection'); 
                     exit();
                 endif;
+                
+               
             else:
                 $data['warning'] = validation_errors();
             endif;
         endif;
-
+        
         $data['title']          = 'Tambah Koleksi Buku';
         $data['content']        = 'collection/collection_main';
         $data['list_genre']     = $this->Collection_md->getGenreList();
@@ -122,6 +127,11 @@ class Collection extends CI_Controller
         $this->load->view('administrator/index', $data);
     }
 
+    public function get_printr(){
+        //$data['printr']=print_r($this->input->post('koleksi_stok'));
+        $data['content']        = 'collection/collection_main';
+        $this->load->view('administrator/index', $data);
+    }
     public function delete($collection_id)
     {
         $this->Collection_md->delete_collection($collection_id);

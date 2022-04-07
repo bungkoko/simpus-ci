@@ -20,7 +20,7 @@ class Circulation_md extends CI_Model
 
         $result = array();
 
-        for ($i = 0; $i < $count; $i++):
+        for ($i = 0; $i < $count; $i++) :
             $result[] = array(
                 'simpus_koleksi_koleksi_kd'   => $collection_id[$i],
                 'simpus_anggota_anggota_kd'   => $member_id,
@@ -142,27 +142,27 @@ class Circulation_md extends CI_Model
     public function returnbook($transaction_id, $denda)
     {
         $collection_id = $this->input->post('bookcheck');
-        for ($i = 0; $i < count($collection_id); $i++):
+        for ($i = 0; $i < count($collection_id); $i++) :
             $this->db->where('simpus_koleksi_koleksi_kd', $collection_id[$i]);
-        $this->db->where('sirkulasi_pinjam_kd', $transaction_id);
-        $this->db->set('sirkulasi_denda', $denda);
-        $this->db->set('sirkulasi_status_pinjam', 'kembali');
-        $this->db->set('sirkulasi_tgl_dikembalikan', date('Y-m-d'));
-        $this->db->update('simpus_sirkulasi');
+            $this->db->where('sirkulasi_pinjam_kd', $transaction_id);
+            $this->db->set('sirkulasi_denda', $denda);
+            $this->db->set('sirkulasi_status_pinjam', 'kembali');
+            $this->db->set('sirkulasi_tgl_dikembalikan', date('Y-m-d'));
+            $this->db->update('simpus_sirkulasi');
         endfor;
     }
 
     public function extendsion($transaction_id, $extends)
     {
         $collection_id = $this->input->post('bookcheck');
-        for ($i = 0; $i < count($collection_id); $i++):
+        for ($i = 0; $i < count($collection_id); $i++) :
             $this->db->where('simpus_koleksi_koleksi_kd', $collection_id[$i]);
-        $this->db->where('sirkulasi_pinjam_kd', $transaction_id);
-        //$this->db->where('sirkulasi_tgl_pinjam',date('Y-m-d'));
-        $this->db->set('sirkulasi_tgl_pinjam', date('Y-m-d'));
-        $this->db->set('sirkulasi_tgl_harus_kembali', $extends);
-        $this->db->set('sirkulasi_tgl_dikembalikan', null);
-        $this->db->update('simpus_sirkulasi');
+            $this->db->where('sirkulasi_pinjam_kd', $transaction_id);
+            //$this->db->where('sirkulasi_tgl_pinjam',date('Y-m-d'));
+            $this->db->set('sirkulasi_tgl_pinjam', date('Y-m-d'));
+            $this->db->set('sirkulasi_tgl_harus_kembali', $extends);
+            $this->db->set('sirkulasi_tgl_dikembalikan', null);
+            $this->db->update('simpus_sirkulasi');
         endfor;
     }
 
@@ -178,7 +178,7 @@ class Circulation_md extends CI_Model
     public function filter_view_by_date($date)
     {
         $this->db->where('DATE(sirkulasi_tgl_dikembalikan)', $date);
-        return $this->db->get('simpus_sirkulasi')->result();//menapikan data sirkulasi sesuai tanggal yang diinput oleh user
+        return $this->db->get('simpus_sirkulasi')->result(); //menapikan data sirkulasi sesuai tanggal yang diinput oleh user
     }
 
     public function filter_view_by_month($month, $year)

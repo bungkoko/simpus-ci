@@ -1,4 +1,5 @@
 <?php
+
 /**
  *
  */
@@ -56,7 +57,6 @@ class Collection_md extends CI_Model
         $this->db->group_by('simpus_koleksi.koleksi_kd');
 
         return $this->db->get();
-
     }
 
     public function get_collection_code()
@@ -126,11 +126,11 @@ class Collection_md extends CI_Model
         $this->db->order_by('koleksi_kd', 'ASC');
         $this->db->like('koleksi_kd', $collection_id);
         return $this->db->get('simpus_koleksi');
-
     }
 
-    function getAttributeCollection($collection_id){
-         $this->db->select('koleksi_kd,koleksi_judul,koleksi_isbn,penerbit_nm,
+    function getAttributeCollection($collection_id)
+    {
+        $this->db->select('koleksi_kd,koleksi_judul,koleksi_isbn,penerbit_nm,
                     GROUP_CONCAT(simpus_penulis.penulis_kd) AS kode_penulis,
                     GROUP_CONCAT(simpus_penulis.penulis_nm) AS nama_penulis');
         $this->db->from('simpus_penulis_has_simpus_koleksi');
@@ -138,11 +138,10 @@ class Collection_md extends CI_Model
         $this->db->join('simpus_penulis', 'simpus_penulis_has_simpus_koleksi.simpus_penulis_penulis_kd=simpus_penulis.penulis_kd', 'inner');
         $this->db->join('simpus_genre', 'simpus_koleksi.simpus_genre_genre_kd=simpus_genre.genre_kd', 'inner');
         $this->db->join('simpus_penerbit', 'simpus_koleksi.simpus_penerbit_penerbit_kd=simpus_penerbit.penerbit_kd', 'inner');
-        $this->db->where('koleksi_kd',$collection_id);   
+        $this->db->where('koleksi_kd', $collection_id);
         $this->db->group_by('simpus_koleksi.koleksi_kd');
 
 
         return $this->db->get()->row();
     }
-
 }

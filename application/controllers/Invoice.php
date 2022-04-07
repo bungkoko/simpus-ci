@@ -12,9 +12,9 @@ class Invoice extends CI_Controller
     {
         parent::__construct();
 
-        if ($this->session->userdata('logged') == false):
+        if ($this->session->userdata('logged') == false) :
             redirect('administrator');
-        exit();
+            exit();
         endif;
     }
 
@@ -50,25 +50,26 @@ class Invoice extends CI_Controller
     {
         $page = $this->uri->segment(3);
 
-        if ($page == "borrow"):
+        if ($page == "borrow") :
             $data['page_title']     = 'Nota Peminjaman - No Invoice #' . $transaction_id;
-        $data['title']          = 'Nota Peminjaman';
-        $data['transaction_id'] = $transaction_id;
-        $data['borrowBook']     = $this->Circulation_md->searchBorrow($transaction_id)->result();
-        $data['gt_date']        = $this->Circulation_md->getDatebyTransactionId($transaction_id);
-        $data['member']         = $this->Circulation_md->getAnggotaByKeyword($transaction_id);
-        $data['content']        = 'invoice/borrow/invoice_borrow';
+            $data['title']          = 'Nota Peminjaman';
+            $data['transaction_id'] = $transaction_id;
+            $data['borrowBook']     = $this->Circulation_md->searchBorrow($transaction_id)->result();
+            $data['gt_date']        = $this->Circulation_md->getDatebyTransactionId($transaction_id);
+            $data['member']         = $this->Circulation_md->getAnggotaByKeyword($transaction_id);
+            $data['content']        = 'invoice/borrow/invoice_borrow';
 
-        $this->load->view('administrator/printout', $data); elseif ($page == "returnbook"):
+            $this->load->view('administrator/printout', $data);
+        elseif ($page == "returnbook") :
             $data['page_title']     = 'Nota Pengembalian - No Invoice #' . $transaction_id;
-        $data['title']          = 'Nota Pengembalian';
-        $data['transaction_id'] = $transaction_id;
-        $data['returnbook']     = $this->Circulation_md->getReturnBook($transaction_id)->result();
-        $data['gt_date']        = $this->Circulation_md->getDatebyTransactionId($transaction_id);
-        $data['member']         = $this->Circulation_md->getAnggotaByKeyword($transaction_id);
-        $data['content']        = 'invoice/return/invoice_return';
+            $data['title']          = 'Nota Pengembalian';
+            $data['transaction_id'] = $transaction_id;
+            $data['returnbook']     = $this->Circulation_md->getReturnBook($transaction_id)->result();
+            $data['gt_date']        = $this->Circulation_md->getDatebyTransactionId($transaction_id);
+            $data['member']         = $this->Circulation_md->getAnggotaByKeyword($transaction_id);
+            $data['content']        = 'invoice/return/invoice_return';
 
-        $this->load->view('administrator/printout', $data);
+            $this->load->view('administrator/printout', $data);
         endif;
     }
 }

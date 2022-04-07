@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Pengaturan Denda dan Lama Denda
  * Joko Purwanto

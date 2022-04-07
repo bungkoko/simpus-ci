@@ -1,4 +1,5 @@
-s<?php
+<?php
+
 /**
  * Source by : Joko Purwanto
  */
@@ -8,7 +9,7 @@ class Genre extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        if($this->session->userdata('logged')==false):
+        if ($this->session->userdata('logged') == false) :
             redirect('administrator/signin');
             exit();
         endif;
@@ -18,15 +19,15 @@ class Genre extends CI_Controller
     {
         $data['warning'] = '';
 
-        if ($this->input->post('submit')):
+        if ($this->input->post('submit')) :
             $this->form_validation->set_rules('genre_judul', 'Judul Genre', 'required');
             $this->form_validation->set_rules('genre_singkatan', 'Singkatan', 'required|max_length[3]');
 
-            if ($this->form_validation->run() == true):
+            if ($this->form_validation->run() == true) :
                 $this->Genres_md->add_genres();
                 $this->session->set_flashdata('message', 'Genre sudah ditambahkan');
                 redirect('genre');
-            else:
+            else :
                 $data['warning'] = validation_errors();
             endif;
         endif;
@@ -45,10 +46,10 @@ class Genre extends CI_Controller
         $data['content'] = 'genre/genre_main';
 
         $this->load->view('administrator/index', $data);
-
     }
 
-    public function add_genre_popup(){
+    public function add_genre_popup()
+    {
         return $this->Genres_md->add_genres();
     }
 
@@ -62,11 +63,11 @@ class Genre extends CI_Controller
 
     public function update($abbrev)
     {
-    	$data['warning']= '';
+        $data['warning'] = '';
         $data['title']   = 'Genre Buku';
         $data['content'] = 'genre/genre_update';
         $data['read']    = $this->Genres_md->read($abbrev);
-        if ($this->input->post('submit')):
+        if ($this->input->post('submit')) :
             $this->Genres_md->update($abbrev);
             $this->session->set_flashdata('message', 'Genre berhasil diubah');
             redirect('genre');

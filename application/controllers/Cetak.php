@@ -1,4 +1,5 @@
 <?php
+
 /**
  *
  */
@@ -10,11 +11,10 @@ class Cetak extends CI_Controller
         //$this->load->library('Pdf');
         parent::__construct();
 
-        if ($this->session->userdata('logged') == false):
+        if ($this->session->userdata('logged') == false) :
             redirect('administrator');
             exit();
         endif;
-
     }
 
 
@@ -41,7 +41,5 @@ class Cetak extends CI_Controller
         $this->session->unset_userdata('date_return');
 
         $this->load->view('administrator/cetak', $data);
-
     }
-
 }

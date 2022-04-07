@@ -1,7 +1,7 @@
 <body class="signup-page">
     <div class="signup-box">
         <div class="logo">
-            <a href="javascript:void(0);"><?php echo $title;?></b></a>
+            <a href="javascript:void(0);"><?php echo $title; ?></b></a>
             <small>Perpustakaan</small>
         </div>
     </div>
@@ -12,21 +12,21 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="body">
-                            <form id="wizard_with_validation" method="POST" action="<?php echo current_url(); ?>" >
+                            <form id="wizard_with_validation" method="POST" action="<?php echo current_url(); ?>">
                                 <h3>Petunjuk Pengisian Form</h3>
                                 <fieldset style="border:0px">
-                                    
-                                        <ol>
-                                            <li>Pastikan data yang anda masukkan sesuai kartu identitas yang berlaku, benar, dan dapat dipertanggungjawabkan.</li>
-                                            <li>Silahkan hubungi bagian layanan Perpustakaan, jika anda pernah mendaftarkan diri sebelumnya namun akun anda tidak aktif.</li>
-                                            <li>Inputan dengan tanda <span class="mandatory">*</span> wajib diisi.</li>
-                                        </ol>
-                                    
+
+                                    <ol>
+                                        <li>Pastikan data yang anda masukkan sesuai kartu identitas yang berlaku, benar, dan dapat dipertanggungjawabkan.</li>
+                                        <li>Silahkan hubungi bagian layanan Perpustakaan, jika anda pernah mendaftarkan diri sebelumnya namun akun anda tidak aktif.</li>
+                                        <li>Inputan dengan tanda <span class="mandatory">*</span> wajib diisi.</li>
+                                    </ol>
+
                                 </fieldset>
 
                                 <h3>Account</h3>
                                 <fieldset>
-                               
+
                                     <label for="username">Username*</label>
                                     <div class="form-group">
                                         <div class="form-line">
@@ -38,7 +38,7 @@
                                     <div class="form-group">
                                         <div class="form-line">
                                             <input type="password" class="form-control" name="anggota_password" id="password" placeholder="Masukkan password anda" required>
-                                         </div>
+                                        </div>
                                     </div>
                                     <label for="confirm_password">Konfirmasi Password*</label>
                                     <div class="form-group">
@@ -55,14 +55,14 @@
                                 </fieldset>
                                 <h3>Profile Information</h3>
                                 <fieldset>
-                                    
+
                                     <label for="fullname">Nama Lengkap*</label>
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <input type="text"  name="anggota_nm" class="form-control" placeholder="Masukkan nama lengkap anda" required>
+                                            <input type="text" name="anggota_nm" class="form-control" placeholder="Masukkan nama lengkap anda" required>
                                         </div>
                                     </div>
-                                    <label for="tempatlahir">Tempat Tanggal Lahir*</label>                    
+                                    <label for="tempatlahir">Tempat Tanggal Lahir*</label>
                                     <div class="form-group">
                                         <div class="row clearfix">
                                             <div class="col-lg-4 col-md-6 col-sm-12">
@@ -81,7 +81,7 @@
                                         </div>
                                     </div>
                                     <label for="jeniskelamin">Jenis Kelamin</label>
-                                    <div class="form-group">    
+                                    <div class="form-group">
                                         <div class="form-line">
                                             <input id="jenis_kelamin_L" type="radio" name="anggota_jeniskelamin" class="with-gap" value="L" checked required>
                                             <label for="jenis_kelamin_L">Laki-Laki</label>
@@ -94,23 +94,23 @@
                                             <label for="txtAlamatRumah">Alamat Tinggal Sesuai Identitas <span style="color: Red;">*</span></label>
                                             <fieldset>
                                                 <div class="form-group">
-                                                    <textarea name="anggota_alamat_identitas" cols="40" rows="4" id="txtAlamatIdentitas" class="form-control" required placeholder="Masukan alamat Anda sesuai identitas" data-toggle="popover" title="format penulisan" data-placement="bottom" data-content="&lt;b>&lt;i>format penulisan&lt;/b>&lt;/i> : Jalan/Gang/Blok/Dusun, RT, RW&lt;br/>Kelurahan, Kecamatan, KodePos&lt;br> &lt;br/>&lt;b>&lt;i>contoh&lt;/i>&lt;/b> : &lt;div style=&quot;padding:10px;border:1px solid #ccc;display:block;background:#fff;font-size:10pt !important&quot;>JL. Surabaya 281, RT.001, RW.009&lt;br/>Sukamaju, Subur Makmur&lt;br/>109202&lt;/div>" ></textarea>
-                                                  
+                                                    <textarea name="anggota_alamat_identitas" cols="40" rows="4" id="txtAlamatIdentitas" class="form-control" required placeholder="Masukan alamat Anda sesuai identitas" data-toggle="popover" title="format penulisan" data-placement="bottom" data-content="&lt;b>&lt;i>format penulisan&lt;/b>&lt;/i> : Jalan/Gang/Blok/Dusun, RT, RW&lt;br/>Kelurahan, Kecamatan, KodePos&lt;br> &lt;br/>&lt;b>&lt;i>contoh&lt;/i>&lt;/b> : &lt;div style=&quot;padding:10px;border:1px solid #ccc;display:block;background:#fff;font-size:10pt !important&quot;>JL. Surabaya 281, RT.001, RW.009&lt;br/>Sukamaju, Subur Makmur&lt;br/>109202&lt;/div>"></textarea>
+
                                                 </div>
                                             </fieldset>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                             <label for="txtAlamatSekarang">Alamat Tinggal Sekarang <span style="color: Red;">*</span></label>
-                                            <label >( <input id="CekSameAdd" class="filled-in" type="checkbox" name="CekSameAdd" onclick="fillAddressInput()"/><label for="CekSameAdd" > Centang jika sama dengan alamat identitas</label>)</label>
+                                            <label>( <input id="CekSameAdd" class="filled-in" type="checkbox" name="CekSameAdd" onclick="fillAddressInput()" /><label for="CekSameAdd"> Centang jika sama dengan alamat identitas</label>)</label>
                                             <fieldset>
                                                 <div class="form-group">
                                                     <textarea name="anggota_alamat_sekarang" rows="2" cols="40" id="txtAlamatSekarang" class="form-control" placeholder="Masukan alamat Anda sekarang" data-toggle="popover" title="format penulisan" data-placement="bottom" data-content="&lt;b>&lt;i>format penulisan&lt;/b>&lt;/i> : Jalan/Gang/Blok/Dusun, RT, RW&lt;br/>Kelurahan, Kecamatan, KodePos&lt;br> &lt;br/>&lt;b>&lt;i>contoh&lt;/i>&lt;/b> : &lt;div style=&quot;padding:10px;border:1px solid #ccc;display:block;background:#fff;font-size:10pt !important&quot;>JL. Surabaya 281, RT.001, RW.009&lt;br/>Sukamaju, Subur Makmur&lt;br/>109202&lt;/div>"></textarea>
-                                                    
+
                                                 </div>
-                                            </fieldset>                          
+                                            </fieldset>
                                         </div>
                                     </div>
-                                    <hr/>
+                                    <hr />
                                     <label for="anggota_status_kawin">Status Perkawinan</label>
                                     <div class="form-group">
                                         <div class="form-line">
@@ -119,11 +119,11 @@
                                                 <option value="kawin">Kawin</option>
                                                 <option value="belum kawin">Belum Kawin</option>
                                                 <option value="cerai hidup">Cerai Hidup</option>
-                                                <option value="cerai mati">Cerai Mati</option>     
+                                                <option value="cerai mati">Cerai Mati</option>
                                             </select>
                                         </div>
                                     </div>
-                                   
+
                                     <label for="">No Telpon/Handphone</label>
                                     <div class="form-group">
                                         <div class="form-line">
@@ -143,7 +143,7 @@
                                                 <option value="S1/D4">S1 / D4</option>
                                                 <option value="S2">S2</option>
                                                 <option value="S3">S3</option>
-                                            </select>  
+                                            </select>
                                         </div>
                                     </div>
                                     <label for="">Pekerjaan</label>
@@ -161,11 +161,11 @@
                                                 <option value="Guru">Guru</option>
                                                 <option value="Pelajar">Pelajar</option>
                                                 <option value="Mahasiswa">Mahasiswa</option>
-                                                <option value="Lainnya">Lainnya</option>    
+                                                <option value="Lainnya">Lainnya</option>
                                             </select>
                                         </div>
                                     </div>
-                                   
+
                                 </fieldset>
                                 <h3>Terms & Conditions - Finish</h3>
                                 <fieldset>
@@ -178,9 +178,8 @@
                 </div>
             </div>
         </div>
-</section>
+    </section>
 
-<script>
-   
-</script>
-  
+    <script>
+
+    </script>

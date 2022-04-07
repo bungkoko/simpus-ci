@@ -1,4 +1,5 @@
 <?php
+
 /**
  *
  */
@@ -53,5 +54,4 @@ class Genres_md extends CI_Model
         $this->db->where('genre_singkatan', $abbrev);
         $this->db->update('simpus_genre');
     }
-
 }

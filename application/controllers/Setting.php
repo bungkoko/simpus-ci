@@ -28,5 +28,10 @@ class Setting extends CI_Controller
 		$data['content']='setting/setting_main';
 		$this->load->view('administrator/index',$data);
 	}
+	function membercard(){
+		$data['title']='Kartu Anggota';
+		$data['content']='setting/setting_membercard';
+		$this->load->view('administrator/index',$data);
+	}
 }
- ?>
+?>
