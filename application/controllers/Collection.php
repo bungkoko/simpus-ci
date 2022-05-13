@@ -12,7 +12,7 @@ class Collection extends CI_Controller
         parent::__construct();
         //$this->load->controller('Author');
         //$author=new Author;
-        if ($this->session->userdata('logged') == false):
+        if ($this->session->userdata('logged') == false) :
             redirect('administrator');
             exit();
         endif;
@@ -20,7 +20,7 @@ class Collection extends CI_Controller
 
     public function index()
     {
-       
+
 
         $data['warning'] = '';
         $data['title']   = "Daftar Koleksi";
@@ -41,10 +41,10 @@ class Collection extends CI_Controller
 
         $gt_kode = $this->Collection_md->get_collection_code();
 
-        foreach ($gt_kode->result() as $gtKode):
-            if (($gtKode->koleksi_kd == null) || (substr($gtKode->koleksi_kd, 0, 3) != $genre_singkatan)):
+        foreach ($gt_kode->result() as $gtKode) :
+            if (($gtKode->koleksi_kd == null) || (substr($gtKode->koleksi_kd, 0, 3) != $genre_singkatan)) :
                 $koleksi_kd = $genre_singkatan . '-' . '0001';
-            else:
+            else :
                 $substr_kd  = (int) substr($gtKode->koleksi_kd, 5);
                 $count_kd   = $substr_kd + 1;
                 $koleksi_kd = $genre_singkatan . '-' . sprintf("%04s", $count_kd);
@@ -52,27 +52,26 @@ class Collection extends CI_Controller
         endforeach;
 
         return $koleksi_kd;
-
     }
 
     public function add()
     {
         $data['warning'] = '';
-        if ($this->input->post('submit')):
-            
-            //$this->form_validation->set_rules('koleksi_judul', 'Judul Koleksi', 'required');
-            //$this->form_validation->set_rules('koleksi_isbn', 'ISBN', 'required');
-            //$this->form_validation->set_rules('koleksi_stok', 'Stok', 'required');
-            $this->form_validation->set_rules('koleksi_stok','Stok','required');
-           // $this->form_validation->set_rules('koleksi_lokasi_rak', 'Lokasi Rak', 'required');
-           // $this->form_validation->set_rules('koleksi_tebal', 'Tebal Koleksi', 'required');
-           // $this->form_validation->set_rules('koleksi_deskripsi', 'Deskripsi Koleksi', 'required');
-           // $this->form_validation->set_rules('simpus_penulis_penulis_kd[]', 'Penulis', 'required');
-           // $this->form_validation->set_rules('simpus_genre_genre_kd', 'Genre', 'required');
-           // $this->form_validation->set_rules('simpus_penerbit_penerbit_kd', 'Penerbit', 'required');
-            
-            if ($this->form_validation->run() == true):
-                
+        if ($this->input->post('submit')) :
+
+            $this->form_validation->set_rules('koleksi_judul', 'Judul Koleksi', 'required');
+            $this->form_validation->set_rules('koleksi_isbn', 'ISBN', 'required');
+            $this->form_validation->set_rules('koleksi_stok', 'Stok', 'required');
+
+            $this->form_validation->set_rules('koleksi_lokasi_rak', 'Lokasi Rak', 'required');
+            $this->form_validation->set_rules('koleksi_tebal', 'Tebal Koleksi', 'required');
+            $this->form_validation->set_rules('koleksi_deskripsi', 'Deskripsi Koleksi', 'required');
+            $this->form_validation->set_rules('simpus_penulis_penulis_kd[]', 'Penulis', 'required');
+            $this->form_validation->set_rules('simpus_genre_genre_kd', 'Genre', 'required');
+            $this->form_validation->set_rules('simpus_penerbit_penerbit_kd', 'Penerbit', 'required');
+
+            if ($this->form_validation->run() == true) :
+
                 $config['upload_path']   = '.' . $this->config->item('upload_path_koleksi');
                 $config['allowed_types'] = $this->config->item('allowed_types');
                 $config['encrypt_name']  = true;
@@ -82,9 +81,9 @@ class Collection extends CI_Controller
 
                 $this->upload->initialize($config);
 
-                if (!$this->upload->do_upload('koleksi_cover')):
+                if (!$this->upload->do_upload('koleksi_cover')) :
                     $data['warning'] = $this->upload->display_errors();
-                else:
+                else :
                     $dt_cover       = $this->upload->data();
                     $cover_nm       = $dt_cover['raw_name'];
                     $cover_ext      = $dt_cover['file_ext'];
@@ -107,27 +106,28 @@ class Collection extends CI_Controller
                     $this->Collection_md->add_collection($cover_path, $this->get_kode_koleksi());
 
                     $this->session->set_flashdata('message', 'Koleksi berhasil ditambahkan');
-                    redirect('collection'); 
+                    redirect('collection');
                     exit();
                 endif;
-                
-               
-            else:
+
+
+            else :
                 $data['warning'] = validation_errors();
             endif;
         endif;
-        
+
         $data['title']          = 'Tambah Koleksi Buku';
         $data['content']        = 'collection/collection_main';
         $data['list_genre']     = $this->Collection_md->getGenreList();
         $data['list_author']    = $this->Collection_md->getAuthorList();
-        
+
         $data['list_publisher'] = $this->Collection_md->getPublisherList();
         $data['gt_kode'] = $this->get_kode_author_collection();
         $this->load->view('administrator/index', $data);
     }
 
-    public function get_printr(){
+    public function get_printr()
+    {
         //$data['printr']=print_r($this->input->post('koleksi_stok'));
         $data['content']        = 'collection/collection_main';
         $this->load->view('administrator/index', $data);
@@ -150,7 +150,7 @@ class Collection extends CI_Controller
         $data['list_author']    = $this->Collection_md->getAuthorList();
         $data['list_publisher'] = $this->Collection_md->getPublisherList();
 
-        if ($this->input->post('submit')):
+        if ($this->input->post('submit')) :
             $this->form_validation->set_rules('koleksi_judul', 'Judul Koleksi', 'required');
             $this->form_validation->set_rules('koleksi_isbn', 'ISBN', 'required');
             $this->form_validation->set_rules('koleksi_stok', 'Stok', 'required');
@@ -161,12 +161,12 @@ class Collection extends CI_Controller
             $this->form_validation->set_rules('simpus_genre_genre_kd', 'Genre', 'required');
             $this->form_validation->set_rules('simpus_penerbit_penerbit_kd', 'Penerbit', 'required');
 
-            if ($this->form_validation->run() == true):
+            if ($this->form_validation->run() == true) :
                 $this->Collection_md->update($collection_id);
                 $this->session->set_flashdata('message', 'Koleksi berhasil diubah');
                 redirect('collection');
                 exit();
-            else:
+            else :
                 $data['warning'] = validation_errors();
             endif;
         endif;
@@ -179,7 +179,7 @@ class Collection extends CI_Controller
         $data['read']    = $this->Collection_md->read($collection_id);
         $data['content'] = "collection/collection_cover_update";
 
-        if ($this->input->post('submit')):
+        if ($this->input->post('submit')) :
             $config['upload_path']   = '.' . $this->config->item('upload_path_koleksi');
             $config['allowed_types'] = $this->config->item('allowed_types');
             $config['encrypt_name']  = true;
@@ -189,9 +189,9 @@ class Collection extends CI_Controller
 
             $this->upload->initialize($config);
 
-            if (!$this->upload->do_upload('koleksi_cover')):
+            if (!$this->upload->do_upload('koleksi_cover')) :
                 $data['warning'] = $this->upload->display_errors();
-            else:
+            else :
                 $dt_img = $this->upload->data();
 
                 $img_nm       = $dt_img['raw_name'];
@@ -228,7 +228,7 @@ class Collection extends CI_Controller
         $collection_id = $this->input->post('koleksi_kd');
         $collect       = $this->Collection_md->getCollectionById($collection_id);
 
-        foreach ($collect->result() as $collection):
+        foreach ($collect->result() as $collection) :
             $data[] = $collection->koleksi_kd;
         endforeach;
         echo json_encode($data);
@@ -241,7 +241,7 @@ class Collection extends CI_Controller
         //$data=array();
         $collection = $this->Collection_md->getAttributeCollection($collection_id);
 
-        if (!empty($collection)):
+        if (!empty($collection)) :
             $callback = array(
                 'status'        => 'success',
                 'koleksi_kd'    => $collection->koleksi_kd,
@@ -251,7 +251,7 @@ class Collection extends CI_Controller
                 'koleksi_isbn'  => $collection->koleksi_isbn,
                 'jumlah_buku'   => 1,
             );
-        else:
+        else :
             $callback = array(
                 'status' => 'failed'
             );
@@ -265,10 +265,10 @@ class Collection extends CI_Controller
         $gt_kode   = $this->Author_md->get_kode_author();
         $author_kd = '';
         $kar       = 'PNL-';
-        foreach ($gt_kode->result() as $gtkode):
-            if ($gtkode->penulis_kd == null):
+        foreach ($gt_kode->result() as $gtkode) :
+            if ($gtkode->penulis_kd == null) :
                 $author_kd = $kar . '0001';
-            else:
+            else :
                 $substr_kd = (int) substr($gtkode->penulis_kd, 4, 8);
                 $tmp       = $substr_kd + 1;
                 $author_kd = $kar . sprintf("%04s", $tmp);
@@ -277,5 +277,4 @@ class Collection extends CI_Controller
         return $author_kd;
         //print_r($author_kd);
     }
-
 }
