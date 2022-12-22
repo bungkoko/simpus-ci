@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework
  *
@@ -367,16 +368,16 @@ class Zend_Barcode_Renderer_Image extends Zend_Barcode_Renderer_RendererAbstract
         );
 
         $allocatedColor = imagecolorallocate(
-            $this->_resource,
+            $this->resource,
             ($color & 0xFF0000) >> 16,
             ($color & 0x00FF00) >> 8,
             $color & 0x0000FF
         );
 
         if ($filled) {
-            imagefilledpolygon($this->_resource, $newPoints, 4, $allocatedColor);
+            imagefilledpolygon($this->resource, $newPoints, 4, $allocatedColor);
         } else {
-            imagepolygon($this->_resource, $newPoints, 4, $allocatedColor);
+            imagepolygon($this->resource, $newPoints, 4, $allocatedColor);
         }
     }
 
@@ -440,7 +441,7 @@ class Zend_Barcode_Renderer_Image extends Zend_Barcode_Renderer_RendererAbstract
                 require_once 'Zend/Barcode/Renderer/Exception.php';
                 throw new Zend_Barcode_Renderer_Exception(
                     'A font was provided, but this instance of PHP does not have TTF (FreeType) support'
-                    );
+                );
             }
 
             $box = imagettfbbox($size, 0, $font, $text);

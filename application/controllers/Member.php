@@ -26,7 +26,7 @@ class Member extends CI_Controller
         $sub_year  = substr($gtYear, 2, 4);
 
         foreach ($gt_kode->result() as $gtKode) :
-            if ($gtKode->anggota_kd == null || substr($gtKode->anggota_kd, 2, 4) != $sub_year) :
+            if ($gtKode->anggota_kd ==  null) :
                 $member_kd = $sub_year . '0001';
             //else:
             else :

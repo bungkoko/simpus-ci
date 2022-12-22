@@ -33,6 +33,10 @@
         </div>
     </div>
 
+    <!--
+    <button onclick="window.print()">Cetak</button>
+
+    <!--
     <div class="card card-about-me">
         <div class="header">
             <h2>ABOUT ME</h2>
@@ -81,4 +85,5 @@
             </ul>
         </div>
     </div>
+-->
 </div>
