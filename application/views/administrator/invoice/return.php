@@ -24,7 +24,7 @@
         Yth. Saudara
         <address>
           <strong><?php echo $member->anggota_nm; ?></strong><br>
-          <?php echo $member->anggota_alamat; ?><br>
+          <?php echo $member->anggota_alamat_sekarang; ?><br>
           Telepon: <?php echo $member->anggota_notelpon; ?><br>
           Mail : <?php echo $member->anggota_email; ?>
         </address>

@@ -119,7 +119,7 @@ class Circulation_md extends CI_Model
 
     public function getAnggotaByKeyword($keyword)
     {
-        $this->db->select('anggota_kd, anggota_nm, anggota_alamat,anggota_notelpon, anggota_email,sirkulasi_pinjam_kd');
+        $this->db->select('anggota_kd, anggota_nm, anggota_alamat_sekarang,anggota_notelpon, anggota_email,sirkulasi_pinjam_kd');
         $this->db->from('simpus_sirkulasi');
         $this->db->join('simpus_anggota', 'simpus_sirkulasi.simpus_anggota_anggota_kd=simpus_anggota.anggota_kd', 'inner');
         $this->db->where('simpus_sirkulasi.sirkulasi_pinjam_kd', $keyword);

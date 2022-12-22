@@ -4,6 +4,7 @@
  */
 class Circulation extends CI_Controller
 {
+    public $type;
 
     public function __construct()
     {
@@ -93,7 +94,9 @@ class Circulation extends CI_Controller
             $this->session->unset_userdata('member_id');
             //$this->session->unset_userdata('date_return',$this->date_return());
             $this->session->unset_userdata('count_book');
-            redirect('invoice/borrow/' . $this->session->userdata('transaction_id'));
+            //redirect('invoice/borrow/' . $this->session->userdata('transaction_id'));
+            //$this->invoice('borrowBook', $this->session->userdata('transaction_id'));
+            redirect('circulation/invoice/' . 'borrowbook/' . $this->session->userdata('transaction_id'));
             exit();
 
         else :
@@ -186,6 +189,7 @@ class Circulation extends CI_Controller
                 $data['member'] = $this->Circulation_md->getAnggotaByKeyword($transaction_id);
                 $data['denda']  = $this->denda($transaction_id);
                 $this->session->set_userdata('transaction_id', $transaction_id);
+
             else :
                 $data['warning'] = validation_errors();
             endif;
@@ -202,16 +206,63 @@ class Circulation extends CI_Controller
             //$this->db->set('sirkulasi_denda',$this->denda($transaction_id));
             $this->Circulation_md->returnbook($transaction_id, $this->denda($transaction_id));
             $this->session->set_flashdata('message', 'Koleksi telah dikembalikan');
-            $this->session->unset_userdata('transaction_id');
-            redirect('Circulation/returnbook');
+            //$this->session->unset_userdata('transaction_id');
+            redirect('circulation/invoice/' . 'returnbook/' . $this->session->userdata('transaction_id'));
+        //redirect('Circulation/returnbook');
         endif;
         if ($this->input->post('perpanjang') == true) :
             $this->Circulation_md->extendsion($transaction_id, $this->date_return());
             $this->session->set_flashdata('message', 'Masa pinjam koleksi telah diperpanjang');
             $this->session->unset_userdata('transaction_id');
-            redirect('Circulation/returnbook');
+            redirect('circulation/returnbook');
         endif;
     }
+
+    public function invoice($type, $transaction_id)
+    {
+        if ($type == "borrowbook") :
+            $data['title'] = 'Nota Peminjaman';
+            $data['transaction_id'] = $transaction_id;
+            $data['borrowBook'] = $this->Circulation_md->searchBorrow($transaction_id)->result();
+            $data['gt_date'] = $this->Circulation_md->getDatebyTransactionId($transaction_id);
+            $data['member'] = $this->Circulation_md->getAnggotaByKeyword($transaction_id);
+            $data['content'] = 'invoice/borrow';
+
+        elseif ($type == "returnbook") :
+            $data['title']          = 'Nota Pengembalian';
+            $data['transaction_id'] = $transaction_id;
+            $data['returnbook']     = $this->Circulation_md->getReturnBook($transaction_id)->result();
+            $data['gt_date']        = $this->Circulation_md->getDatebyTransactionId($transaction_id);
+            $data['member']         = $this->Circulation_md->getAnggotaByKeyword($transaction_id);
+            $data['content']        = 'invoice/return';
+        endif;
+
+        $this->load->view('administrator/index', $data);
+    }
+
+    public function printInvoice($type, $transaction_id)
+    {
+        if ($type == "borrowbook") :
+            $data['page_title'] = "Nota Peminjaman - No Invoice #" . $transaction_id;
+            $data['title'] = "Nota Peminjaman";
+            $data['transaction_id'] = $transaction_id;
+            $data['borrowBook'] = $this->Circulation_md->searchBorrow($transaction_id)->result();
+            $data['gt_date'] = $this->Circulation_md->getDatebyTransactionId($transaction_id);
+            $data['member'] = $this->Circulation_md->getAnggotaByKeyword($transaction_id);
+            $data['content'] = 'invoice/borrow';
+        elseif ($type == "returnbook") :
+            $data['page_title'] = "Nota Pengembalian - No Invoice #" . $transaction_id;
+            $data['title'] = "Nota Pengembalian";
+            $data['transaction_id'] = $transaction_id;
+            $data['returnbook'] = $this->Circulation_md->getReturnBook($transaction_id)->result();
+            $data['gt_date'] = $this->Circulation_md->getDatebyTransactionId($transaction_id);
+            $data['member'] = $this->Circulation_md->getAnggotaByKeyword($transaction_id);
+            $data['content'] = 'invoice/return';
+        endif;
+        $this->load->view('administrator/printout', $data);
+    }
+
+
 
     public function getAttributeCirculation()
     {
@@ -239,5 +290,18 @@ class Circulation extends CI_Controller
         }
 
         echo json_encode($callback);
+    }
+
+    public function getAnggotaByTransactionId()
+    {
+        $transaction_id = $this->input->post('sirkulasi_pinjam_kd');
+
+        $transaction = $this->Circulation_md->getAnggotaByKeyword($transaction_id);
+
+        foreach ($transaction->result() as $trx) :
+            $data['anggota_kd'] = $trx->anggota_kd;
+            $data['anggota_nm'] = $trx->anggota_nm;
+        endforeach;
+        echo json_encode($data);
     }
 }
